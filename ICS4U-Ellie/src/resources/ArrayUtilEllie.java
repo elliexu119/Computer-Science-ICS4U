@@ -5,10 +5,10 @@
  */
 package resources;
 
-import static ics4u.SOPL.sopl;
 import java.util.ArrayList; 
 import java.util.Collections;
 import java.util.List;
+import static resources.SOPL.sopl;
 
 public class ArrayUtilEllie {
 

@@ -5,7 +5,7 @@
  */
 package unit1;
 
-import java.util.StringTokenizer;
+import static resources.SOPL.sopl;
 
 /**
  *
@@ -17,12 +17,14 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String string = "1 2 3";
-        StringTokenizer token = new StringTokenizer(string, "2");
-        while (token.hasMoreTokens()) {
-            System.out.println(token.nextToken());
-
-        }
+        //String string = "1 2 3";
+        //StringTokenizer token = new StringTokenizer(string, "2");
+        //while (token.hasMoreTokens()) {
+        //    System.out.println(token.nextToken());
+        //}
+        String word = "cat";
+        sopl(word.length());
+        sopl(word.charAt(2)); 
     }
     
 }
