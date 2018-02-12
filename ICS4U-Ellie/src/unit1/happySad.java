@@ -25,13 +25,13 @@ public class happySad {
 
         sop("Enter in the phrase: ");
         original = input.nextLine();
+        
         phrase = original;
-
         while (sub1 != -1) {
             sub1++;
             sub2 = sub1;
-            phrase = phrase.substring(sub1, phrase.length() - 1) + " ";
-            phrase.trim();
+            phrase = phrase.substring(sub1, phrase.length()) + " ";
+            phrase = phrase.trim();
             sub1 = phrase.indexOf(":-)");
             happy++;
         }
@@ -43,8 +43,8 @@ public class happySad {
         while (sub1 != -1) {
             sub1++;
             sub2 = sub1;
-            phrase = phrase.substring(sub1, phrase.length() - 1) + " ";
-            phrase.trim();
+            phrase = phrase.substring(sub1, phrase.length()) + " ";
+            phrase = phrase.trim();
             sub1 = phrase.indexOf(":-(");
             sad++;
         }
