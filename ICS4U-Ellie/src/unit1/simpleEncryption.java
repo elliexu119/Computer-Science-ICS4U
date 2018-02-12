@@ -38,10 +38,8 @@ public class simpleEncryption {
                 char character = word.charAt(i);
                 if (cryption == 1) {
                     int a  = character + rotation;
-                    if (a >= 122){
-                        sopl(a);
-                        a = a -23;
-                        sopl(a);
+                    if (a >= 123){
+                        a = a -26;
                     }
                     character = (char) a;
                 }
