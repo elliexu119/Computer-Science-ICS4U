@@ -1,9 +1,11 @@
+package resources;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unit1;
+
 
 import static resources.SOPL.sopl;
 
@@ -22,9 +24,10 @@ public class test {
         //while (token.hasMoreTokens()) {
         //    System.out.println(token.nextToken());
         //}
-        String word = "cat";
-        sopl(word.length());
-        sopl(word.charAt(2)); 
+        String word = "zzzz";
+        sopl(word.charAt(0));
+        sopl(word.charAt(1));
+        sopl(word.charAt(2));
     }
     
 }

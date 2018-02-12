@@ -20,7 +20,7 @@ public class palindrome {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //palindrome 3
+        //palindrome 1, 2, and 3 
         String word = null, newSentence = "", newWord = "";
         int end, start = 0, a = 0;
         boolean palindrome = false;
