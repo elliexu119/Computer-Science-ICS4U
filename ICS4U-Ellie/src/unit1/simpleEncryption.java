@@ -47,7 +47,6 @@ public class simpleEncryption {
                     int a  = character - rotation; 
                     if (a <= 96){
                         a = a+26;
-                        sopl(a);
                     }
                     character = (char) a;
                 }
