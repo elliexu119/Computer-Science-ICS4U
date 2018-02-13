@@ -5,9 +5,10 @@ package resources;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-import static resources.SOPL.sopl;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.Set;
 
 /**
  *
@@ -18,16 +19,19 @@ public class test {
     /**
      * @param args the command line arguments
      */
+    NavigableMap<Integer, Set<String>> ordered;
+    Map<String, Integer> frequency;
+
     public static void main(String[] args) {
-        //String string = "1 2 3";
-        //StringTokenizer token = new StringTokenizer(string, "2");
-        //while (token.hasMoreTokens()) {
-        //    System.out.println(token.nextToken());
-        //}
-        String word = "zzzz";
-        sopl(word.charAt(0));
-        sopl(word.charAt(1));
-        sopl(word.charAt(2));
     }
-    
+
+    public void search() {
+        String word = "word word can can if if if asklfhsd";
+        int count = frequency.getOrDefault(word, 0);
+        if (count > 0) {
+            ordered.get(count).remove(word);
+        }
+        ordered.computeIfAbsent(count + 1, HashSet::new).add(word);
+        frequency.put(word, count + 1);
+    }
 }
