@@ -180,7 +180,7 @@ public class ArrayUtilEllie {
                 ans = ans / number.length;
             }
         }
-        sopl(ans);
+        //sopl(ans);
         return ans;
     }
 
