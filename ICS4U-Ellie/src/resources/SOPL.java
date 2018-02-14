@@ -18,7 +18,9 @@ public class SOPL {
     public static void sop(int a) {
         System.out.print(a);
     }
-
+public static void sop(char a) {
+        System.out.print(a);
+    }
     public static void sop(double a) {
         System.out.print(a);
     }
@@ -32,6 +34,9 @@ public class SOPL {
     }
 
     public static void sopl(double a) {
+        System.out.println(a);
+    }
+    public static void sopl(char a) {
         System.out.println(a);
     }
 
@@ -50,8 +55,8 @@ public class SOPL {
     }
 
     public static void sopl(String number[]) {
-        for (String number1 : number) {
-            sop(number1 + " ");
+        for (int i = 0; i < number.length; i++) {
+            sop(number[i] + " ");
         }
         sop("\n");
     }
