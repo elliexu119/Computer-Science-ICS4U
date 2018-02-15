@@ -1,3 +1,5 @@
+package CCC;
+
 
 import java.util.Scanner;
 
@@ -10,25 +12,23 @@ import java.util.Scanner;
  *
  * @author 1xuell
  */
-public class OccupyParking {
+public class telemarketerOrNot {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        int spaces = Integer.parseInt(input.nextLine());
-        String yesterday = input.nextLine();
-        String today = input.nextLine();
-        int counter = 0;
+        int one = input.nextInt();
+        int two = input.nextInt();
+        int three = input.nextInt();
+        int four = input.nextInt();
+        String output = "answer";
 
-        for (int i = 0; i < spaces; i++) {
-            if (yesterday.charAt(i) == today.charAt(i) && yesterday.charAt(i) != '.') {
-                counter++;
-            }
+        if ((one == 8 || one == 9) && (four == 8 || four == 9) && (two == three)){
+            output="ignore";
         }
-        System.out.println(counter);
+        System.out.println(output);
 
     }
-
 }

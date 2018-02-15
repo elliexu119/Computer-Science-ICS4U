@@ -88,7 +88,7 @@ public class rottenTomatoes {
         }
 
         //here is when the user inputs in the word
-        search = search.toLowerCase().trim();
+        search = " " + search.toLowerCase().trim() + " ";
 
         double count = 0, time = 0, average = -1, count2 = 0;
         for (int i = 0; i < rate.length; i++) {
@@ -104,11 +104,11 @@ public class rottenTomatoes {
             }
             count = 0;
         }
-        sopl("the word " + search + " appears for " + time + " times");
+        sopl("the word " + search.trim() + " appears for " + time + " times");
 
         if (time != 0) {
             average = (count2 / time);
-            sopl(search + "'s average is " + average + "\n");
+            sopl(search.trim() + "'s average is " + average + "\n");
         }
         return average;
     }
