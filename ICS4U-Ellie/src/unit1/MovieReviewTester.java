@@ -3,6 +3,7 @@
  */
 package unit1;
 
+import unit1.MovieReview;
 import java.io.File;
 
 /**
@@ -15,19 +16,19 @@ public class MovieReviewTester {
 
     public static void main( String[] args ) throws Exception {
 
-        String search;
+        String word;
 
         // MOVIE REVIEW FILE
         File reviews = new File( ".\\data\\movie.review\\MovieReviews.txt" );
 
         // ********************************************************************
         // PART 1: Word Review
-        search = "fantastic";
+        word = "fantastic";
         System.out.println( "********************************" );
-        System.out.println( "PART 1: Word Review - " + search );
+        System.out.println( "PART 1: Word Review - " + word );
 
-        double wordCount = MovieReview.wordCount( search, reviews );
-        double wordAverage = MovieReview.wordAverage(wordCount);
+        int wordCount = MovieReview.wordCount( word, reviews );
+        double wordAverage = MovieReview.wordAverage( word, reviews );
 
         System.out.println( "Word Count     : " + wordCount );
         System.out.println( "Word Average   : " + wordAverage );
