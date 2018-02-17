@@ -207,5 +207,4 @@ public class rottenTomatoes {
         }
         return sentence;
     }
-
 }
