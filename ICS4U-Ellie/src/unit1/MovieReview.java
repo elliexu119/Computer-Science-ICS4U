@@ -8,10 +8,6 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import static resources.SOPL.sopl;
-import static unit1.rottenTomatoes.higestWordRating;
-import static unit1.rottenTomatoes.sentenceRating;
-import static unit1.rottenTomatoes.wordAverage;
-import static unit1.rottenTomatoes.writeTxt;
 
 /**
  * Movie Review Assignment
@@ -61,7 +57,7 @@ public class MovieReview {
                     sub = input.nextLine();
                     text = input.nextLine();
                     file = new File(text);
-                    higestWordRating (file, reviews);
+                    higestWordRating(file, reviews);
                     sopl("");
                     break;
                 case 4:
@@ -245,9 +241,10 @@ public class MovieReview {
         PrintWriter negativeWriter = new PrintWriter(negative);
 
         for (int i = 0; i < sentence.length; i++) {
-            if (wordAverage(sentence[i], reviews) < 2) {
+            double sub = wordAverage(sentence[i], reviews);
+            if (sub < 2 && sub != -1) {
                 negativeWriter.write(sentence[i] + " ");
-            } else if (wordAverage(sentence[i], reviews) > 2) {
+            } else if (sub > 2 && sub != -1) {
                 positiveWriter.write(sentence[i] + " ");
 
             }
@@ -259,23 +256,23 @@ public class MovieReview {
     public static void higestWordRating(File fileName, File reviews) throws Exception {
         String[] sentence = readTxt(fileName);
         double[] ratings = new double[sentence.length];
+        double max, min;
+        int maxV = -1, minV = -1;
 
         for (int i = 0; i < sentence.length; i++) {
             ratings[i] = wordAverage(sentence[i], reviews);
         }
 
-        double max, min;
-        int maxV = -1, minV = -1;
         max = ratings[0];
         min = ratings[0];
         for (int a = 0; a < 2; a++) {
             for (int i = 1; i < ratings.length; i++) {
                 if (a == 0) {
-                    if (ratings[i] > max) {
+                    if (ratings[i] > max && ratings[i] != 0) {
                         max = ratings[i];
                         maxV = i;
                     }
-                } else if (ratings[i] < min) {
+                } else if (ratings[i] < min && ratings[i] != 0) {
                     min = ratings[i];
                     minV = i;
                 }
