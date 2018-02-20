@@ -5,7 +5,6 @@ package resources;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import static resources.SOPL.sopl;
 
 /**
  *
@@ -16,10 +15,9 @@ public class test {
     /**
      * @param args the command line arguments
      */
-
     public static void main(String[] args) {
-        String word = "word word can can if if if asklfhsd";
-        char a = (word.charAt(0));
-        sopl(a);
+        double a = 2.2;
+        int b = 3;
+        System.out.println(Math.ceil(a));
     }
 }
