@@ -1,5 +1,7 @@
-/*
- *
+/* 
+ * Your majesty 
+ * Tuesday, Feb 20, 2018
+ * rotten tomatoe scores 
  */
 package unit1;
 
@@ -24,6 +26,7 @@ public class MovieReview {
         boolean end = false;
         File reviews = new File(".\\data\\movie.review\\MovieReviews.txt");
 
+        //menu
         while (end == false) {
             option = 0;
             sopl("What would you like to do? ");
@@ -40,7 +43,7 @@ public class MovieReview {
                 case 1:
                     sopl("Enter a word ");
                     sub = input.nextLine();
-                    text = input.nextLine();
+                    text = input.nextLine().toLowerCase();
                     wordAverage(text, reviews);
                     sopl("");
                     break;
@@ -95,7 +98,7 @@ public class MovieReview {
             if (rate[i] != null && rate[i].contains(word)) {
                 StringTokenizer token = new StringTokenizer(rate[i], "***");
                 while (token.hasMoreTokens()) {
-                    if (token.nextToken().contains(word)) {
+                    if (token.nextToken().toLowerCase().contains(word)) {
                         count++;
                     }
                 }
@@ -121,13 +124,14 @@ public class MovieReview {
     public static int wordTotalScore(String word, File reviews) throws Exception {
         String[] rate = readFile(reviews);
         int count = 0, time = 0, count2 = 0;
-        //counts the accumulated ratings of a word and the number of times it appears. 
+        
+    //counts the accumulated ratings of a word and the number of times it appears. 
         word = " " + word + " ";
         for (int i = 0; i < rate.length; i++) {
             if (rate[i] != null && rate[i].contains(word)) {
                 StringTokenizer token = new StringTokenizer(rate[i], "***");
                 while (token.hasMoreTokens()) {
-                    if (token.nextToken().contains(word)) {
+                    if (token.nextToken().toLowerCase().contains(word)) {
                         count++;
                     }
                 }
@@ -162,12 +166,13 @@ public class MovieReview {
     }
 
     public static String[] readFile(File reviews) throws Exception {
+        //sorts all reviews by rating
         String[] sentence = readTxt(reviews);
         String[] rate = new String[5];
         int rateSub;
         for (int i = 0; i < sentence.length; i++) {
             rateSub = Integer.parseInt(Character.toString(sentence[i].charAt(0)));
-            rate[rateSub] = sentence[i] + "***" + rate[rateSub];
+            rate[rateSub] = sentence[i].toLowerCase() + "***" + rate[rateSub];
         }
         return rate;
     }
@@ -180,6 +185,7 @@ public class MovieReview {
      * @return the average score for the key word. Word Total Score / Word Count
      */
     public static double wordAverage(String word, File reviews) throws Exception {
+        //finds the average rating for a word. 
         double time = wordCount(word, reviews), count2 = wordTotalScore(word, reviews);
         double average = -1;
         if (time != 0) {
@@ -194,22 +200,8 @@ public class MovieReview {
      * file, given th specified movie review file.
      */
     public static double sentenceAverage(File wordList, File reviews) throws Exception {
-        Scanner lines = new Scanner(wordList);
-        Scanner file = new Scanner(wordList);
-        int lineCount = 0;
-        String[] sentence;
-
-        while (lines.hasNext()) {
-            lineCount++;
-            lines.nextLine();
-        }
-
-        sentence = new String[lineCount];
-        lineCount = 0;
-        while (file.hasNext()) {
-            sentence[lineCount] = (file.nextLine()).toLowerCase();
-            lineCount++;
-        }
+        //finds the average rating for a sentence. 
+        String[] sentence = readTxt(wordList);
 
         double numerator = 0, rating;
         for (int i = 0; i < sentence.length; i++) {
