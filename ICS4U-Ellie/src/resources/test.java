@@ -1,7 +1,6 @@
 package resources;
 
-import java.io.File;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,12 +17,13 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-         boolean numbers[] = new boolean [1000];
-        System.out.println(numbers[3]);
-        File file = new File("Eratosthenes.txt");
-        PrintWriter writer = new PrintWriter(file);
+        ArrayList <String> list = new ArrayList(); 
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("d");
+        System.out.println(list.indexOf("c"));
         
-        writer.write("dskjkfhdsf");
-        writer.close();
+        Object[] array = list.toArray();
     }
 }

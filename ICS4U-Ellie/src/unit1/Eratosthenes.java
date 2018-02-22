@@ -18,15 +18,15 @@ public class Eratosthenes {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        boolean numbers[] = new boolean [1000];
-        System.out.println(numbers[3]);
+        boolean numbers[] = new boolean [10000];
         File file = new File("Eratosthenes.txt");
         PrintWriter writer = new PrintWriter(file);
         
-        for (int i = 2; i < 1000; i++){
+        for (int i = 2; i < numbers.length; i++){
             if (numbers[i] == false){
                 writer.write(i + " "); 
-                for (int a = i; a < 1000; a++){
+                System.out.println(i);
+                for (int a = i; a < numbers.length; a++){
                     if (numbers[a] == false && a%i == 0){
                         numbers[a] = true; 
                     }
@@ -35,5 +35,4 @@ public class Eratosthenes {
         }
         writer.close();
     }
-
 }

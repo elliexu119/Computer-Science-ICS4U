@@ -19,8 +19,8 @@ public class Resistors {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String[] values = {"black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "grey", "white"};
         Scanner input = new Scanner(System.in);
+        String[] values = {"black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "grey", "white"};
         String code = input.nextLine();
         String numbers = "";
         int answer = 0; 
@@ -35,9 +35,15 @@ public class Resistors {
                         break;
                     } else if (numbers.length() == 2) {
                         answer = Integer.parseInt(numbers) * i*10;
+                        if (i == 0){
+                            answer = Integer.parseInt(numbers); 
+                        }
                     } else {
                         sopl("too many colours, too little values");
                     }
+                }
+                else {
+                    sopl("this coloured doesn't exist");
                 }
             }
         }
