@@ -1,5 +1,8 @@
 package resources;
 
+import java.io.File;
+import java.io.PrintWriter;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,14 +17,13 @@ public class test {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        int n = 246;
-        int one = n/ 100;
-        int two = (n % 100 - (n % 100) % 10) / 10;
-        int three = (n % 100) % 10;
-        int sum = one + two + three;
-
-        System.out.println("the original number is: " + n);
-        System.out.println("and the sum of its digits is: " + sum);
+    public static void main(String[] args) throws Exception {
+         boolean numbers[] = new boolean [1000];
+        System.out.println(numbers[3]);
+        File file = new File("Eratosthenes.txt");
+        PrintWriter writer = new PrintWriter(file);
+        
+        writer.write("dskjkfhdsf");
+        writer.close();
     }
 }

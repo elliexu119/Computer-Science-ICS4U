@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * You know who I am 
+ * Feb 21, 2018
+ * finds resistor values
  */
 package unit1;
 
@@ -28,7 +28,6 @@ public class Resistors {
         StringTokenizer hyphens = new StringTokenizer(code, "-");
         while (hyphens.hasMoreTokens()) {
             String token = hyphens.nextToken();
-
             for (int i = 0; i < values.length; i++) {
                 if (token.trim().equalsIgnoreCase(values[i])) {
                     if (numbers.length() < 2) {
@@ -41,7 +40,6 @@ public class Resistors {
                     }
                 }
             }
-
         }
         sopl("the value of the resistor is " + answer + " ohms.");
     }
