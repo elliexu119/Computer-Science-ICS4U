@@ -19,12 +19,8 @@ public class Eratosthenes {
      */
     public static void main(String[] args) throws Exception {
         boolean numbers[] = new boolean [10000];
-        File file = new File("Eratosthenes.txt");
-        PrintWriter writer = new PrintWriter(file);
-        
         for (int i = 2; i < numbers.length; i++){
             if (numbers[i] == false){
-                writer.write(i + " "); 
                 System.out.println(i);
                 for (int a = i; a < numbers.length; a++){
                     if (numbers[a] == false && a%i == 0){
@@ -33,6 +29,5 @@ public class Eratosthenes {
                 }
             }
         }
-        writer.close();
     }
 }
