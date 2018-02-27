@@ -78,4 +78,30 @@ public static void sop(char a) {
             sop(number1 + " ");
         }
     }
+    public static void sopl(String a[][]) {
+        for (int i = 0; i < a.length; i++) {
+            for (int e = 0; e < a[i].length; e++) {
+                System.out.print(a[i][e] + " ");
+            }
+            System.out.println("");
+        }
+    }
+
+    public static void sopl(int a[][]) {
+        for (int i = 0; i < a.length; i++) {
+            for (int e = 0; e < a[i].length; e++) {
+                System.out.print(a[i][e] + " ");
+            }
+            System.out.println("");
+        }
+    }
+
+    public static void sopl(double a[][]) {
+        for (int i = 0; i < a.length; i++) {
+            for (int e = 0; e < a[i].length; e++) {
+                System.out.print(a[i][e] + " ");
+            }
+            System.out.println("");
+        }
+    }
 }

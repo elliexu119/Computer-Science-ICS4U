@@ -1,6 +1,6 @@
 package resources;
 
-import static resources.SOPL.sop;
+import static resources.ArrayUtilEllie.average;
 import static resources.SOPL.sopl;
 
 /*
@@ -18,17 +18,8 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        int[][] grid = new int[20][20];
-        int num = 10;
-        for (int i = 0; i < num + 1; i++) {
-            grid[(int) (Math.random() * 20)][(int) (Math.random() * 20)] = 1;
-        }
+        double[] array = {1,2,4,5};
 
-        for (int i = 0; i < grid.length; i++) {
-            for (int a = 0; a < grid[i].length; a++) {
-                sop(grid[i][a]);
-            }
-            sopl("");
-        }
+        sopl(average(array));
     }
 }

@@ -5,7 +5,7 @@
  */
 package resources;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static resources.SOPL.sopl;
@@ -48,148 +48,65 @@ public class ArrayUtilEllie {
         }
     }
 
-    public static void bubbleSort(double number[], boolean way) {
-        int x, y, cases = 1, unnessary = 0, swappedCount = 0, i = number.length;
-
-        for (; cases < i; cases++, unnessary++) {// counting the cases
-            for (x = 0, y = 1; y < i - unnessary; x++, y++) {//coutnting the letters in each case
-                if (way == true) {//sorting order
-                    if (number[x] > number[y]) {
-                        swapBubble(number, x, y);
-                        swappedCount += 1;
-                    }
-                } else if (number[x] < number[y]) {
-                    swapBubble(number, x, y);
-                    swappedCount += 1;
-                }
-            }
-            if (swappedCount == 0) {
-                cases = i;
+    public static double max(double[] array) {
+        double max = array[0];
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
             }
         }
+        return max;
     }
 
-    public static void bubbleSort(int number[], boolean way) {
-        double array[] = new double[number.length];
-        toDouble(number, array);
-        bubbleSort(array, way);
-        toInt(array, number);
-    }
-
-    public static void bubbleSort(String number[], boolean way) {
-        int x, y, cases = 1, unnessary = 0, swappedCount = 0, i = number.length;
-
-        for (; cases < i; cases++, unnessary++) {// counting the cases
-            for (x = 0, y = 1; y < i - unnessary; x++, y++) {//coutnting the letters in each case
-                if (way == true) {//sorting order
-                    if (number[x].compareToIgnoreCase(number[y]) > 0) {
-                        swapBubble(number, x, y);
-                        swappedCount += 1;
-                    }
-                } else if (number[x].compareToIgnoreCase(number[y]) < 0) {
-                    swapBubble(number, x, y);
-                    swappedCount += 1;
-                }
-            }
-            if (swappedCount == 0) {
-                cases = i;
+    public static int max(int[] array) {
+        int max = array[0];
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
             }
         }
+        return max;
     }
 
-    public static void swapBubble(String[] number, int x, int y) {
-        String sub = number[x];
-        number[x] = number[y];
-        number[y] = sub;
-    }
-
-    public static void swapBubble(double[] number, int x, int y) {
-        double sub = number[x];
-        number[x] = number[y];
-        number[y] = sub;
-    }
-
-    public static void selectionSort(double number[], boolean way) { //sorting
-        int x, unnessary = 0, cases = 1, i = number.length, max;
-        for (; cases <= (i - 1); cases++) {//counting cases
-            max = 0;
-            for (x = 1; x < i - unnessary; x++) {//sorting the numbers in a case
-                if (way == true) {//sorting order
-                    if (number[x] > number[max]) {
-                        max = x;
-                    }
-                } else if (number[x] < number[max]) {
-                    max = x;
-                }
-            }
-            double sub;
-            sub = number[(i - unnessary) - 1];
-            number[(i - unnessary) - 1] = number[max];
-            number[max] = sub;
-            unnessary++;
-        }
-    }
-
-    public static void selectionSort(int number[], boolean way) {
-        double number2[] = new double[number.length];
-        toDouble(number, number2);
-        selectionSort(number2, way);
-        toInt(number2, number);
-    }
-
-    public static void selectionSort(String number[], boolean way) {
-        int x, unnessary = 0, cases = 1, i = number.length, max;
-        for (; cases <= (i - 1); cases++) {//counting cases
-            max = 0;
-            for (x = 1; x < i - unnessary; x++) {//sorting the numbers in a case
-                if (way == true) {//sorting order
-                    if (number[x].compareToIgnoreCase(number[max]) > 0) {
-                        max = x;
-                    }
-                } else if (number[x].compareToIgnoreCase(number[max]) < 0) {
-                    max = x;
-                }
-            }
-            String sub;
-            sub = number[(i - unnessary) - 1];
-            number[(i - unnessary) - 1] = number[max];
-            number[max] = sub;
-            unnessary++;
-        }
-    }
-
-    public static double math(double[] number, String which) { //average sum min max
-        double ans = -1;
-        if (which.equalsIgnoreCase("max") || which.equalsIgnoreCase("min")) {
-            ans = number[0];
-            for (int i = 1; i < number.length; i++) {//compares the numbers for the biggest number
-                if (which.equalsIgnoreCase("max")) {
-                    if (number[i] > ans) {
-                        ans = number[i];
-                    }
-                } else if (number[i] < ans) {
-                    ans = number[i];
-                }
-            }
-        } else if (which.equalsIgnoreCase("sum") || which.equalsIgnoreCase("average")) {
-            ans = 0;
-            for (int i = 0; i < number.length; i++) {
-                ans = number[i] + ans;
-            }
-            if (which.equalsIgnoreCase("average")) {
-                ans = ans / number.length;
+    public static double min(double[] array) {
+        double min = array[0];
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < min) {
+                min = array[i];
             }
         }
-        //sopl(ans);
-        return ans;
+        return min;
     }
 
-    public static int math(int[] number, String which) {
-        double array[] = new double[number.length];
-        toDouble(number, array);
-        return (int) math(array, which);
+    public static int min(int[] array) {
+        int min = array[0];
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < min) {
+                min = array[i];
+            }
+        }
+        return min;
     }
 
+    public static double average (double[] array){
+       double average = 0; 
+       for (int i = 0; i < array.length; i++){
+           average = average + array [i];
+       }
+       average = average/array.length; 
+        return average;
+    }
+
+    public static double average (int[] array){
+       double average = 0; 
+       for (int i = 0; i < array.length; i++){
+           average = average + array [i];
+       }
+       average = average/array.length; 
+        return average;
+    }
+
+    
     public static int linearSearch(double number[], double search) {
         String number2[] = new String[number.length], b = search + "";
         toString(number, number2);
@@ -290,4 +207,78 @@ public class ArrayUtilEllie {
         a = a.toLowerCase();
         return a;
     }
+
+    public static double max(double[][] array) {
+        double max = array[0][0];
+        for (int i = 0; i < array.length; i++) {
+            for (int a = 0; a < array[i].length; a++) {
+
+                if (array[i][a] > max) {
+                    max = array[i][a];
+                }
+            }
+        }
+        return max;
+    }
+
+    public static int max(int[][] array) {
+        int max = array[0][0];
+        for (int i = 0; i < array.length; i++) {
+            for (int a = 0; a < array[i].length; a++) {
+                if (array[i][a] > max) {
+                    max = array[i][a];
+                }
+            }
+        }
+        return max;
+    }
+
+    public static double min(double[][] array) {
+        double min = array[0][0];
+        for (int i = 0; i < array.length; i++) {
+            for (int a = 0; a < array[i].length; a++) {
+                if (array[i][a] < min) {
+                    min = array[i][a];
+                }
+            }
+        }
+        return min;
+    }
+
+    public static int min(int[][] array) {
+        int min = array[0][0];
+        for (int i = 0; i < array.length; i++) {
+            for (int a = 0; a < array[i].length; a++) {
+                if (array[i][a] < min) {
+                    min = array[i][a];
+                }
+            }
+        }
+        return min;
+    }
+    
+    public static double average (double [] [] array){
+        double sum = 0;
+        int counter = 0; 
+        for (int i = 0; i < array.length; i ++){
+            for (int a  = 0; a < array.length; a++){
+                sum = sum + array [i] [a]; 
+                counter ++; 
+            }
+        }
+        return sum/counter;
+    }
+    
+        public static double average (int [][] array){
+        double sum = 0;
+        int counter = 0; 
+        for (int i = 0; i < array.length; i ++){
+            for (int a  = 0; a < array.length; a++){
+                sum = sum + array [i] [a]; 
+                counter ++; 
+            }
+        }
+        return sum/counter;
+    }
+
 }
