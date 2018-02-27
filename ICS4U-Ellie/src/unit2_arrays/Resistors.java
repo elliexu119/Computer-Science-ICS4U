@@ -3,7 +3,7 @@
  * Feb 21, 2018
  * finds resistor values
  */
-package unit1;
+package unit2_arrays;
 
 import java.util.Scanner;
 import java.util.StringTokenizer;

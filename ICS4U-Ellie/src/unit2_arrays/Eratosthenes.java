@@ -3,7 +3,7 @@
  * 8 days before March 1, 2018 
  * finds prime numbers from 1 - 1000; 
  */
-package unit1;
+package unit2_arrays;
 
 import java.io.File;
 import java.io.PrintWriter;

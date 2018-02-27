@@ -3,7 +3,7 @@
  * Tuesday, Feb 20, 2018
  * rotten tomatoe scores 
  */
-package unit1;
+package unit1_nums_strings;
 
 import java.io.File;
 import java.io.PrintWriter;

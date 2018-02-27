@@ -3,7 +3,7 @@
  * Thursday, Feb 8, 2018
  * calculate date of easter 
  */
-package unit1;
+package unit1_nums_strings;
 
 import static resources.SOPL.sop;
 import static resources.SOPL.sopl;
@@ -13,7 +13,7 @@ import java.util.Scanner;
  *
  * @author ellix
  */
-public class easter {
+public class Easter {
 
     /**
      * @param args the command line arguments

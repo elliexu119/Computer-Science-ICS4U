@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unit1;
+package unit1_nums_strings;
 
 import java.util.Scanner;
 import static resources.SOPL.sop;
@@ -13,7 +13,7 @@ import static resources.SOPL.sopl;
  *
  * @author 1xuell
  */
-public class happySad {
+public class HappySad {
 
     /**
      * @param args the command line arguments
