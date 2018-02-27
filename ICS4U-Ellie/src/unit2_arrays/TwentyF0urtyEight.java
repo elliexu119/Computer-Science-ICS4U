@@ -5,19 +5,75 @@
  */
 package unit2_arrays;
 
+import javax.swing.JLabel;
+import static resources.SOPL.sopl;
+
 /**
  *
  * @author 1xuell
  */
 public class TwentyF0urtyEight extends javax.swing.JFrame {
 
+    private static final int EMPTY = 0; 
+    private JLabel[][] squares; 
+    private int [][] values; 
     /**
      * Creates new form TwentyF0urtyEight
      */
     public TwentyF0urtyEight() {
         initComponents();
+        squares = new JLabel[4][4];
+        
+        squares[0][0] = jLabel00; 
+        squares[0][1] = jLabel01; 
+        squares[0][2] = jLabel02; 
+        squares[0][3] = jLabel03; 
+        
+        squares[1][0] = jLabel10; 
+        squares[1][1] = jLabel11; 
+        squares[1][2] = jLabel12; 
+        squares[1][3] = jLabel13; 
+        
+        squares[2][0] = jLabel20; 
+        squares[2][1] = jLabel21; 
+        squares[2][2] = jLabel22; 
+        squares[2][3] = jLabel23; 
+        
+        squares[3][0] = jLabel30; 
+        squares[3][1] = jLabel31; 
+        squares[3][2] = jLabel32; 
+        squares[3][3] = jLabel33; 
+        
+        //clear game board
+        clearBoard();
+        
     }
 
+    public void clearBoard(){
+        values = new int[4][4];
+        for (int i = 0; i < squares.length; i++){
+            for (int a = 0; a < squares[i].length; a++){
+                squares [i][a].setText("");
+            }
+        }
+        placeRandomTwo();
+        placeRandomTwo();
+    }
+    
+    public void placeRandomTwo(){
+        int random1, random2;
+        boolean randomCounter = false;
+        while (!randomCounter) {
+            random1 = (int) (Math.random() * 4);
+            random2 = (int) (Math.random() * 4);
+            if (values[random1][random2] == EMPTY) {
+                sopl("true");
+                values[random1][random2] = 2;
+                squares[random1][random2].setText("2");
+                randomCounter = true;
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,6 +130,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel00.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel00.setForeground(new java.awt.Color(153, 102, 0));
         jLabel00.setText("1024");
+        jLabel00.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -97,6 +154,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(153, 102, 0));
         jLabel10.setText("1024");
+        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -120,6 +178,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(153, 102, 0));
         jLabel20.setText("1024");
+        jLabel20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -143,6 +202,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel30.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(153, 102, 0));
         jLabel30.setText("1024");
+        jLabel30.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -166,6 +226,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel31.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(153, 102, 0));
         jLabel31.setText("1024");
+        jLabel31.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -189,6 +250,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(153, 102, 0));
         jLabel21.setText("1024");
+        jLabel21.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -212,6 +274,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(153, 102, 0));
         jLabel11.setText("1024");
+        jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -235,6 +298,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel01.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel01.setForeground(new java.awt.Color(153, 102, 0));
         jLabel01.setText("1024");
+        jLabel01.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -258,6 +322,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel33.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(153, 102, 0));
         jLabel33.setText("1024");
+        jLabel33.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -281,6 +346,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(153, 102, 0));
         jLabel23.setText("1024");
+        jLabel23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -304,6 +370,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(153, 102, 0));
         jLabel13.setText("1024");
+        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -327,6 +394,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel03.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel03.setForeground(new java.awt.Color(153, 102, 0));
         jLabel03.setText("1024");
+        jLabel03.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -350,6 +418,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel02.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel02.setForeground(new java.awt.Color(153, 102, 0));
         jLabel02.setText("1024");
+        jLabel02.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -373,6 +442,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(153, 102, 0));
         jLabel12.setText("1024");
+        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -396,6 +466,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(153, 102, 0));
         jLabel22.setText("1024");
+        jLabel22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -419,6 +490,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel32.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(153, 102, 0));
         jLabel32.setText("1024");
+        jLabel32.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -465,7 +537,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap())
         );
         gameBoardLayout.setVerticalGroup(
             gameBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,7 +597,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(top, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(gameBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gameBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
