@@ -45,7 +45,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         squares[3][0] = jLabel30;
         squares[3][1] = jLabel31;
         squares[3][2] = jLabel32;
-        squares[3][3] = jLabel33;
+        squares[3][3] = jLabel33; 
 
         //clear game board
         clearBoard();
