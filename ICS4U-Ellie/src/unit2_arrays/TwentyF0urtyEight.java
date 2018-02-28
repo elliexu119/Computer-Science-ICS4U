@@ -122,7 +122,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
                     for (int b = a -1 ; b >= 0; b--) {
                         if (values[i][b] == EMPTY) {
                             values[i][b] = values[i][a];
-                            values[i][a] = EMPTY;
+                            values[i][a] = EMPTY; 
                         }
                     }
                 }
