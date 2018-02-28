@@ -5,6 +5,7 @@
  */
 package unit2_arrays;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import static resources.SOPL.sopl;
 
@@ -14,66 +15,154 @@ import static resources.SOPL.sopl;
  */
 public class TwentyF0urtyEight extends javax.swing.JFrame {
 
-    private static final int EMPTY = 0; 
-    private JLabel[][] squares; 
-    private int [][] values; 
+    private static final int EMPTY = 0;
+    private JLabel[][] squares;
+    private int[][] values;
+
     /**
      * Creates new form TwentyF0urtyEight
      */
     public TwentyF0urtyEight() {
         initComponents();
         squares = new JLabel[4][4];
-        
-        squares[0][0] = jLabel00; 
-        squares[0][1] = jLabel01; 
-        squares[0][2] = jLabel02; 
-        squares[0][3] = jLabel03; 
-        
-        squares[1][0] = jLabel10; 
-        squares[1][1] = jLabel11; 
-        squares[1][2] = jLabel12; 
-        squares[1][3] = jLabel13; 
-        
-        squares[2][0] = jLabel20; 
-        squares[2][1] = jLabel21; 
-        squares[2][2] = jLabel22; 
-        squares[2][3] = jLabel23; 
-        
-        squares[3][0] = jLabel30; 
-        squares[3][1] = jLabel31; 
-        squares[3][2] = jLabel32; 
-        squares[3][3] = jLabel33; 
-        
+        values = new int[4][4];
+
+        squares[0][0] = jLabel00;
+        squares[0][1] = jLabel01;
+        squares[0][2] = jLabel02;
+        squares[0][3] = jLabel03;
+
+        squares[1][0] = jLabel10;
+        squares[1][1] = jLabel11;
+        squares[1][2] = jLabel12;
+        squares[1][3] = jLabel13;
+
+        squares[2][0] = jLabel20;
+        squares[2][1] = jLabel21;
+        squares[2][2] = jLabel22;
+        squares[2][3] = jLabel23;
+
+        squares[3][0] = jLabel30;
+        squares[3][1] = jLabel31;
+        squares[3][2] = jLabel32;
+        squares[3][3] = jLabel33;
+
         //clear game board
-        clearBoard();
-        
+        //clearBoard();
+        values[0][0] = 2;
+        values[0][1] = 2;
+
+        // TEST DATA
+        values[1][0] = 2;
+        values[1][2] = 2;
+
+        // TEST DATA
+        values[2][1] = 2;
+        values[2][3] = 2;
+
+        // TEST DATA
+        values[3][1] = 2;
+        values[3][3] = 2;
+        values[3][3] = 2;
+        updateBoard();
+
     }
 
-    public void clearBoard(){
-        values = new int[4][4];
-        for (int i = 0; i < squares.length; i++){
-            for (int a = 0; a < squares[i].length; a++){
-                squares [i][a].setText("");
+    public void swap(int row1, int column1, int row2, int column2) {
+        values[row2][column2] = values[row1][column1];
+        values[row1][column1] = 0;
+    }
+
+    public void mergeLeft() {
+        for (int i = 0; i < squares.length; i++) {
+            for (int a = 0; a < squares[i].length; a++) {
+                if (values[i][a] != EMPTY && a + 1 != squares[i].length) {
+                    if (values[i][a] == values[i][a + 1]) {
+                        values[i][a] = values[i][a] * 2;
+                        values[i][a + 1] = EMPTY;
+                    }
+                }
+            }
+        }
+    }
+
+    public void shiftLeft() {
+        for (int i = 0; i < squares.length; i++) {
+            for (int a = 1; a < squares[i].length; a++) {
+                if (values[i][a] != EMPTY) {
+                    for (int b = 0; b < a; b++) {
+                        if (values[i][b] == EMPTY) {
+                            values[i][b] = values[i][a];
+                            values[i][a] = EMPTY;
+                        }
+                    }
+                }
+            }
+        }
+        updateBoard();
+    }
+    
+        public void mergeRight() {
+        for (int i = 0; i < squares.length; i++) {
+            for (int a = 0; a < squares[i].length; a++) {
+                if (values[i][a] != EMPTY && a - 1 != squares[i].length) {
+                    if (values[i][a] == values[i][a - 1]) {
+                        values[i][a] = values[i][a] * 2;
+                        values[i][a - 1] = EMPTY;
+                    }
+                }
+            }
+        }
+    }
+
+    public void shiftRight() {
+        for (int i = squares.length-1; i >= 0; i--) {
+            for (int a = squares[i].length-1; a > 0; a--) {
+                if (values[i][a] != EMPTY) {
+                    for (int b = a -1 ; b >= 0; b--) {
+                        if (values[i][b] == EMPTY) {
+                            values[i][b] = values[i][a];
+                            values[i][a] = EMPTY;
+                        }
+                    }
+                }
+            }
+        }
+        updateBoard();
+    }
+
+    public void clearBoard() {
+        for (int i = 0; i < squares.length; i++) {
+            for (int a = 0; a < squares[i].length; a++) {
+                squares[i][a].setText("");
             }
         }
         placeRandomTwo();
         placeRandomTwo();
     }
-    
-    public void placeRandomTwo(){
+
+    public void updateBoard() {
+        for (int i = 0; i < squares.length; i++) {
+            for (int a = 0; a < squares[i].length; a++) {
+                squares[i][a].setText("" + values[i][a]);
+            }
+        }
+    }
+
+    public void placeRandomTwo() {
         int random1, random2;
         boolean randomCounter = false;
         while (!randomCounter) {
             random1 = (int) (Math.random() * 4);
             random2 = (int) (Math.random() * 4);
             if (values[random1][random2] == EMPTY) {
-                sopl("true");
                 values[random1][random2] = 2;
                 squares[random1][random2].setText("2");
                 randomCounter = true;
             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,6 +210,11 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("2048");
         setBackground(new java.awt.Color(0, 204, 0));
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         gameBoard.setBackground(new java.awt.Color(255, 204, 51));
 
@@ -401,8 +495,8 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addComponent(jLabel03)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addComponent(jLabel03, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -609,6 +703,28 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        System.out.print("KEY PRESSED: ");
+        switch (evt.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                System.out.println("UP");
+                break;
+            case KeyEvent.VK_DOWN:
+                System.out.println("DOWN");
+                break;
+            case KeyEvent.VK_LEFT:
+                System.out.println("LEFT");
+                shiftLeft();
+                mergeLeft();
+                shiftLeft();
+                break;
+            case KeyEvent.VK_RIGHT:
+                System.out.println("RIGHT");
+                shiftRight();
+                break;
+        }
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments
