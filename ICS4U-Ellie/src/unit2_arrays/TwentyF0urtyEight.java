@@ -48,23 +48,23 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         squares[3][3] = jLabel33;
 
         //clear game board
-        //clearBoard();
-        values[0][0] = 2;
-        values[0][1] = 2;
-
-        // TEST DATA
-        values[1][0] = 2;
-        values[1][2] = 2;
-
-        // TEST DATA
-        values[2][1] = 2;
-        values[2][3] = 2;
-
-        // TEST DATA
-        values[3][1] = 2;
-        values[3][3] = 2;
-        values[3][3] = 2;
-        updateBoard();
+        clearBoard();
+//        values[0][0] = 2;
+//        values[0][1] = 2;
+//
+//        // TEST DATA
+//        values[1][0] = 2;
+//        values[1][2] = 2;
+//
+//        // TEST DATA
+//        values[2][1] = 2;
+//        values[2][3] = 2;
+//
+//        // TEST DATA
+//        values[3][1] = 2;
+//        values[3][3] = 2;
+//        values[3][3] = 2;
+        //updateBoard();
 
     }
 
@@ -101,14 +101,14 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         }
         updateBoard();
     }
-    
-        public void mergeRight() {
+
+    public void mergeRight() {
         for (int i = 0; i < squares.length; i++) {
             for (int a = 0; a < squares[i].length; a++) {
-                if (values[i][a] != EMPTY && a - 1 != squares[i].length) {
-                    if (values[i][a] == values[i][a - 1]) {
+                if (values[i][a] != EMPTY && a + 1 != squares[i].length) {
+                    if (values[i][a] == values[i][a + 1]) {
                         values[i][a] = values[i][a] * 2;
-                        values[i][a - 1] = EMPTY;
+                        values[i][a + 1] = EMPTY;
                     }
                 }
             }
@@ -116,13 +116,74 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
     }
 
     public void shiftRight() {
-        for (int i = squares.length-1; i >= 0; i--) {
-            for (int a = squares[i].length-1; a > 0; a--) {
+        for (int i = 0; i < squares.length; i++) {
+            for (int a = squares[i].length - 2; a >= 0; a--) {
                 if (values[i][a] != EMPTY) {
-                    for (int b = a -1 ; b >= 0; b--) {
+                    for (int b = squares[i].length - 1; b >= a; b--) {
                         if (values[i][b] == EMPTY) {
                             values[i][b] = values[i][a];
-                            values[i][a] = EMPTY; 
+                            values[i][a] = EMPTY;
+                        }
+                    }
+                }
+            }
+        }
+        updateBoard();
+    }
+
+    public void mergeUp() {
+        for (int i = 0; i < squares.length; i++) {
+            sopl("a");
+            for (int a = 0; a < squares[i].length; a++) {
+                sopl("b");
+                if (values[i][a] != EMPTY && i + 1 != squares.length) {
+                    if (values[i][a] == values[i + 1][a]) {
+                        values[i][a] = values[i][a] * 2;
+                        values[i + 1][a] = 0;
+                        // sopl("values[" + i +  "][" + a + "]");
+                    }
+                }
+            }
+        }
+    }
+
+    public void shiftUp() {
+        for (int i = 1; i < squares.length; i++) {
+            for (int a = 0; a < squares[i].length; a++) {
+                if (values[i][a] != EMPTY) {
+                    for (int b = 0; b < i; b++) {
+                        if (values[b][a] == EMPTY) {
+                            values[b][a] = values[i][a];
+                            values[i][a] = EMPTY;
+                        }
+                    }
+                }
+            }
+        }
+        updateBoard();
+    }
+
+    public void mergeDown() {
+        for (int i = squares.length - 1; i >= 0; i--) {
+            for (int a = 0; a < squares[i].length; a++) {
+                if (values[i][a] != EMPTY && i + 1 != squares.length) {
+                    if (values[i][a] == values[i + 1][a]) {
+                        values[i][a] = values[i][a] * 2;
+                        values[i + 1][a] = EMPTY;
+                    }
+                }
+            }
+        }
+    }
+
+    public void shiftDown() {
+        for (int i = squares.length - 2; i >= 0; i--) {
+            for (int a = 0; a < squares[i].length; a++) {
+                if (values[i][a] != EMPTY) {
+                    for (int b = squares.length - 1; b > i; b--) {
+                        if (values[b][a] == EMPTY) {
+                            values[b][a] = values[i][a];
+                            values[i][a] = EMPTY;
                         }
                     }
                 }
@@ -144,7 +205,11 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
     public void updateBoard() {
         for (int i = 0; i < squares.length; i++) {
             for (int a = 0; a < squares[i].length; a++) {
-                squares[i][a].setText("" + values[i][a]);
+                if (values[i][a] == 0) {
+                    squares[i][a].setText("");
+                } else {
+                    squares[i][a].setText("" + values[i][a]);
+                }
             }
         }
     }
@@ -223,23 +288,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel00.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel00.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel00.setText("1024");
+        jLabel00.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel00.setText("1");
         jLabel00.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel00)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel00, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel00)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel00, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(0, 204, 204));
@@ -247,23 +311,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel10.setText("1024");
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("1");
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel10)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel5.setBackground(new java.awt.Color(0, 204, 204));
@@ -271,23 +334,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel20.setText("1024");
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("1");
         jLabel20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel20)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel20)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 204));
@@ -295,23 +357,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel30.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel30.setText("1024");
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setText("1");
         jLabel30.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel30)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel30)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel6.setBackground(new java.awt.Color(0, 204, 204));
@@ -319,23 +380,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel31.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel31.setText("1024");
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel31.setText("1");
         jLabel31.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jLabel31)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel31)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel7.setBackground(new java.awt.Color(0, 204, 204));
@@ -343,23 +403,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel21.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel21.setText("1024");
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("1");
         jLabel21.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jLabel21)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel21)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel8.setBackground(new java.awt.Color(0, 204, 204));
@@ -367,23 +426,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel11.setText("1024");
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("1");
         jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jLabel11)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel9.setBackground(new java.awt.Color(0, 204, 204));
@@ -391,23 +449,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel01.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel01.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel01.setText("1024");
+        jLabel01.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel01.setText("1");
         jLabel01.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addComponent(jLabel01)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel01, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel01)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel01, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel10.setBackground(new java.awt.Color(0, 204, 204));
@@ -415,23 +472,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel33.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel33.setText("1024");
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel33.setText("1");
         jLabel33.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jLabel33)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel33)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel11.setBackground(new java.awt.Color(0, 204, 204));
@@ -439,23 +495,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel23.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel23.setText("1024");
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setText("1");
         jLabel23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(jLabel23)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel23)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel12.setBackground(new java.awt.Color(0, 204, 204));
@@ -463,23 +518,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel13.setText("1024");
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("1");
         jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jLabel13)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel13)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel13.setBackground(new java.awt.Color(0, 204, 204));
@@ -487,23 +541,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel03.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel03.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel03.setText("1024");
+        jLabel03.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel03.setText("1");
         jLabel03.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addComponent(jLabel03, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel03, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel03)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel03, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel14.setBackground(new java.awt.Color(0, 204, 204));
@@ -511,23 +564,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel02.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel02.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel02.setText("1024");
+        jLabel02.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel02.setText("1");
         jLabel02.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addComponent(jLabel02)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel02, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel02)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel02, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel15.setBackground(new java.awt.Color(0, 204, 204));
@@ -535,23 +587,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel12.setText("1024");
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("1");
         jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addComponent(jLabel12)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel12)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel16.setBackground(new java.awt.Color(0, 204, 204));
@@ -559,23 +610,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel22.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel22.setText("1024");
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("1");
         jLabel22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addComponent(jLabel22)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel22)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel17.setBackground(new java.awt.Color(0, 204, 204));
@@ -583,23 +633,22 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         jLabel32.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(153, 102, 0));
-        jLabel32.setText("1024");
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setText("1");
         jLabel32.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addComponent(jLabel32)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel32)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout gameBoardLayout = new javax.swing.GroupLayout(gameBoard);
@@ -709,19 +758,31 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         switch (evt.getKeyCode()) {
             case KeyEvent.VK_UP:
                 System.out.println("UP");
+                shiftUp();
+                mergeUp();
+                shiftUp();
+                placeRandomTwo();
                 break;
             case KeyEvent.VK_DOWN:
                 System.out.println("DOWN");
+                shiftDown();
+                mergeDown();
+                shiftDown();
+                placeRandomTwo();
                 break;
             case KeyEvent.VK_LEFT:
                 System.out.println("LEFT");
                 shiftLeft();
                 mergeLeft();
                 shiftLeft();
+                placeRandomTwo();
                 break;
             case KeyEvent.VK_RIGHT:
                 System.out.println("RIGHT");
                 shiftRight();
+                mergeRight();
+                shiftRight();
+                placeRandomTwo();
                 break;
         }
     }//GEN-LAST:event_formKeyPressed
