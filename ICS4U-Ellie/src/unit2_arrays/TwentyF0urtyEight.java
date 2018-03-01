@@ -8,7 +8,6 @@ package unit2_arrays;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
-import static resources.SOPL.sopl;
 
 /**
  *
@@ -64,6 +63,8 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         //clear game board
         clearBoard();
+        score = 0; 
+        scoreBoard.setText("0");
 
 
     }
