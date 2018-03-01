@@ -5,6 +5,7 @@
  */
 package unit2_arrays;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import static resources.SOPL.sopl;
@@ -16,8 +17,22 @@ import static resources.SOPL.sopl;
 public class TwentyF0urtyEight extends javax.swing.JFrame {
 
     private static final int EMPTY = 0;
+    private static int score = 0, end = 0;
     private JLabel[][] squares;
     private int[][] values;
+    private static Color[] colour = { //log#/log2
+        new Color(255, 255, 255),
+        new Color(255, 255, 0),
+        new Color(255, 200, 100), //4
+        new Color(100, 255, 255), //8
+        new Color(255, 255, 255), //16
+        new Color(200, 255, 100), //32
+        new Color(0, 220, 0), //64
+        new Color(0, 255, 255),
+        new Color(255, 255, 255),
+        new Color(255, 255, 0),
+        new Color(255, 0, 255)
+    };
 
     /**
      * Creates new form TwentyF0urtyEight
@@ -45,27 +60,27 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         squares[3][0] = jLabel30;
         squares[3][1] = jLabel31;
         squares[3][2] = jLabel32;
-        squares[3][3] = jLabel33; 
+        squares[3][3] = jLabel33;
 
         //clear game board
         clearBoard();
-//        values[0][0] = 2;
-//        values[0][1] = 2;
-//
-//        // TEST DATA
-//        values[1][0] = 2;
-//        values[1][2] = 2;
-//
-//        // TEST DATA
-//        values[2][1] = 2;
-//        values[2][3] = 2;
-//
-//        // TEST DATA
-//        values[3][1] = 2;
-//        values[3][3] = 2;
-//        values[3][3] = 2;
-        //updateBoard();
 
+
+    }
+    public void updateBoard() {
+        for (int i = 0; i < squares.length; i++) {
+            for (int a = 0; a < squares[i].length; a++) {
+                if (values[i][a] == 0) {
+                    squares[i][a].setText("");
+                    squares[i][a].setBackground(new Color(240,240,240));
+                } else {
+                    //sopl((int)(Math.log(values[i][a])/(Math.log(2))));
+                    squares[i][a].setText("" + values[i][a]);
+                    squares[i][a].setBackground(colour[(int) (Math.log(values[i][a]) / (Math.log(2)))]);
+                }
+            }
+        }
+        scoreBoard.setText("" + score);
     }
 
     public void swap(int row1, int column1, int row2, int column2) {
@@ -73,20 +88,25 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         values[row1][column1] = 0;
     }
 
-    public void mergeLeft() {
+    public boolean mergeLeft() {
+        boolean boo = false;
         for (int i = 0; i < squares.length; i++) {
             for (int a = 0; a < squares[i].length; a++) {
                 if (values[i][a] != EMPTY && a + 1 != squares[i].length) {
                     if (values[i][a] == values[i][a + 1]) {
                         values[i][a] = values[i][a] * 2;
+                        score = score + values[i][a];
                         values[i][a + 1] = EMPTY;
+                        boo = true;
                     }
                 }
             }
         }
+        return boo;
     }
 
-    public void shiftLeft() {
+    public boolean shiftLeft() {
+        boolean boo = false;
         for (int i = 0; i < squares.length; i++) {
             for (int a = 1; a < squares[i].length; a++) {
                 if (values[i][a] != EMPTY) {
@@ -94,28 +114,35 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
                         if (values[i][b] == EMPTY) {
                             values[i][b] = values[i][a];
                             values[i][a] = EMPTY;
+                            boo = true;
                         }
                     }
                 }
             }
         }
         updateBoard();
+        return boo;
     }
 
-    public void mergeRight() {
+    public boolean mergeRight() {
+        boolean boo = false;
         for (int i = 0; i < squares.length; i++) {
             for (int a = 0; a < squares[i].length; a++) {
                 if (values[i][a] != EMPTY && a + 1 != squares[i].length) {
                     if (values[i][a] == values[i][a + 1]) {
                         values[i][a] = values[i][a] * 2;
+                        score = score + values[i][a];
                         values[i][a + 1] = EMPTY;
+                        boo = true;
                     }
                 }
             }
         }
+        return boo;
     }
 
-    public void shiftRight() {
+    public boolean shiftRight() {
+        boolean boo = false;
         for (int i = 0; i < squares.length; i++) {
             for (int a = squares[i].length - 2; a >= 0; a--) {
                 if (values[i][a] != EMPTY) {
@@ -123,31 +150,36 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
                         if (values[i][b] == EMPTY) {
                             values[i][b] = values[i][a];
                             values[i][a] = EMPTY;
+                            boo = true;
                         }
                     }
                 }
             }
         }
         updateBoard();
+        return boo; 
     }
 
-    public void mergeUp() {
+    public boolean mergeUp() {
+        boolean boo = false;
         for (int i = 0; i < squares.length; i++) {
-            sopl("a");
             for (int a = 0; a < squares[i].length; a++) {
-                sopl("b");
                 if (values[i][a] != EMPTY && i + 1 != squares.length) {
                     if (values[i][a] == values[i + 1][a]) {
                         values[i][a] = values[i][a] * 2;
+                        score = score + values[i][a];
                         values[i + 1][a] = 0;
+                        boo = true;
                         // sopl("values[" + i +  "][" + a + "]");
                     }
                 }
             }
         }
+        return boo;
     }
 
-    public void shiftUp() {
+    public boolean shiftUp() {
+        boolean boo = false;
         for (int i = 1; i < squares.length; i++) {
             for (int a = 0; a < squares[i].length; a++) {
                 if (values[i][a] != EMPTY) {
@@ -155,28 +187,35 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
                         if (values[b][a] == EMPTY) {
                             values[b][a] = values[i][a];
                             values[i][a] = EMPTY;
+                            boo = true;
                         }
                     }
                 }
             }
         }
         updateBoard();
+        return boo;
     }
 
-    public void mergeDown() {
+    public boolean mergeDown() {
+        boolean boo = false;
         for (int i = squares.length - 1; i >= 0; i--) {
             for (int a = 0; a < squares[i].length; a++) {
                 if (values[i][a] != EMPTY && i + 1 != squares.length) {
                     if (values[i][a] == values[i + 1][a]) {
                         values[i][a] = values[i][a] * 2;
+                        score = score + values[i][a];
                         values[i + 1][a] = EMPTY;
+                        boo = true;
                     }
                 }
             }
         }
+        return boo;
     }
 
-    public void shiftDown() {
+    public boolean shiftDown() {
+        boolean boo = false;
         for (int i = squares.length - 2; i >= 0; i--) {
             for (int a = 0; a < squares[i].length; a++) {
                 if (values[i][a] != EMPTY) {
@@ -184,12 +223,14 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
                         if (values[b][a] == EMPTY) {
                             values[b][a] = values[i][a];
                             values[i][a] = EMPTY;
+                            boo = true;
                         }
                     }
                 }
             }
         }
         updateBoard();
+        return boo;
     }
 
     public void clearBoard() {
@@ -200,32 +241,42 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         }
         placeRandomTwo();
         placeRandomTwo();
-    }
-
-    public void updateBoard() {
-        for (int i = 0; i < squares.length; i++) {
-            for (int a = 0; a < squares[i].length; a++) {
-                if (values[i][a] == 0) {
-                    squares[i][a].setText("");
-                } else {
-                    squares[i][a].setText("" + values[i][a]);
-                }
-            }
-        }
+        scoreBoard.setText(""+ score);
     }
 
     public void placeRandomTwo() {
         int random1, random2;
         boolean randomCounter = false;
-        while (!randomCounter) {
+        if (!isFull()) {
+          while (!randomCounter) {
             random1 = (int) (Math.random() * 4);
             random2 = (int) (Math.random() * 4);
             if (values[random1][random2] == EMPTY) {
                 values[random1][random2] = 2;
                 squares[random1][random2].setText("2");
+                squares[random1][random2].setBackground(colour[(int) (Math.log(2) / (Math.log(2)))]);
                 randomCounter = true;
             }
+        }  
         }
+        
+    }
+    
+    public boolean isFull(){
+        boolean full = true;
+        for (int col = 0; col < values.length; col++) {
+            for (int row = 0; row < values[col].length; row++) {
+                if (values[col][row] == EMPTY) {
+                    full = false;
+                }
+            }
+        }
+        return full;
+    }
+    
+    public void End(){
+        new end2048(score).setVisible(true); 
+        this.dispose();
     }
 
     /**
@@ -271,6 +322,8 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jPanel17 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         top = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        scoreBoard = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("2048");
@@ -291,6 +344,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel00.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel00.setText("1");
         jLabel00.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel00.setOpaque(true);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -302,7 +356,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel00, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel00, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -314,6 +368,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("1");
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel10.setOpaque(true);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -325,7 +380,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -337,6 +392,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("1");
         jLabel20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel20.setOpaque(true);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -348,7 +404,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -360,6 +416,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel30.setText("1");
         jLabel30.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel30.setOpaque(true);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -371,7 +428,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -383,6 +440,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("1");
         jLabel31.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel31.setOpaque(true);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -394,7 +452,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -406,6 +464,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("1");
         jLabel21.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel21.setOpaque(true);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -417,7 +476,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -429,6 +488,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("1");
         jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel11.setOpaque(true);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -440,7 +500,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -452,6 +512,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel01.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel01.setText("1");
         jLabel01.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel01.setOpaque(true);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -463,7 +524,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel01, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel01, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -475,6 +536,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel33.setText("1");
         jLabel33.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel33.setOpaque(true);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -486,7 +548,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -498,6 +560,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("1");
         jLabel23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel23.setOpaque(true);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -509,7 +572,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -521,6 +584,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("1");
         jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel13.setOpaque(true);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -532,7 +596,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -544,6 +608,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel03.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel03.setText("1");
         jLabel03.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel03.setOpaque(true);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -555,7 +620,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel03, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel03, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -567,6 +632,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel02.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel02.setText("1");
         jLabel02.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel02.setOpaque(true);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -578,7 +644,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel02, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel02, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -590,6 +656,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("1");
         jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel12.setOpaque(true);
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -601,7 +668,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -613,6 +680,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("1");
         jLabel22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel22.setOpaque(true);
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -624,7 +692,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -636,6 +704,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel32.setText("1");
         jLabel32.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel32.setOpaque(true);
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -647,7 +716,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -724,15 +793,47 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         top.setBackground(new java.awt.Color(255, 153, 0));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        scoreBoard.setBackground(new java.awt.Color(255, 204, 0));
+        scoreBoard.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
+        scoreBoard.setForeground(new java.awt.Color(255, 255, 255));
+        scoreBoard.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        scoreBoard.setText("a");
+        scoreBoard.setOpaque(true);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(scoreBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(scoreBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout topLayout = new javax.swing.GroupLayout(top);
         top.setLayout(topLayout);
         topLayout.setHorizontalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
         );
         topLayout.setVerticalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 131, Short.MAX_VALUE)
+            .addGroup(topLayout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -754,36 +855,67 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        boolean shift, shift2, merge;  
         System.out.print("KEY PRESSED: ");
         switch (evt.getKeyCode()) {
             case KeyEvent.VK_UP:
                 System.out.println("UP");
-                shiftUp();
-                mergeUp();
-                shiftUp();
-                placeRandomTwo();
+                shift = shiftUp();
+                merge = mergeUp();
+                shift2 = shiftUp();
+                if (shift || merge || shift2) {
+                    placeRandomTwo();
+                    placeRandomTwo();
+                }
+                else {
+                    end++; 
+                }
                 break;
             case KeyEvent.VK_DOWN:
                 System.out.println("DOWN");
-                shiftDown();
-                mergeDown();
-                shiftDown();
-                placeRandomTwo();
+                shift = shiftDown();
+                merge = mergeDown();
+                shift2 = shiftDown();
+                if (shift || merge || shift2) {
+                    placeRandomTwo();
+                    placeRandomTwo();
+                    end = 0; 
+                }
+                else {
+                    end++; 
+                }
                 break;
             case KeyEvent.VK_LEFT:
                 System.out.println("LEFT");
-                shiftLeft();
-                mergeLeft();
-                shiftLeft();
-                placeRandomTwo();
+                shift = shiftLeft();
+                merge = mergeLeft();
+                shift2 = shiftLeft();
+                if (shift || merge || shift2) {
+                    placeRandomTwo();
+                    placeRandomTwo();
+                    end = 0; 
+                }
+                else {
+                    end++; 
+                }
                 break;
             case KeyEvent.VK_RIGHT:
                 System.out.println("RIGHT");
-                shiftRight();
-                mergeRight();
-                shiftRight();
-                placeRandomTwo();
+                shift = shiftRight();
+                merge = mergeRight();
+                shift2 = shiftRight();
+                if (shift || merge || shift2) {
+                    placeRandomTwo();
+                    placeRandomTwo();
+                    end = 0; 
+                }
+                else {
+                    end++; 
+                }
                 break;
+        }
+        if (end > 3){
+            End();
         }
     }//GEN-LAST:event_formKeyPressed
 
@@ -840,6 +972,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -856,6 +989,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel scoreBoard;
     private javax.swing.JPanel top;
     // End of variables declaration//GEN-END:variables
 }
