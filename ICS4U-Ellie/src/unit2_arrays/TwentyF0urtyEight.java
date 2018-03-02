@@ -7,6 +7,11 @@ package unit2_arrays;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -16,7 +21,8 @@ import javax.swing.JLabel;
 public class TwentyF0urtyEight extends javax.swing.JFrame {
 
     private static final int EMPTY = 0;
-    private static int score = 0, end = 0;
+    private static int score = 0;
+    Integer[] end = {0, 0, 0, 0};
     private JLabel[][] squares;
     private int[][] values;
     private static Color[] colour = { //log#/log2
@@ -36,7 +42,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
     /**
      * Creates new form TwentyF0urtyEight
      */
-    public TwentyF0urtyEight() {
+    public TwentyF0urtyEight() throws Exception {
         initComponents();
         squares = new JLabel[4][4];
         values = new int[4][4];
@@ -63,17 +69,18 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
 
         //clear game board
         clearBoard();
-        score = 0; 
-        scoreBoard.setText("0");
-
-
+        score = 0;
+        highScore();
+scoreBoard.setText("0");
+        
     }
-    public void updateBoard() {
+
+    public void updateBoard() throws Exception {
         for (int i = 0; i < squares.length; i++) {
             for (int a = 0; a < squares[i].length; a++) {
                 if (values[i][a] == 0) {
                     squares[i][a].setText("");
-                    squares[i][a].setBackground(new Color(240,240,240));
+                    squares[i][a].setBackground(new Color(240, 240, 240));
                 } else {
                     //sopl((int)(Math.log(values[i][a])/(Math.log(2))));
                     squares[i][a].setText("" + values[i][a]);
@@ -82,6 +89,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             }
         }
         scoreBoard.setText("" + score);
+        score();
     }
 
     public void swap(int row1, int column1, int row2, int column2) {
@@ -106,7 +114,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         return boo;
     }
 
-    public boolean shiftLeft() {
+    public boolean shiftLeft() throws Exception {
         boolean boo = false;
         for (int i = 0; i < squares.length; i++) {
             for (int a = 1; a < squares[i].length; a++) {
@@ -142,7 +150,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         return boo;
     }
 
-    public boolean shiftRight() {
+    public boolean shiftRight() throws Exception {
         boolean boo = false;
         for (int i = 0; i < squares.length; i++) {
             for (int a = squares[i].length - 2; a >= 0; a--) {
@@ -158,7 +166,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
             }
         }
         updateBoard();
-        return boo; 
+        return boo;
     }
 
     public boolean mergeUp() {
@@ -179,7 +187,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         return boo;
     }
 
-    public boolean shiftUp() {
+    public boolean shiftUp() throws Exception {
         boolean boo = false;
         for (int i = 1; i < squares.length; i++) {
             for (int a = 0; a < squares[i].length; a++) {
@@ -215,7 +223,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         return boo;
     }
 
-    public boolean shiftDown() {
+    public boolean shiftDown() throws Exception {
         boolean boo = false;
         for (int i = squares.length - 2; i >= 0; i--) {
             for (int a = 0; a < squares[i].length; a++) {
@@ -242,28 +250,28 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         }
         placeRandomTwo();
         placeRandomTwo();
-        scoreBoard.setText(""+ score);
+        scoreBoard.setText("" + score);
     }
 
     public void placeRandomTwo() {
         int random1, random2;
         boolean randomCounter = false;
         if (!isFull()) {
-          while (!randomCounter) {
-            random1 = (int) (Math.random() * 4);
-            random2 = (int) (Math.random() * 4);
-            if (values[random1][random2] == EMPTY) {
-                values[random1][random2] = 2;
-                squares[random1][random2].setText("2");
-                squares[random1][random2].setBackground(colour[(int) (Math.log(2) / (Math.log(2)))]);
-                randomCounter = true;
+            while (!randomCounter) {
+                random1 = (int) (Math.random() * 4);
+                random2 = (int) (Math.random() * 4);
+                if (values[random1][random2] == EMPTY) {
+                    values[random1][random2] = 2;
+                    squares[random1][random2].setText("2");
+                    squares[random1][random2].setBackground(colour[(int) (Math.log(2) / (Math.log(2)))]);
+                    randomCounter = true;
+                }
             }
-        }  
         }
-        
+
     }
-    
-    public boolean isFull(){
+
+    public boolean isFull() {
         boolean full = true;
         for (int col = 0; col < values.length; col++) {
             for (int row = 0; row < values[col].length; row++) {
@@ -274,10 +282,35 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         }
         return full;
     }
-    
-    public void End(){
-        new end2048(score).setVisible(true); 
+
+    public void End() throws Exception {
+        new end2048(score).setVisible(true);
+        score();
         this.dispose();
+    }
+
+    public void score() throws Exception {
+        File file = new File("2048HighScore.txt");
+        Scanner highScore = new Scanner(file);
+        if (score > Integer.parseInt(highScore.nextLine())) {
+            PrintWriter highScoreRecord = new PrintWriter(file);
+            highScoreRecord.write("" + score);
+            highScoreRecord.close();
+        }
+    }
+
+    public void highScore() throws Exception {
+        File file = new File("2048HighScore.txt");
+        try {
+            Scanner highScore = new Scanner(file);
+        } catch (Exception ex) {
+            PrintWriter highScoreRecord = new PrintWriter(file);
+            highScoreRecord.write("" + 0);
+            highScoreRecord.close();
+            highScoreDisplay.setText("0");
+        }
+        Scanner highScore = new Scanner(file);
+        highScoreDisplay.setText(highScore.nextLine());
     }
 
     /**
@@ -325,6 +358,10 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         top = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         scoreBoard = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        highScoreDisplay = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("2048");
@@ -820,21 +857,69 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
+
+        highScoreDisplay.setBackground(new java.awt.Color(255, 204, 0));
+        highScoreDisplay.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
+        highScoreDisplay.setForeground(new java.awt.Color(255, 255, 255));
+        highScoreDisplay.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        highScoreDisplay.setText("a");
+        highScoreDisplay.setOpaque(true);
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(highScoreDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(highScoreDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Score");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("High Score");
+
         javax.swing.GroupLayout topLayout = new javax.swing.GroupLayout(top);
         top.setLayout(topLayout);
         topLayout.setHorizontalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117))
+            .addGroup(topLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         topLayout.setVerticalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topLayout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -856,67 +941,87 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        boolean shift, shift2, merge;  
+        boolean shift, shift2, merge;
         System.out.print("KEY PRESSED: ");
-        switch (evt.getKeyCode()) {
-            case KeyEvent.VK_UP:
-                System.out.println("UP");
-                shift = shiftUp();
-                merge = mergeUp();
-                shift2 = shiftUp();
-                if (shift || merge || shift2) {
-                    placeRandomTwo();
-                    placeRandomTwo();
-                }
-                else {
-                    end++; 
-                }
-                break;
-            case KeyEvent.VK_DOWN:
-                System.out.println("DOWN");
-                shift = shiftDown();
-                merge = mergeDown();
-                shift2 = shiftDown();
-                if (shift || merge || shift2) {
-                    placeRandomTwo();
-                    placeRandomTwo();
-                    end = 0; 
-                }
-                else {
-                    end++; 
-                }
-                break;
-            case KeyEvent.VK_LEFT:
-                System.out.println("LEFT");
-                shift = shiftLeft();
-                merge = mergeLeft();
-                shift2 = shiftLeft();
-                if (shift || merge || shift2) {
-                    placeRandomTwo();
-                    placeRandomTwo();
-                    end = 0; 
-                }
-                else {
-                    end++; 
-                }
-                break;
-            case KeyEvent.VK_RIGHT:
-                System.out.println("RIGHT");
-                shift = shiftRight();
-                merge = mergeRight();
-                shift2 = shiftRight();
-                if (shift || merge || shift2) {
-                    placeRandomTwo();
-                    placeRandomTwo();
-                    end = 0; 
-                }
-                else {
-                    end++; 
-                }
-                break;
+        try {
+            switch (evt.getKeyCode()) {
+                case KeyEvent.VK_UP:
+                    System.out.println("UP");
+                    shift = shiftUp();
+                    merge = mergeUp();
+                    shift2 = shiftUp();
+                    if (shift || merge || shift2) {
+                        placeRandomTwo();
+                        placeRandomTwo();
+                        for (int i = 0; i < 4; i++) {
+                            end[0] = 0;
+                        }
+                    } else {
+                        end[0] = 1;
+                    }
+                    break;
+                case KeyEvent.VK_DOWN:
+                    System.out.println("DOWN");
+                    shift = shiftDown();
+                    merge = mergeDown();
+                    shift2 = shiftDown();
+                    if (shift || merge || shift2) {
+                        placeRandomTwo();
+                        placeRandomTwo();
+                        for (int i = 0; i < 4; i++) {
+                            end[0] = 0;
+                        }
+                    } else {
+                        end[1] = 1;
+                    }
+                    break;
+                case KeyEvent.VK_LEFT:
+                    System.out.println("LEFT");
+                    shift = shiftLeft();
+                    merge = mergeLeft();
+                    shift2 = shiftLeft();
+                    if (shift || merge || shift2) {
+                        placeRandomTwo();
+                        placeRandomTwo();
+                        for (int i = 0; i < 4; i++) {
+                            end[0] = 0;
+                        }
+                    } else {
+                        end[2] = 1;
+                    }
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    System.out.println("RIGHT");
+                    shift = shiftRight();
+                    merge = mergeRight();
+                    shift2 = shiftRight();
+                    if (shift || merge || shift2) {
+                        placeRandomTwo();
+                        placeRandomTwo();
+                        for (int i = 0; i < 4; i++) {
+                            end[0] = 0;
+                        }
+                    } else {
+                        end[3] = 1;
+                    }
+                    break;
+            }
+        }catch (Exception ex) {
+            
         }
-        if (end > 3){
-            End();
+
+        int counter = 0;
+        for (int i = 0; i < 4; i++) {
+            if (end[i] == 1) {
+                counter++;
+            }
+        }
+        if (counter == 4) {
+            try {
+                End();
+            } catch (Exception ex) {
+                Logger.getLogger(TwentyF0urtyEight.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_formKeyPressed
 
@@ -950,21 +1055,28 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TwentyF0urtyEight().setVisible(true);
+                try {
+                    new TwentyF0urtyEight().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(TwentyF0urtyEight.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel gameBoard;
+    private javax.swing.JLabel highScoreDisplay;
     private javax.swing.JLabel jLabel00;
     private javax.swing.JLabel jLabel01;
     private javax.swing.JLabel jLabel02;
     private javax.swing.JLabel jLabel03;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -982,6 +1094,7 @@ public class TwentyF0urtyEight extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

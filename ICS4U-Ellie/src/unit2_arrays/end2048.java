@@ -5,6 +5,9 @@
  */
 package unit2_arrays;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author 1xuell
@@ -124,7 +127,11 @@ public class end2048 extends javax.swing.JFrame {
 
     private void StarOverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StarOverActionPerformed
         this.dispose();
-        new TwentyF0urtyEight().setVisible(true);
+        try {
+            new TwentyF0urtyEight().setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(end2048.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_StarOverActionPerformed
 
     /**
