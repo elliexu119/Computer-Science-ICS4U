@@ -24,9 +24,10 @@ void setup() {
 
   // DEFAULT MAP
   fileName = FILE_NAMES_ELECTIONS[0];
-  drawMap();
+
   // ELECTION RESULTS
-  //electionResult();
+  electionResult();
+  drawMap();
 }
 
 /*
@@ -38,7 +39,17 @@ void electionResult( ) {
 
     // ELECTION RESULT DATA
     Scanner data = new Scanner( new File( dataPath("") + "\\" + fileName ) );
+    StringTokenizer token;
+    electionResults = new String [50][4]; 
 
+    data.nextLine();
+    for (int i = 0; i < 50; i++) {
+      token = new StringTokenizer(data.nextLine(), ",");
+      for (int j = 0; token.hasMoreTokens(); j++) {
+        electionResults[i][j] = token.nextToken().trim();
+      }
+      System.out.println("");
+    }
 
     data.close();
   }
@@ -56,34 +67,45 @@ void drawMap() {
 
     // USA MAP DATA
     Scanner data = new Scanner( new File( dataPath("") + "\\USA.txt" ) );
-    beginShape();
-    String temp;
-    int points;
+    int points, regions;
+    String state;
     StringTokenizer token;
     data.nextLine();
     data.nextLine();
-    int regions = Integer.parseInt(data.nextLine());
-
+    regions = Integer.parseInt(data.nextLine());
+    data.nextLine();
 
     for (int a = 0; a < regions; a++) {
-      data.nextLine();
-      data.nextLine();
+      state = data.nextLine().trim();
       data.nextLine();
       points = Integer.parseInt(data.nextLine());
-      System.out.println(points);
+      beginShape();
       for (int i = 0; i <= points; i ++) {
-        //System.out.println(i);
-        temp = data.nextLine();
-        //System.out.println(temp);
-        token = new StringTokenizer(temp);
+        token = new StringTokenizer(data.nextLine());
         while (token.hasMoreTokens()) {
-          vertex(Float.parseFloat(token.nextToken().trim())+200, Float.parseFloat(token.nextToken())+200);
+          float temp2 = Float.parseFloat(token.nextToken().trim()); 
+          vertex((temp2)*(13) +1850, (Float.parseFloat(token.nextToken()))*-16 + 900);
         }
       }
+      //colour here
+      int colorTrack = -1;
+      for (int i = 0; i < electionResults.length; i++) {
+        if (state.equalsIgnoreCase(electionResults[i][0])) {
+          colorTrack = i; 
+          break;
+        }
+      }
+      if (colorTrack != -1){
+       if (Integer.parseInt(electionResults[colorTrack][1]) > Integer.parseInt(electionResults[colorTrack][2])){
+         fill(255,28,21); 
+       }
+       else{
+         fill(71,42,212); 
+       }
+      }
+
+      endShape(CLOSE);
     }
-
-
-    endShape(CLOSE);
     data.close();
   }
   catch (Exception e ) {
