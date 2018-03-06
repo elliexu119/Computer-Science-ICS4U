@@ -11,7 +11,7 @@ final static String[] FILE_NAMES_ELECTIONS = {
   "USA2000.txt", "USA2004.txt", "USA2008.txt", "USA2012.txt", "USA2016.txt"
 };
 
-int value;
+int value = 0, backgroundColor = 210;
 String fileName;
 String[][] electionResults;
 
@@ -20,14 +20,15 @@ String[][] electionResults;
  */
 void setup() {
 
+  background(backgroundColor); 
   size( 1200, 600 );
-
-  // DEFAULT MAP
-  fileName = FILE_NAMES_ELECTIONS[0];
-
-  // ELECTION RESULTS
+  fileName = FILE_NAMES_ELECTIONS[value];
   electionResult();
   drawMap();
+  textFont(createFont("Arial", 24, true), 24);
+  fill(0);
+  int year = 1960 + value*4; 
+  text("America: " + year, width - 220, height - 100);
 }
 
 /*
@@ -57,7 +58,8 @@ void electionResult( ) {
     e.printStackTrace();
   }
 }
-
+void draw() {
+}
 /*
  * DRAW MAP OFF USA w/ Election Results
  */
@@ -68,10 +70,15 @@ void drawMap() {
     // USA MAP DATA
     Scanner data = new Scanner( new File( dataPath("") + "\\USA.txt" ) );
     int points, regions;
+    double minLong, minLat, maxLong, maxLat;
     String state;
     StringTokenizer token;
-    data.nextLine();
-    data.nextLine();
+    token = new StringTokenizer(data.nextLine());
+    minLong = Math.abs(Double.parseDouble(token.nextToken())); 
+    minLat = Math.abs(Double.parseDouble(token.nextToken())); 
+    token = new StringTokenizer(data.nextLine());
+    maxLong = Math.abs(Double.parseDouble(token.nextToken())); 
+    maxLat = Math.abs(Double.parseDouble(token.nextToken())); 
     regions = Integer.parseInt(data.nextLine());
     data.nextLine();
 
@@ -80,11 +87,13 @@ void drawMap() {
       data.nextLine();
       points = Integer.parseInt(data.nextLine());
       beginShape();
+      float move = (float) ((width-((minLong - maxLong)*((height/ (maxLat - minLat))/1.28)))/2);
+
       for (int i = 0; i <= points; i ++) {
         token = new StringTokenizer(data.nextLine());
         while (token.hasMoreTokens()) {
-          float temp2 = Float.parseFloat(token.nextToken().trim()); 
-          vertex((temp2)*(13) +1850, (Float.parseFloat(token.nextToken()))*-16 + 900);
+          stroke(backgroundColor);
+          vertex((float) ((minLong + Float.parseFloat(token.nextToken().trim()))*((height/ (maxLat - minLat))/1.28)) + move, (float) ((maxLat - Float.parseFloat(token.nextToken()))*(height/ (maxLat - minLat))));
         }
       }
       //colour here
@@ -95,13 +104,15 @@ void drawMap() {
           break;
         }
       }
-      if (colorTrack != -1){
-       if (Integer.parseInt(electionResults[colorTrack][1]) > Integer.parseInt(electionResults[colorTrack][2])){
-         fill(255,28,21); 
-       }
-       else{
-         fill(71,42,212); 
-       }
+      if (colorTrack != -1) {
+        int demoniator = Integer.parseInt(electionResults[colorTrack][2])+Integer.parseInt(electionResults[colorTrack][3])+Integer.parseInt(electionResults[colorTrack][1]);
+        double top = Integer.parseInt(electionResults[colorTrack][2]);
+        int r = (int) ((top/demoniator)*255); 
+        top = Integer.parseInt(electionResults[colorTrack][3]);
+        int g = (int) ((top/demoniator)*255); 
+        top = Integer.parseInt(electionResults[colorTrack][1]);
+        int b = (int) ((top/demoniator)*255); 
+        fill(r, g, b);
       }
 
       endShape(CLOSE);
@@ -121,10 +132,33 @@ void drawState( ) {
 
 /*
  */
+
+
 void keyPressed() {
-  if ( key >= 'a' && key <= ( 'a' + FILE_NAMES_ELECTIONS.length - 1 )  ) {
-    fileName = FILE_NAMES_ELECTIONS[key-'a'];
-    print( fileName );
-    electionResult();
+
+  if (key == CODED) {
+    if (keyCode == RIGHT) {
+      value ++; 
+      if (value > 14) {
+        value = 0;
+      }
+    }
+    if (keyCode == LEFT) {
+      value --; 
+      if (value < 0) {
+        value = 14;
+      }
+      
+    }
+    fileName = FILE_NAMES_ELECTIONS[value];
+      electionResult();
+      drawMap();
+      int year = 1960 + value*4; 
+      println(value); 
+      fill(backgroundColor);
+      stroke(backgroundColor);
+      rect(width-220, height-100, 200, -20); 
+      fill(0,0,0); 
+      text("America: " + year, width - 220, height - 100);
   }
 }
