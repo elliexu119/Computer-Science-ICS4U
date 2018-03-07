@@ -49,7 +49,6 @@ void electionResult( ) {
       for (int j = 0; token.hasMoreTokens(); j++) {
         electionResults[i][j] = token.nextToken().trim();
       }
-      System.out.println("");
     }
 
     data.close();
@@ -154,7 +153,6 @@ void keyPressed() {
       electionResult();
       drawMap();
       int year = 1960 + value*4; 
-      println(value); 
       fill(backgroundColor);
       stroke(backgroundColor);
       rect(width-220, height-100, 200, -20); 
