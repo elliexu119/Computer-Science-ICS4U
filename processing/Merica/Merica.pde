@@ -86,13 +86,18 @@ void drawMap() {
       data.nextLine();
       points = Integer.parseInt(data.nextLine());
       beginShape();
-      float move = (float) ((width-((minLong - maxLong)*((height/ (maxLat - minLat))/1.28)))/2);
+      
+      //double multiple = (width/ (minLong - maxLong)); //scale the map so that at least the max and min Longitude points are shown 
+      double multiple = (height/ (maxLat - minLat)); //scale the map so that at least the max and min Latitiude points are shown 
+      
+      float moveLong = (float) ((width-((minLong - maxLong)*(multiple/1.28)))/2);
+      float moveLat = (float) ((height-((maxLat - minLat)*(multiple)))/2);
 
       for (int i = 0; i <= points; i ++) {
         token = new StringTokenizer(data.nextLine());
         while (token.hasMoreTokens()) {
           stroke(backgroundColor);
-          vertex((float) ((minLong + Float.parseFloat(token.nextToken().trim()))*((height/ (maxLat - minLat))/1.28)) + move, (float) ((maxLat - Float.parseFloat(token.nextToken()))*(height/ (maxLat - minLat))));
+          vertex((float) ((minLong + Float.parseFloat(token.nextToken().trim()))*(multiple/1.28)) + moveLong, (float) ((maxLat - Float.parseFloat(token.nextToken()))*multiple) + moveLat);
         }
       }
       //colour here
