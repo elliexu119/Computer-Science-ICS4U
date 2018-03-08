@@ -5,7 +5,8 @@
  */
 package resources;
 
-import java.util.Scanner;
+import java.util.StringTokenizer;
+import static resources.SOPL.sopl;
 
 /**
  *
@@ -17,14 +18,25 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        int[][] data = {
+            {7, 22, 1, 33},
+            {5, 3, 10, 4},
+            {66, 44, 2, 55}
+        };
+        sopl(sumCross(data, 1, 2));
     }
-    
-    public static void read(String string){
-        Scanner scanner = new Scanner (string);
-        while (scanner.hasNextLine()){
-            
+
+    public static int sumCross(int[][] data, int rowIndex, int colIndex) {
+        int sum = 0; //1,2
+        for (int i = 0; i < data[rowIndex].length; i++) {
+            sum = sum + data[rowIndex][i];
+            sopl(data[rowIndex][i]);
         }
+        for (int i = 0; i < data.length; i++) {
+            sum = sum + data[i][colIndex];
+        }
+        sum = sum - data[rowIndex][colIndex];
+        return sum;
     }
-    
+
 }
