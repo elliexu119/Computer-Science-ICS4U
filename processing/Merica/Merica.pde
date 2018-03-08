@@ -87,17 +87,17 @@ void drawMap() {
       points = Integer.parseInt(data.nextLine());
       beginShape();
       
-      //double multiple = (width/ (minLong - maxLong)); //scale the map so that at least the max and min Longitude points are shown 
-      double multiple = (height/ (maxLat - minLat)); //scale the map so that at least the max and min Latitiude points are shown 
+      double multiple = (width/ (minLong - maxLong)); //scale the map so that at least the max and min Longitude points are shown 
+      //double multiple = (height/ (maxLat - minLat)); //scale the map so that at least the max and min Latitiude points are shown 
       
-      float moveLong = (float) ((width-((minLong - maxLong)*(multiple/1.28)))/2);
+      float moveLong = (float) ((width-((minLong - maxLong)*(multiple/1)))/2);
       float moveLat = (float) ((height-((maxLat - minLat)*(multiple)))/2);
 
       for (int i = 0; i <= points; i ++) {
         token = new StringTokenizer(data.nextLine());
         while (token.hasMoreTokens()) {
           stroke(backgroundColor);
-          vertex((float) ((minLong + Float.parseFloat(token.nextToken().trim()))*(multiple/1.28)) + moveLong, (float) ((maxLat - Float.parseFloat(token.nextToken()))*multiple) + moveLat);
+          vertex((float) ((minLong + Float.parseFloat(token.nextToken().trim()))*(multiple/1)) + moveLong, (float) ((maxLat - Float.parseFloat(token.nextToken()))*multiple) + moveLat);
         }
       }
       //colour here
