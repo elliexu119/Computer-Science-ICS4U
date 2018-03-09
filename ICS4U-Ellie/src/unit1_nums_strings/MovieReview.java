@@ -159,7 +159,7 @@ public class MovieReview {
         sentence = new String[lineCount];
         lineCount = 0;
         while (file.hasNext()) {
-            sentence[lineCount] = (file.nextLine()).toLowerCase();
+            sentence[lineCount] = (file.nextLine()).toLowerCase().trim();
             lineCount++;
         }
         return sentence;
