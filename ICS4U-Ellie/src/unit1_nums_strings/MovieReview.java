@@ -159,7 +159,7 @@ public class MovieReview {
         sentence = new String[lineCount];
         lineCount = 0;
         while (file.hasNext()) {
-            sentence[lineCount] = (file.nextLine()).toLowerCase().trim();
+            sentence[lineCount] = (file.nextLine()).toLowerCase().trim(); //added .trim()
             lineCount++;
         }
         return sentence;
@@ -245,18 +245,20 @@ public class MovieReview {
         negativeWriter.close();
     }
 
-    public static void higestWordRating(File fileName, File reviews) throws Exception {
+    public static void higestWordRating(File fileName, File reviews) throws Exception { //changed some stuff here 
         String[] sentence = readTxt(fileName);
         double[] ratings = new double[sentence.length];
-        double max, min;
-        int maxV = -1, minV = -1;
+        double max, min = 100;
+        int maxV = 0, minV = 0;
 
         for (int i = 0; i < sentence.length; i++) {
             ratings[i] = wordAverage(sentence[i], reviews);
         }
 
         max = ratings[0];
-        min = ratings[0];
+        if (ratings[0] != -1){
+           min = ratings[0];
+        }
         for (int a = 0; a < 2; a++) {
             for (int i = 1; i < ratings.length; i++) {
                 if (a == 0) {
@@ -264,7 +266,7 @@ public class MovieReview {
                         max = ratings[i];
                         maxV = i;
                     }
-                } else if (ratings[i] < min && ratings[i] != 0) {
+                } else if (ratings[i] != -1 && ratings[i] < min && ratings[i] != 0) {
                     min = ratings[i];
                     minV = i;
                 }
@@ -272,11 +274,7 @@ public class MovieReview {
         }
 
         sopl("-------------------------------");
-        if (maxV != -1) {
             sopl("the word with the highest rating is " + sentence[maxV] + ". With a rating of " + ratings[maxV]);
-        }
-        if (minV != -1) {
             sopl("the word with the lowest rating is " + sentence[minV] + ". With a rating of " + ratings[minV]);
-        }
     }
 }
