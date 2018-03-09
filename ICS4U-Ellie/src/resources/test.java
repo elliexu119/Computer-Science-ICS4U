@@ -5,8 +5,7 @@
  */
 package resources;
 
-import java.util.StringTokenizer;
-import static resources.SOPL.sopl;
+import java.math.BigInteger;
 
 /**
  *
@@ -18,25 +17,16 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int[][] data = {
-            {7, 22, 1, 33},
-            {5, 3, 10, 4},
-            {66, 44, 2, 55}
-        };
-        sopl(sumCross(data, 1, 2));
+        System.out.println(fact(10000)); 
     }
 
-    public static int sumCross(int[][] data, int rowIndex, int colIndex) {
-        int sum = 0; //1,2
-        for (int i = 0; i < data[rowIndex].length; i++) {
-            sum = sum + data[rowIndex][i];
-            sopl(data[rowIndex][i]);
+    public static BigInteger fact(int n) {
+        if (n < 0) {
+            return BigInteger.valueOf(-1);
         }
-        for (int i = 0; i < data.length; i++) {
-            sum = sum + data[i][colIndex];
+        if (n < 2) {
+            return BigInteger.valueOf(1);
         }
-        sum = sum - data[rowIndex][colIndex];
-        return sum;
+        return BigInteger.valueOf(n).multiply(fact(n - 1));
     }
-
 }
