@@ -1,26 +1,31 @@
 void setup() {
   size (600, 600); 
-  background (255); 
-  stroke(0);
-  //noFill(); 
-  ellip(0); 
+  background (0); 
 }
 void draw() {
+  ellip(0); 
+   
 }
 
 void ellip(int d) {
-  int speed = 2; 
-  fill ((int) (Math.random()*255), (int) (Math.random()*255), (int) (Math.random()*255));
-  if (frameCount%5 == 0 && d < 900/speed){
-    d = d +5; 
-    ellipse(width/2, height/2, d * speed , d  * speed);
-    delay(100); 
-    ellip(d); 
-  } 
-  //if (frameCount%10 == 0){
-  // ellipse(width/2, height/2, 0,0);  
-  //}
-  else if (d >899/speed)  {
+  int speed = 1; 
+  stroke ((int) (Math.random()*255), (int) (Math.random()*255), (int) (Math.random()*255)); 
+  d ++; 
+  noFill();
+  if (d < width*3) {
+    if (d% (int)(Math.random()*200 + 1) == 0){
+          ellipse(mouseX + d, mouseY, d * speed, d  * speed);
+          ellipse(mouseX - d, mouseY, d * speed, d  * speed);
+          ellipse(mouseX, mouseY + d, d * speed, d  * speed);
+          ellipse(mouseX, mouseY - d, d * speed, d  * speed);
+    }
+    ellip(d);
   }
-    //ellipse(width/2, height/2, h, w);
+   
+   
+}
+
+void mouseMoved(){
+    fill(0); 
+   rect(0, 0, width, height); 
 }
