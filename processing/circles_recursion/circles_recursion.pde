@@ -4,11 +4,12 @@ void setup() {
 }
 void draw() {
   ellip(0); 
-   
+  delay(100);
 }
 
 void ellip(int d) {
   int speed = 1; 
+  //stroke(255); 
   stroke ((int) (Math.random()*255), (int) (Math.random()*255), (int) (Math.random()*255)); 
   d ++; 
   noFill();
@@ -26,6 +27,6 @@ void ellip(int d) {
 }
 
 void mouseMoved(){
-    fill(0); 
+   fill(0, 0, 0, 63); 
    rect(0, 0, width, height); 
 }
