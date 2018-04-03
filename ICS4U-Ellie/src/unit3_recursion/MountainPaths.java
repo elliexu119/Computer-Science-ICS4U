@@ -6,46 +6,52 @@
 package unit3_recursion;
 
 import java.awt.*;
+import java.io.File;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+import static resources.SOPL.sop;
+import static resources.SOPL.sopl;
 
 public class MountainPaths {
 
     /**
      * Mount Paths
      */
-    public static void main( String[] args ) throws Exception {
+    public static void main(String[] args) throws Exception {
 
         // ***********************************
         // TASK 1:  read data into a 2D Array
         // 
-        System.out.println( "TASK 1: READ DATA" );
-        int[][] data = read( ".\\data\\mountain.paths\\moutain paths test data" );
+        System.out.println("TASK 1: READ DATA");
+        int[][] data = read(".\\data\\mountain.paths\\Colorado.844x480.dat"); //moutain paths test data.txt
+//Colorado.844x480.dat
 
         // ***********************************
         // Construct DrawingPanel, and get its Graphics context
         //
-        //DrawingPanel panel = new DrawingPanel( data[0].length, data.length );
-        //Graphics g = panel.getGraphics();
+        DrawingPanel panel = new DrawingPanel(data[0].length, data.length);
+        Graphics g = panel.getGraphics();
 //
 //        // ***********************************
 //        // TASK 2:  find HIGHEST & LOWEST elevation; for GRAY SCALE
 //        //
-//        System.out.println( "TASK 2: HIGHEST / LOWEST ELEVATION" );
-//        int min = findMinValue( data );
-//        System.out.println( "\tMin: " + min );
+        System.out.println("TASK 2: HIGHEST / LOWEST ELEVATION");
+        int min = findMinValue(data);
+        System.out.println("\tMin: " + min);
 //
-//        int max = findMaxValue( data );
-//        System.out.println( "\tMax: " + max );
+        int max = findMaxValue(data);
+        System.out.println("\tMax: " + max);
 //
 //        // ***********************************
 //        // TASK 3:  Draw The Map
 //        //
-//        System.out.println( "TASK 3: DRAW MAP" );
-//        drawMap( g, data );
+        System.out.println("TASK 3: DRAW MAP");
+        drawMap(g, data);
 //
 //        // ***********************************
 //        // TASK 4A:  implement indexOfMinInCol
 //        //
-//        System.out.println( "TASK 4A: INDEX OF MIN IN COL 0" );
+        System.out.println( "TASK 4A: INDEX OF MIN IN COL 0" );
 //        int minRow = indexOfMinInCol( data, 0 );
 //        System.out.println( "\tRow with lowest Col 0 Value: " + minRow );
 //
@@ -82,11 +88,34 @@ public class MountainPaths {
      * @param fileName the name of the file
      * @return a 2D array (rows x cols) of the data from the file read
      */
-    public static int[][] read( String fileName ) {
-        int[][] data = null;
+    public static int[][] read(String fileName) throws Exception {
 
-        // TODO
-        
+        File file = new File(fileName);
+        Scanner fileData = new Scanner(file);
+        int row = 0, column = 0;
+        for (; fileData.hasNext(); row++) {
+            fileData.nextLine();
+            if (row == 1) {
+                StringTokenizer token = new StringTokenizer(fileData.nextLine());
+                row++;
+                for (column = 0; token.hasMoreTokens(); column++) {
+                    token.nextToken();
+                }
+            }
+        }
+        int[][] data = new int[row][column];
+
+        fileData = new Scanner(file);
+        for (int i = 0; fileData.hasNext(); i++) {
+            StringTokenizer token = new StringTokenizer(fileData.nextLine());
+            for (int a = 0; token.hasMoreTokens(); a++) {
+                String temp = token.nextToken().trim();
+                data[i][a] = Integer.parseInt(temp);
+                //sop(data[i][a] + " ");
+            }
+            //sopl("");
+        }
+
         return data;
     }
 
@@ -94,10 +123,16 @@ public class MountainPaths {
      * @param grid a 2D array from which you want to find the smallest value
      * @return the smallest value in the given 2D array
      */
-    public static int findMinValue( int[][] grid ) {
-
-        // TODO
-        return -1;
+    public static int findMinValue(int[][] grid) {
+        int min = grid[0][0];
+        for (int i = 0; i < grid.length; i++) {
+            for (int a = 0; a < grid[i].length; a++) {
+                if (grid[i][a] < min) {
+                    min = grid[i][a];
+                }
+            }
+        }
+        return min;
 
     }
 
@@ -105,10 +140,16 @@ public class MountainPaths {
      * @param grid a 2D array from which you want to find the largest value
      * @return the largest value in the given 2D array
      */
-    public static int findMaxValue( int[][] grid ) {
-
-        // TODO
-        return -1;
+    public static int findMaxValue(int[][] grid) {
+        int max = grid[0][0];
+        for (int i = 0; i < grid.length; i++) {
+            for (int a = 0; a < grid[i].length; a++) {
+                if (grid[i][a] > max) {
+                    max = grid[i][a];
+                }
+            }
+        }
+        return max;
 
     }
 
@@ -121,8 +162,25 @@ public class MountainPaths {
      * @param g a Graphics context to use
      * @param grid a 2D array of the data
      */
-    public static void drawMap( Graphics g, int[][] data ) {
-        // TODO
+    public static void drawMap(Graphics g, int[][] data) {
+        int min = findMinValue(data);
+        int max = findMaxValue(data);
+        double temp; 
+
+        for (int i = 0; i < data.length; i++) {
+            for (int a = 0; a < data[i].length; a++) {
+                if (data[i][a] != min) {
+                    temp = data[i][a] - min;
+                    //sopl(temp / max * 255);
+                    g.setColor(new Color((int)(temp / max * 255),(int)(temp / max * 255),(int)(temp / max * 255)));
+                    //sopl((data[i][a]-min) + " " + max);
+                } else {
+                    g.setColor(new Color(0));
+                }
+                g.fillRect(a, i, 1, 1);
+            }
+        }
+
     }
 
     /**
@@ -133,7 +191,7 @@ public class MountainPaths {
      * @col the column in the 2D array to process
      * @return the index of smallest value from grid at the given col
      */
-    public static int indexOfMinInCol( int[][] grid, int col ) {
+    public static int indexOfMinInCol(int[][] grid, int col) {
         // TODO
         return -1;
     }
@@ -148,10 +206,9 @@ public class MountainPaths {
      * @param row - the starting row for traversing to find the min path
      * @return total elevation of the route
      */
-    public static int drawLowestElevPath( Graphics g, int[][] data, int row, int col ) {
+    public static int drawLowestElevPath(Graphics g, int[][] data, int row, int col) {
 
         // TODO
-
         return -1;
     }
 
@@ -164,7 +221,7 @@ public class MountainPaths {
      * @return the index of the row where the lowest elevation-change path
      * starts.
      */
-    public static int indexOfLowestElevPath( Graphics g, int[][] data ) {
+    public static int indexOfLowestElevPath(Graphics g, int[][] data) {
 
         // TODO
         return -1;
