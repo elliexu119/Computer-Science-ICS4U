@@ -9,10 +9,11 @@ import java.awt.*;
 import java.io.File;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import static resources.SOPL.sop;
 import static resources.SOPL.sopl;
 
 public class MountainPaths {
+
+    static int lastRow = 0;
 
     /**
      * Mount Paths
@@ -51,16 +52,16 @@ public class MountainPaths {
 //        // ***********************************
 //        // TASK 4A:  implement indexOfMinInCol
 //        //
-        System.out.println( "TASK 4A: INDEX OF MIN IN COL 0" );
-//        int minRow = indexOfMinInCol( data, 0 );
-//        System.out.println( "\tRow with lowest Col 0 Value: " + minRow );
+        System.out.println("TASK 4A: INDEX OF MIN IN COL 0");
+        int minRow = indexOfMinInCol(data, 0);
+        System.out.println("\tRow with lowest Col 0 Value: " + minRow);
 //
 //        // ***********************************
 //        // TASK 4B:  use minRow as starting point to draw path
 //        //
-//        System.out.println( "TASK 4B: PATH from LOWEST STARTING ELEVATION" );
-//        g.setColor( Color.RED );
-//        int totalChange = drawLowestElevPath( g, data, minRow, 0 ); //
+        System.out.println("TASK 4B: PATH from LOWEST STARTING ELEVATION");
+        g.setColor(Color.RED);
+        int totalChange = drawLowestElevPath(g, data, minRow, 0); //
 //        System.out.println( "\tLowest-Elevation-Change Path starting at row " + minRow + " gives total change of: " + totalChange );
 //
 //        // ***********************************
@@ -165,14 +166,14 @@ public class MountainPaths {
     public static void drawMap(Graphics g, int[][] data) {
         int min = findMinValue(data);
         int max = findMaxValue(data);
-        double temp; 
+        double temp;
 
         for (int i = 0; i < data.length; i++) {
             for (int a = 0; a < data[i].length; a++) {
                 if (data[i][a] != min) {
                     temp = data[i][a] - min;
                     //sopl(temp / max * 255);
-                    g.setColor(new Color((int)(temp / max * 255),(int)(temp / max * 255),(int)(temp / max * 255)));
+                    g.setColor(new Color((int) (temp / max * 255), (int) (temp / max * 255), (int) (temp / max * 255)));
                     //sopl((data[i][a]-min) + " " + max);
                 } else {
                     g.setColor(new Color(0));
@@ -193,7 +194,15 @@ public class MountainPaths {
      */
     public static int indexOfMinInCol(int[][] grid, int col) {
         // TODO
-        return -1;
+        int min = grid[0][col];
+        int ret = 0;
+        for (int i = 0; i < grid.length; i++) {
+            if (grid[i][col] < min) {
+                min = grid[i][col];
+                ret = i;
+            }
+        }
+        return ret;
     }
 
     /**
@@ -207,9 +216,34 @@ public class MountainPaths {
      * @return total elevation of the route
      */
     public static int drawLowestElevPath(Graphics g, int[][] data, int row, int col) {
+        g.fillRect(col, row, 1, 1);
 
-        // TODO
+        if (col < data[0].length - 1 && row < data.length) {
+            int dif1;
+            int dif2 = 10000000;
+            int dif3 = 10000000;
+            dif1 = Math.abs(data[row][col + 1] - data[row][col]);
+            if (row + 1 < data[0].length && row + 1 != lastRow) {
+                dif2 = Math.abs(data[row + 1][col] - data[row][col]) + Math.abs(data[row + 1][col + 1] - data[row + 1][col]);
+            }
+            if (row - 1 >= 0 && row - 1 != lastRow) {
+                dif3 = Math.abs(data[row - 1][col] - data[row][col]) + Math.abs(data[row - 1][col + 1] - data[row - 1][col]);
+            }
+
+            //sopl("col " + col);
+            //sopl("row " + row);
+            lastRow = row;
+
+            if (dif1 < dif2 && dif1 < dif3) {
+                drawLowestElevPath(g, data, row, col + 1);
+            } else if (dif2 < dif3) {
+                drawLowestElevPath(g, data, row + 1, col + 1);
+            } else {
+                drawLowestElevPath(g, data, row - 1, col + 1);
+            }
+        }
         return -1;
+
     }
 
     /**
