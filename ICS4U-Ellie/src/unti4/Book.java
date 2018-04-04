@@ -18,8 +18,10 @@ public class Book {
      */
     public static void main(String[] args) {
         BookInfo a = new BookInfo(); 
-        a.setAuthor("sdf");
+        a.setAuthor(null);
+        if (a.getAuthor() == null){
         sopl(a.getAuthor());
+        }
     }
 
     @Override
