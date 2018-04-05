@@ -13,7 +13,8 @@ import static resources.SOPL.sopl;
 
 public class MountainPaths {
 
-    static int lastRow = 0;
+    static int count = 0;
+    static int mx;
 
     /**
      * Mount Paths
@@ -26,6 +27,7 @@ public class MountainPaths {
         System.out.println("TASK 1: READ DATA");
         int[][] data = read(".\\data\\mountain.paths\\Colorado.844x480.dat"); //moutain paths test data.txt
 //Colorado.844x480.dat
+        mx = findMaxValue(data) + 1;
 
         // ***********************************
         // Construct DrawingPanel, and get its Graphics context
@@ -62,22 +64,23 @@ public class MountainPaths {
         System.out.println("TASK 4B: PATH from LOWEST STARTING ELEVATION");
         g.setColor(Color.RED);
         int totalChange = drawLowestElevPath(g, data, minRow, 0); //
-//        System.out.println( "\tLowest-Elevation-Change Path starting at row " + minRow + " gives total change of: " + totalChange );
+        System.out.println("\tLowest-Elevation-Change Path starting at row " + minRow + " gives total change of: " + totalChange);
 //
 //        // ***********************************
-//        // TASK 5:  determine the BEST path
-//        //
-//        g.setColor( Color.RED );
-//        int bestRow = indexOfLowestElevPath( g, data );
+        // TASK 5:  determine the BEST path
+
+        g.setColor(Color.RED);
+        int bestRow = indexOfLowestElevPath(g, data);
+        sopl(bestRow);
 //
 //        // ***********************************
 //        // TASK 6:  draw the best path
 //        //
-//        System.out.println( "TASK 6: DRAW BEST PATH" );
-//        //drawMap.drawMap(g); //use this to get rid of all red lines
-//        g.setColor( Color.GREEN ); //set brush to green for drawing best path
-//        totalChange = drawLowestElevPath( g, data, bestRow, 0 );
-//        System.out.println( "\tThe Lowest-Elevation-Change Path starts at row: " + bestRow + " and gives a total change of: " + totalChange );
+        System.out.println( "TASK 6: DRAW BEST PATH" );
+        //drawMap.drawMap(g); //use this to get rid of all red lines
+        g.setColor( Color.GREEN ); //set brush to green for drawing best path
+        totalChange = drawLowestElevPath( g, data, bestRow, 0 );
+        System.out.println( "\tThe Lowest-Elevation-Change Path starts at row: " + bestRow + " and gives a total change of: " + totalChange );
 
     }
 
@@ -218,32 +221,30 @@ public class MountainPaths {
     public static int drawLowestElevPath(Graphics g, int[][] data, int row, int col) {
         g.fillRect(col, row, 1, 1);
 
-        if (col < data[0].length - 1 && row < data.length) {
-            int dif1;
-            int dif2 = 10000000;
-            int dif3 = 10000000;
-            dif1 = Math.abs(data[row][col + 1] - data[row][col]);
-            if (row + 1 < data[0].length && row + 1 != lastRow) {
-                dif2 = Math.abs(data[row + 1][col] - data[row][col]) + Math.abs(data[row + 1][col + 1] - data[row + 1][col]);
-            }
-            if (row - 1 >= 0 && row - 1 != lastRow) {
-                dif3 = Math.abs(data[row - 1][col] - data[row][col]) + Math.abs(data[row - 1][col + 1] - data[row - 1][col]);
+        if (col + 1 < data[0].length && row < data.length) {
+            int dif2 = mx;
+            int dif3 = mx;
+            int dif1 = Math.abs(data[row][col + 1] - data[row][col]);
+            if (row + 1 < data.length) {
+                dif2 = Math.abs(data[row + 1][col + 1] - data[row][col]);
             }
 
-            //sopl("col " + col);
-            //sopl("row " + row);
-            lastRow = row;
+            if (row - 1 >= 0) {
+                dif3 = Math.abs(data[row - 1][col + 1] - data[row][col]);
+            }
 
             if (dif1 < dif2 && dif1 < dif3) {
+                count = count + dif1;
                 drawLowestElevPath(g, data, row, col + 1);
             } else if (dif2 < dif3) {
+                count = count + dif2;
                 drawLowestElevPath(g, data, row + 1, col + 1);
             } else {
+                count = count + dif3;
                 drawLowestElevPath(g, data, row - 1, col + 1);
             }
         }
-        return -1;
-
+        return count;
     }
 
     /**
@@ -256,9 +257,19 @@ public class MountainPaths {
      * starts.
      */
     public static int indexOfLowestElevPath(Graphics g, int[][] data) {
-
-        // TODO
-        return -1;
+        int ans = 0; 
+        int ansChange = drawLowestElevPath(g, data, 0, 0);
+        count = 0;
+        for (int i = 1; i < data.length - 1; i++) {
+            if (ansChange > drawLowestElevPath(g, data, i, 0)){
+                ans = i;
+                count = 0;
+                ansChange = drawLowestElevPath(g, data, i, 0);
+                
+            }
+            count = 0;
+        }
+        return ans;
     }
 
 }
