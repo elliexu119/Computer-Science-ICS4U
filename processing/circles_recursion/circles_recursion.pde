@@ -4,7 +4,8 @@ void setup() {
   ellip(0); 
 }
 void draw() {
-  clear();
+  clear(); 
+  //background ((int) (Math.random()*255));
   ellip(0); 
   //delay(100);
 }
