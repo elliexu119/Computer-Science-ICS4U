@@ -110,67 +110,59 @@ public class ArrayUtilEllie {
     public static int linearSearch(double number[], double search) {
         String number2[] = new String[number.length], b = search + "";
         toString(number, number2);
-        return linearSearch(number2, b);
+        return linearSearch(number2, b, 0);
     }
 
     public static int linearSearch(int number[], int search) {
         String number2[] = new String[number.length], b = search + "";
         toString(number, number2);
-        return linearSearch(number2, b);
+        return linearSearch(number2, b, 0);
     }
 
-    public static int linearSearch(String number[], String search) {
-        int correct = 0;
-        for (int a = 0; a < number.length; a++) {
-            if (search.equalsIgnoreCase(number[a])) {
-                correct = a;
-                break;
-            } else {
-                correct = -1;
-            }
-        }
-        sopl(search + " is at" + " [" + correct + "].");
-        return correct;
-    }
-
-    public static int binarySearch(double number[], double search) {
-        String number2[] = new String[number.length], b = search + "";
-        toString(number, number2);
-        return binarySearch(number2, b);
-    }
-
-    public static int binarySearch(int number[], int search) {
-        String number2[] = new String[number.length], b = search + "";
-        toString(number, number2);
-        return binarySearch(number2, b);
-    }
-
-    public static int binarySearch(String number[], String search) {
-        int l = 0, r = number.length - 1, mid = (l + r) / 2;
-        if (number[l].compareTo(number[r]) < 0) {
-            while (!search.equalsIgnoreCase(number[mid]) && l < r) {
-                if (search.compareToIgnoreCase(number[mid]) < 0) {
-                    r = mid - 1;
-                } else {
-                    l = mid + 1;
-                }
-                mid = (l + r) / 2;
-            }
+    public static int linearSearch(String array[], String search, int pos) {
+        if (!array[pos].equals(search)) {
+            return linearSearch(array, search, pos + 1);
         } else {
-            while (!search.equalsIgnoreCase(number[mid]) && l < r) {
-                if (search.compareToIgnoreCase(number[mid]) < 0) {
-                    l = mid + 1;
-                } else {
-                    r = mid - 1;
-                }
-                mid = (l + r) / 2;
+            return pos;
+        }
+    }
+
+    public static int binarySearch(double array[], double search, int pos) {
+        if (search < array[pos] && pos > 0 ) {
+            return binarySearch(array, search, (int) pos / 2);
+        } else if (search > array[pos] && pos +1 < array.length) {
+            if (pos == 1) {
+                return binarySearch(array, search, 1 + pos);
+            } else {
+                return binarySearch(array, search, (int) (array.length-pos) / 2 + pos);
             }
+        } else if (search == (array[pos])) {
+            return pos;
+        } else {
+            return -1;
         }
-        if (!search.equalsIgnoreCase(number[mid])) {
-            mid = -1;
+    }
+
+    public static int binarySearch(int number[], int search, int pos) {
+        double number2[] = new double[number.length];
+        toDouble(number, number2);
+        return binarySearch(number2, (double) search, pos);
+    }
+
+    public static int binarySearch(String array[], String search, int pos) {
+       if (search .compareTo(array[pos]) < 0 && pos > 0 ) {
+            return binarySearch(array, search, (int) pos / 2);
+        } else if (search .compareTo(array[pos]) > 0 && pos +1 < array.length) {
+            if (pos == 1) {
+                return binarySearch(array, search, 1 + pos);
+            } else {
+                return binarySearch(array, search, (int) (array.length-pos) / 2 + pos);
+            }
+        } else if (search.equals(array[pos])) {
+            return pos;
+        } else {
+            return -1;
         }
-        sopl(search + " is at" + " [" + mid + "].");
-        return mid;
     }
 
     public static void shuffleArray(String array[]) {

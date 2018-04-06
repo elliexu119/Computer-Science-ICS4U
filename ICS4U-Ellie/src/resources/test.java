@@ -5,7 +5,8 @@
  */
 package resources;
 
-import java.math.BigInteger;
+import static resources.ArrayUtilEllie.binarySearch;
+import static resources.SOPL.sopl;
 
 /**
  *
@@ -17,16 +18,11 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(fact(10000)); 
+        String search[] = {"a", "b", "c", "d", "e","f","g","h","i","j","k","l"};
+//sopl("a".compareTo("b"));       
+int search2[] = {1,2,3,4,5,6,7,8,9,10,11,12};
+sopl(binarySearch(search2, 12, (int) search.length / 2 - 1));
     }
 
-    public static BigInteger fact(int n) {
-        if (n < 0) {
-            return BigInteger.valueOf(-1);
-        }
-        if (n < 2) {
-            return BigInteger.valueOf(1);
-        }
-        return BigInteger.valueOf(n).multiply(fact(n - 1));
-    }
+
 }
