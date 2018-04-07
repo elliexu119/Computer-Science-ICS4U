@@ -26,7 +26,7 @@ public class MountainPaths {
         // 
         System.out.println("TASK 1: READ DATA");
         int[][] data = read(".\\data\\mountain.paths\\Colorado.844x480.dat"); //moutain paths test data.txt
-//Colorado.844x480.dat
+//.\\data\\mountain.paths\\Colorado.844x480.dat
         mx = findMaxValue(data) + 1;
 
         // ***********************************
@@ -233,10 +233,10 @@ public class MountainPaths {
                 dif3 = Math.abs(data[row - 1][col + 1] - data[row][col]);
             }
 
-            if (dif1 < dif2 && dif1 < dif3) {
+            if (dif1 <= dif2 && dif1 <= dif3) {
                 count = count + dif1;
                 drawLowestElevPath(g, data, row, col + 1);
-            } else if (dif2 < dif3) {
+            } else if (dif2 <= dif3) {
                 count = count + dif2;
                 drawLowestElevPath(g, data, row + 1, col + 1);
             } else {
