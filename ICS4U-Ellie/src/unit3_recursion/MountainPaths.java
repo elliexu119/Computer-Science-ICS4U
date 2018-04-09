@@ -237,10 +237,18 @@ public class MountainPaths {
                 count = count + dif1;
                 drawLowestElevPath(g, data, row, col + 1);
             } 
-            //else if (dif2 == dif3){
-                //int random = 
-            //}
-            else if (dif2 <= dif3) {
+            else if (dif2 == dif3){
+                int random = (int) (Math.random()*3);
+                if (random == 1){
+                    count = count + dif2;
+                    drawLowestElevPath(g, data, row + 1, col + 1);
+                }
+                else {
+                     count = count + dif3;
+                drawLowestElevPath(g, data, row - 1, col + 1);
+                }
+            }
+            else if (dif2 <dif3) {
                 count = count + dif2;
                 drawLowestElevPath(g, data, row + 1, col + 1);
             } else {

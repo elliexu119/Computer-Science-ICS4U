@@ -16,7 +16,8 @@ public class test {
      */
     public static int a = 2;  
     public static void main(String[] args) {
-    //sopl(b());
+    int random = (int) (Math.random()*3);
+        System.out.println(random);
     //sout
     }
 
