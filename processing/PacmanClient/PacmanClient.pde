@@ -1,26 +1,31 @@
 Pacman p;
+Ghost g; 
 boolean back = false; 
 void setup(){
   size (600, 600); 
   p = new Pacman(); 
+  g = new Ghost(); 
 }
 void draw(){
+  clear(); 
   p.draw(); 
-  
-  //if (back == false && p.getXLocation() < width - 40){
-  // p.move(); 
-  //}
-  //else if (back == false) {
-  //  p.yLoc = p.yLoc + 50;
-  //  back = true; 
-  //}
-  //if (back == true && p.getXLocation() > 40){
-  //  p.move2();
-  //}
-  //else if (back == true){
-  // back = false;  
-  // p.yLoc = p.yLoc + 50;
-  //}
+  g.draw(); 
+
+  if (back == false && g.getXLocation() < width - 40){
+   //p.move(); 
+   g.move();
+  }
+  else if (back == false) {
+    g.yLoc = g.yLoc + 50;
+    back = true; 
+  }
+  if (back == true && g.getXLocation() > 40){
+    g.move2();
+  }
+  else if (back == true){
+   back = false;  
+   g.yLoc = g.yLoc + 50;
+  }
 }
 
 void keyPressed() {

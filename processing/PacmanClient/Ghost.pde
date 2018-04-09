@@ -1,10 +1,10 @@
-public class Pacman {
+public class Ghost {
   //class constants
   private static final int STEP_SIZE = 10; 
   //class variables
   //object variables 
   int xLoc = 12;
-  int yLoc = 13;
+  int yLoc = 50;
 
   //three constructors: empty, primary key, secondary key
 
@@ -12,6 +12,8 @@ public class Pacman {
   public int getXLocation(){
   return this.xLoc; 
   }
+  
+  
 
   //verbs; things you can do to your class/object
 
@@ -20,11 +22,8 @@ public class Pacman {
   //.equals()
 
   public void draw() {
-    fill(#FAE600); 
-    ellipse(xLoc, yLoc, 30, 30);
-    fill(0); 
-    triangle(xLoc+15, yLoc-15, xLoc, yLoc, xLoc+15, yLoc + 15); 
-    
+    fill(200,50,50); 
+    rect(xLoc, yLoc, 30, 30);
   }
   public void move() {
     this.xLoc = this.xLoc + STEP_SIZE;
@@ -32,8 +31,6 @@ public class Pacman {
   
   public void move2() {
     this.xLoc = this.xLoc - STEP_SIZE;
-    fill(#FAE600); 
-    ellipse(xLoc, yLoc, 30, 30);
   }
   
   public void move3() {
