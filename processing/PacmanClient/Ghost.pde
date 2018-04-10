@@ -1,10 +1,10 @@
 public class Ghost {
   //class constants
-  private static final int STEP_SIZE = 10; 
+  private static final int STEP_SIZE = 5; 
   //class variables
   //object variables 
-  int xLoc = 12;
-  int yLoc = 50;
+  int xLoc = width/2 + 100;
+  int yLoc = height/2 + 100;
 
   //three constructors: empty, primary key, secondary key
 
@@ -13,16 +13,15 @@ public class Ghost {
   return this.xLoc; 
   }
   
-  
-
-  //verbs; things you can do to your class/object
-
-  //toString()
-
-  //.equals()
+    public int getYLocation(){
+  return this.yLoc; 
+  }
 
   public void draw() {
     fill(200,50,50); 
+    noStroke();
+    ellipse(xLoc+15, yLoc, 30, 30); 
+    
     rect(xLoc, yLoc, 30, 30);
   }
   public void move() {
