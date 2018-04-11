@@ -3,19 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package resources;
+package unti4;
 
 /**
  *
  * @author 1xuell
  */
-public class test {
+public class stack {
+    public int[] array; 
 
-    /**
-     * @param args the command line arguments
-     */
-    
-    public static void main(String[] args) {
-    //Stack a 
+    public int[] getArray() {
+        return array;
     }
+
+    public void setArray(int[] array) {
+        this.array = array;
+    }
+    
 }
