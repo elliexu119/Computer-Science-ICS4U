@@ -2,8 +2,8 @@ Pacman p;
 Ghost g; 
 int index = 0; 
 int margin = 40; 
-boolean back = false; 
 int random = 1; 
+int life = 3; 
 void setup() {
   size (600, 600); 
   p = new Pacman(); 
@@ -12,11 +12,20 @@ void setup() {
 
 void draw() {
   if (p.getXLocation() >= g.getXLocation() - 10 && p.getXLocation() <= g.getXLocation() + 10*4 && p.getYLocation() >= g.getYLocation()- 10 && p.getYLocation() <= g.getYLocation()+ 10*4 ) {
-    //clear();
     textSize(32);
     fill((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
     text("GAME OVER", width/2-100, height/2);
     delay(100);
+    if (keyPressed && life > 1) {
+      clear();
+      size (600, 600); 
+      p = new Pacman(); 
+      g = new Ghost();
+      index = 0;
+      life --;
+    } else if (life == 1) {
+      life = 0;
+    }
   } else {
     clear(); 
     p.draw(); 
@@ -26,6 +35,9 @@ void draw() {
     //randomly(); 
     follow();
   }
+  textSize(20); 
+  fill(255); 
+  text("LIFES LEFT: " + life, margin, margin);
 }
 
 
@@ -38,7 +50,7 @@ void follow() {
     g.move();
   } else if (g.getYLocation() < p.getYLocation()) {
     g.move3();
-  } else {
+  } else if (g.getYLocation() > p.getYLocation()) {
     g.move4();
   }
 }
@@ -88,18 +100,3 @@ void keyPressed() {
     }
   }
 }
-
-
-//if (back == false && g.getXLocation() < width - margin) {
-//  //p.move(); 
-//  g.move();
-//} else if (back == false) {
-//  g.yLoc = g.yLoc + 50;
-//  back = true;
-//}
-//if (back == true && g.getXLocation() > margin) {
-//  g.move2();
-//} else if (back == true) {
-//  back = false;  
-//  g.yLoc = g.yLoc + 50;
-//}

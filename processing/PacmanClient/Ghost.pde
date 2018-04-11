@@ -19,13 +19,15 @@ public class Ghost {
 
   public void draw() {
     noStroke();
-    //blinky
     fill(200, 50, 50); 
     ellipse(xLoc + 15, yLoc, 30, 30); 
     rect(xLoc, yLoc, 30, 30);
-    //clyde 
-    fill (#FFAA00); 
-    //ellipse 
+    fill(255);
+    ellipse(xLoc + 8, yLoc, 10,15); 
+    ellipse(xLoc + 22, yLoc, 10,15); 
+    fill(#0040C6); 
+    ellipse(xLoc + 8, yLoc+2.5, 10,10); 
+    ellipse(xLoc + 22, yLoc+2.5, 10,10); 
     
   }
   public void move() {
