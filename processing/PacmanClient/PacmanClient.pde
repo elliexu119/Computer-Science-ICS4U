@@ -1,86 +1,60 @@
 Pacman p;
-Ghost g; 
+Ghost blinky; 
+Ghost clyde; 
+Ghost pinky;
+Ghost inky; 
 int index = 0; 
 int margin = 40; 
 int random = 1; 
-int life = 3; 
+int life = 3000; 
+int inkyMove = 1; 
+int counter = 0; 
 void setup() {
-  size (600, 600); 
+  size (1200, 1000); 
   p = new Pacman(); 
-  g = new Ghost();
+  p.a = 7; 
+  blinky = new Ghost();
+  clyde = new Ghost(); 
+  pinky = new Ghost(); 
+  inky = new Ghost();
 }
 
 void draw() {
-  if (p.getXLocation() >= g.getXLocation() - 10 && p.getXLocation() <= g.getXLocation() + 10*4 && p.getYLocation() >= g.getYLocation()- 10 && p.getYLocation() <= g.getYLocation()+ 10*4 ) {
-    textSize(32);
-    fill((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
-    text("GAME OVER", width/2-100, height/2);
-    delay(100);
-    if (keyPressed && life > 1) {
-      clear();
-      size (600, 600); 
-      p = new Pacman(); 
-      g = new Ghost();
-      index = 0;
-      life --;
-    } else if (life == 1) {
-      life = 0;
-    }
+  if (crash(blinky) || crash(clyde) || crash(pinky) || crash(inky)) {
+    end(); 
   } else {
     clear(); 
     p.draw(); 
-    g.draw(); 
+    blinky.draw(#FF0D00); 
+    clyde.draw(#FFAF00); 
+    pinky.draw(#FF6FEC); 
+    inky.draw(#0AFFE0); 
 
-    pacman(); 
-    //randomly(); 
-    follow();
+    p.pacman(); 
+    blinky.follow();
+    clyde.randomly();
+    if (frameCount % 50 == 0) {
+      inkyMove = (int) (Math.random()*2 + 1);
+    }
+    if (inkyMove == 1) {
+      inky.randomly();
+    } else {
+      inky.follow();
+    }
+    pinky.ambush();
   }
+
+
   textSize(20); 
   fill(255); 
   text("LIFES LEFT: " + life, margin, margin);
 }
 
-
-
-void follow() {
-  //follows pacman
-  if (g.getXLocation() > p.getXLocation()) {
-    g.move2();
-  } else if (g.getXLocation() < p.getXLocation()) {
-    g.move();
-  } else if (g.getYLocation() < p.getYLocation()) {
-    g.move3();
-  } else if (g.getYLocation() > p.getYLocation()) {
-    g.move4();
-  }
-}
-
-void pacman() {
-  //PACMAN
-  if (index == 1 && p.getXLocation() < width - margin) {
-    p.move();
-  } else if (index == 2 && p.getXLocation() > margin) {
-    p.move2();
-  } else  if (index == 3 && p.getYLocation() < height - margin ) {
-    p.move3();
-  } else if (index == 4 && p.getYLocation() > margin) {
-    p.move4();
-  }
-}
-
-void randomly() {
-  //moves the ghost in random directions 
-  if (random == 1 && g.getXLocation() < width - margin) {
-    g.move();
-  } else if (random == 2 && g.getXLocation() > margin) {
-    g.move2();
-  } else if (random == 3 && g.getYLocation() < height - margin ) {
-    g.move3();
-  } else if (random == 4 && g.getYLocation() > margin) {
-    println(g.getYLocation());
-    g.move4();
+boolean crash(Ghost g) {
+  if (p.getXLocation() >= g.getXLocation() - 10 && p.getXLocation() <= g.getXLocation() + 10*4 && p.getYLocation() >= g.getYLocation()- 10 && p.getYLocation() <= g.getYLocation()+ 10*4 ) {
+    return true;
   } else {
-    random = (int) (Math.random()*4 + 1);
+    return false;
   }
 }
 
@@ -99,4 +73,28 @@ void keyPressed() {
       index = 4;
     }
   }
+}
+
+void end(){
+  textSize(32);
+    fill((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
+    text("GAME OVER", width/2-100, height/2);
+    if (counter < 8) {
+      p.end(counter);
+      blinky.draw(#FF0D00); 
+      clyde.draw(#FFAF00); 
+      pinky.draw(#FF6FEC); 
+      inky.draw(#0AFFE0); 
+      counter++;
+    }
+    delay(100); 
+    if (keyPressed && life > 1) {
+      clear();
+      setup(); 
+      index = 0;
+      life --;
+      counter = 0;
+    } else if (life == 1) {
+      life = 0;
+    }
 }

@@ -1,13 +1,13 @@
-boolean mov = false;
-int a = 7;
-int b = a + 5;
 public class Pacman {
   //class constants
   private static final int STEP_SIZE = 10; 
   //class variables
   //object variables 
-  int xLoc = 300; //12
-  int yLoc = 300; //13
+  int xLoc = width/2; //12
+  int yLoc = height/2; //13
+  private int a = 7; 
+  private int b = a + 5;
+  boolean mov = false;
 
   //three constructors: empty, primary key, secondary key
 
@@ -28,30 +28,30 @@ public class Pacman {
 
   public void draw() {
     fill(#FAE600); 
-     b = a + 5; 
+    b = a + 5; 
     arc(xLoc, yLoc, 30, 30, a, b); 
   }
 
 
-  public void move() {
+  public void right() {
     a = 7; 
     mouth(); 
     this.xLoc = this.xLoc + STEP_SIZE;
   }
 
-  public void move2() {
+  public void left() {
     a = 29; 
     mouth(); 
     this.xLoc = this.xLoc - STEP_SIZE;
   }
 
-  public void move3() {
+  public void down() {
     a = 65; 
     mouth();    
     this.yLoc = this.yLoc + STEP_SIZE;
   }
 
-  public void move4() {
+  public void up() {
     a = 43;
     mouth();    
     this.yLoc = this.yLoc - STEP_SIZE;
@@ -65,4 +65,24 @@ public class Pacman {
       arc(xLoc, yLoc, 30, 30, a, b);
     }
   }
+  
+  void pacman() {
+  //PACMAN
+  if (index == 1 && p.getXLocation() < width - margin) {
+    right();
+  } else if (index == 2 && p.getXLocation() > margin) {
+    left();
+  } else  if (index == 3 && p.getYLocation() < height - margin ) {
+    down();
+  } else if (index == 4 && p.getYLocation() > margin) {
+    up();
+  }
+}
+
+void end(int d){
+ clear(); 
+ fill (#FAE600);
+ arc(xLoc, yLoc, 30, 30, a, b - QUARTER_PI * d ); 
+ delay(200); 
+}
 }
