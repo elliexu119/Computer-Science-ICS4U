@@ -1,4 +1,6 @@
 boolean mov = false;
+int a = 7;
+int b = a + 5;
 public class Pacman {
   //class constants
   private static final int STEP_SIZE = 10; 
@@ -10,12 +12,12 @@ public class Pacman {
   //three constructors: empty, primary key, secondary key
 
   //getters and setters
-  public int getXLocation(){
-  return this.xLoc; 
+  public int getXLocation() {
+    return this.xLoc;
   }
-  
-  public int getYLocation(){
-  return this.yLoc; 
+
+  public int getYLocation() {
+    return this.yLoc;
   }
 
   //verbs; things you can do to your class/object
@@ -26,43 +28,41 @@ public class Pacman {
 
   public void draw() {
     fill(#FAE600); 
-    arc(xLoc, yLoc, 30, 30, 7, 12); 
-    if (mov == true){
-      mouth();
-      mov = false; 
-    }
-    
+     b = a + 5; 
+    arc(xLoc, yLoc, 30, 30, a, b); 
   }
-  
-  
+
+
   public void move() {
-    mov = true; 
+    a = 7; 
+    mouth(); 
     this.xLoc = this.xLoc + STEP_SIZE;
   }
-  
+
   public void move2() {
-    mov = true; 
+    a = 29; 
+    mouth(); 
     this.xLoc = this.xLoc - STEP_SIZE;
   }
-  
+
   public void move3() {
-    mov = true; 
+    a = 65; 
+    mouth();    
     this.yLoc = this.yLoc + STEP_SIZE;
-    
   }
- 
+
   public void move4() {
-    mov = true; 
+    a = 43;
+    mouth();    
     this.yLoc = this.yLoc - STEP_SIZE;
   }
-  
-  public void mouth(){
+
+  public void mouth() {
     fill(#FAE600); 
-   if (frameCount%20 < 5 ){
+    if (frameCount%20 < 5 ) {
       ellipse(xLoc, yLoc, 30, 30);
-    } 
-    else {
-    arc(xLoc, yLoc, 30, 30, 7, 12); 
+    } else {
+      arc(xLoc, yLoc, 30, 30, a, b);
     }
   }
 }
