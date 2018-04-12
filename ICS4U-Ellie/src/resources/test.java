@@ -16,6 +16,10 @@ public class test {
      */
     
     public static void main(String[] args) {
-    //Stack a 
+    String a = new String ("1");
+    String b = new String ("1");
+    System.out.println(a == b);
+    System.out.println(a.equals(b));
+    
     }
 }
