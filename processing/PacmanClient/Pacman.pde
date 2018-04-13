@@ -1,10 +1,10 @@
 public class Pacman {
   //class constants
-  private static final int STEP_SIZE = 10; 
+  private static final int STEP_SIZE = 5; 
   //class variables
   //object variables 
   int xLoc = width/2; //12
-  int yLoc = height/2; //13
+  int yLoc = height/2 + 60; //13
   private int a = 7; 
   private int b = a + 5;
   boolean mov = false;
@@ -29,11 +29,11 @@ public class Pacman {
   public void draw() {
     fill(#FAE600); 
     b = a + 5; 
-    arc(xLoc, yLoc, 30, 30, a, b); 
+    arc(xLoc, yLoc, 30, 30, a, b);
   }
 
 
-  public void right() {
+  private void right() {
     a = 7; 
     mouth(); 
     this.xLoc = this.xLoc + STEP_SIZE;
@@ -65,24 +65,47 @@ public class Pacman {
       arc(xLoc, yLoc, 30, 30, a, b);
     }
   }
-  
-  void pacman() {
-  //PACMAN
-  if (index == 1 && p.getXLocation() < width - margin) {
-    right();
-  } else if (index == 2 && p.getXLocation() > margin) {
-    left();
-  } else  if (index == 3 && p.getYLocation() < height - margin ) {
-    down();
-  } else if (index == 4 && p.getYLocation() > margin) {
-    up();
-  }
-}
 
-void end(int d){
- clear(); 
- fill (#FAE600);
- arc(xLoc, yLoc, 30, 30, a, b - QUARTER_PI * d ); 
- delay(200); 
-}
+  void pacman() {
+    //PACMAN
+    if (index == 1 && this.getXLocation() < width - margin && checkColour(15, 0) == false) { //(15, 0)
+      right();
+    } else if (index == 2 && this.getXLocation() > margin && checkColour(-15, 0) == false) { //(-15, 0)
+      left();
+    } else  if (index == 3 && this.getYLocation() < height - margin && checkColour(0, 15) == false ) { //(0, 15)
+      down();
+    } else if (index == 4 && this.getYLocation() > margin && checkColour(0, -15) == false) { //(0, -15
+      up();
+    }
+  }
+
+  void end(int d) {
+    fill (#FAE600);
+    arc(xLoc, yLoc, 30, 30, a, b - QUARTER_PI * d ); 
+    delay(200);
+  }
+
+  boolean checkColour(int extraX, int extraY) {
+    if (blue(get().pixels[this.getXLocation() + extraX + (this.getYLocation() + extraY) * width]) > 0) {
+      println("BLUE"); 
+      return true;
+    } else {
+      println("BLACK"); 
+      if (extraX != 0 || extraY != 0) {
+        if (extraX < 0) {
+          extraX ++;
+        } else if (extraX > 0) {
+          extraX --;
+        }
+        if (extraY < 0) {
+          extraY ++;
+        } else if (extraY > 0) {
+          extraY --;
+        }
+        return checkColour(extraX, extraY);
+      } else {
+        return false;
+      }
+    }
+  }
 }

@@ -1,14 +1,7 @@
 Pacman p;
-Ghost blinky; 
-Ghost clyde; 
-Ghost pinky;
-Ghost inky; 
-int index = 0; 
-int margin = 40; 
-int random = 1; 
-int life = 3000; 
-int inkyMove = 1; 
-int counter = 0; 
+Ghost blinky, clyde, pinky, inky; 
+PImage img; 
+int index = 0, margin = 40, random = 1, life = 3000, inkyMove = 1, counter = 0; 
 void setup() {
   size (1200, 1000); 
   p = new Pacman(); 
@@ -17,34 +10,35 @@ void setup() {
   clyde = new Ghost(); 
   pinky = new Ghost(); 
   inky = new Ghost();
+ img = loadImage("Originalpacmaze.png");
+ img.resize(width, height); 
 }
 
 void draw() {
   if (crash(blinky) || crash(clyde) || crash(pinky) || crash(inky)) {
     end(); 
   } else {
-    clear(); 
+    image(img, 0,0);  
     p.draw(); 
-    blinky.draw(#FF0D00); 
+    //blinky.draw(#FF0D00); 
     clyde.draw(#FFAF00); 
-    pinky.draw(#FF6FEC); 
-    inky.draw(#0AFFE0); 
+    //pinky.draw(#FF6FEC); 
+    //inky.draw(#0AFFE0); 
 
     p.pacman(); 
-    blinky.follow();
+    //blinky.follow();
     clyde.randomly();
-    if (frameCount % 50 == 0) {
-      inkyMove = (int) (Math.random()*2 + 1);
-    }
-    if (inkyMove == 1) {
-      inky.randomly();
-    } else {
-      inky.follow();
-    }
-    pinky.ambush();
+    //if (frameCount % 50 == 0) {
+    //  inkyMove = (int) (Math.random()*2 + 1);
+    //}
+    //if (inkyMove == 1) {
+    //  inky.randomly();
+    //} else {
+    //  inky.follow();
+    //}
+    //pinky.ambush();
   }
-
-
+  
   textSize(20); 
   fill(255); 
   text("LIFES LEFT: " + life, margin, margin);
@@ -80,6 +74,7 @@ void end(){
     fill((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
     text("GAME OVER", width/2-100, height/2);
     if (counter < 8) {
+      image(img, 0,0); 
       p.end(counter);
       blinky.draw(#FF0D00); 
       clyde.draw(#FFAF00); 
@@ -89,7 +84,7 @@ void end(){
     }
     delay(100); 
     if (keyPressed && life > 1) {
-      clear();
+      image(img, 0,0); 
       setup(); 
       index = 0;
       life --;
