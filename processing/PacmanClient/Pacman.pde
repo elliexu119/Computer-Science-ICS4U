@@ -4,7 +4,7 @@ public class Pacman {
   //class variables
   //object variables 
   int xLoc = width/2; //12
-  int yLoc = height/2 + 60; //13
+  int yLoc = height/2 + 45; //13
   private int a = 7; 
   private int b = a + 5;
   boolean mov = false;
@@ -87,10 +87,10 @@ public class Pacman {
 
   boolean checkColour(int extraX, int extraY) {
     if (blue(get().pixels[this.getXLocation() + extraX + (this.getYLocation() + extraY) * width]) > 0) {
-      println("BLUE"); 
+      //println("BLUE"); 
       return true;
     } else {
-      println("BLACK"); 
+     // println("BLACK"); 
       if (extraX != 0 || extraY != 0) {
         if (extraX < 0) {
           extraX ++;

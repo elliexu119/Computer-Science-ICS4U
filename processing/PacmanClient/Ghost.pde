@@ -54,47 +54,39 @@ public class Ghost {
   public void up() {
     this.yLoc = this.yLoc - STEP_SIZE;
   }
-
+boolean left = false; 
   public void follow() {
     //follows pacman
     if (this.xLoc > p.getXLocation() + STEP_SIZE && !checkColour(-15, 0)) {
       left();
-    } else if (this.xLoc < p.getXLocation() - STEP_SIZE && !checkColour(15, 0)) {
+    } else if (this.xLoc < p.getXLocation() - STEP_SIZE && !checkColour(15, 0) && !left) {
       right();
-    } else if (this.yLoc < p.getYLocation() - STEP_SIZE && !checkColour(0, 15)) {
+      left = false; 
+    } else if (this.yLoc < p.getYLocation() - STEP_SIZE && !checkColour(0, 30)) {
       down();
     } else if (this.yLoc > p.getYLocation() + STEP_SIZE && !checkColour(0, -15)) {
       up();
-    }
-    else {
-      randomly(); 
+    } else {
+      while (!checkColour(-30, 0)) { 
+        left();
+        left = true; 
+      }
     }
   }
-boolean ran = false;
   public void randomly() {
     //moves the ghost in random directions 
-    int marginMutliple = (int) (Math.random()* (10) + 1);
-    
+    //println(random); 
+    int marginMutliple = (int) (Math.random()* (7) + 1);
     if (random == 1 && this.xLoc < width - margin * marginMutliple && !checkColour(15, 0)) {
       right();
     } else if (random == 2 && this.xLoc > margin * marginMutliple && !checkColour(-15, 0)) {
       left();
-    } else if (random == 3 && this.yLoc < height - margin * marginMutliple && !checkColour(0, 15)) {
+    } else if (random == 3 && this.yLoc < height - margin * marginMutliple && !checkColour(0, 30)) {
       down();
     } else if (random == 4 && this.yLoc > margin * marginMutliple && !checkColour(0, -15)) {
       up();
-    } else {
-      if (!checkColour(15, 0) || !checkColour (-15, 0) && !ran){
-      random = (int) (Math.random()*2 + 1);
-      ran = true; 
-      println("sideways"); 
-    }
-    if ((!checkColour(0, -15) || !checkColour (0, 15)) && ran){ // 
-      random = (int) (Math.random()*4 + 3);
-      ran = false;
-      println("up");
-    }
-    
+    } else if (!checkColour(0, -15) || !checkColour (0, 30) || !checkColour(15, 0) || !checkColour (-15, 0)) { // 
+      random = (int) (Math.random()*4 + 1);
     }
   }
 
@@ -125,8 +117,8 @@ boolean ran = false;
       }
     }
   }
-  
-   boolean checkColour(int extraX, int extraY) {
+
+  boolean checkColour(int extraX, int extraY) {
     if (blue(get().pixels[this.getXLocation() + extraX + (this.getYLocation() + extraY) * width]) > 0) {
       return true;
     } else {
@@ -145,7 +137,7 @@ boolean ran = false;
       //} else {
       //  return false;
       //}
-      return false; 
+      return false;
     }
   }
 }

@@ -3,7 +3,7 @@ Ghost blinky, clyde, pinky, inky;
 PImage img; 
 int index = 0, margin = 40, random = 1, life = 3000, inkyMove = 1, counter = 0; 
 void setup() {
-  size (1200, 1000); 
+  size (600, 600); 
   p = new Pacman(); 
   p.a = 7; 
   blinky = new Ghost();
@@ -20,13 +20,13 @@ void draw() {
   } else {
     image(img, 0,0);  
     p.draw(); 
-    //blinky.draw(#FF0D00); 
+    blinky.draw(#FF0D00); 
     clyde.draw(#FFAF00); 
-    //pinky.draw(#FF6FEC); 
-    //inky.draw(#0AFFE0); 
+    pinky.draw(#FF6FEC); 
+    inky.draw(#0AFFE0); 
 
     p.pacman(); 
-    //blinky.follow();
+    blinky.follow();
     clyde.randomly();
     //if (frameCount % 50 == 0) {
     //  inkyMove = (int) (Math.random()*2 + 1);
