@@ -3,27 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package resources;
+package unti4;
 
 /**
  *
- * @author 1xuell
+ * @author ellix
  */
-public class test {
+public class StackMain {
 
     /**
      * @param args the command line arguments
      */
-    
-    public int a = 3; 
     public static void main(String[] args) {
-    String a = new String ("1");
-    String b = new String ("1");
-    System.out.println(a == b);
-    System.out.println(a.equals(b));
+        // TODO code application logic here
+    }
     
-    }
-    public static void sdfds(){
-    }
-    }
-
+}
