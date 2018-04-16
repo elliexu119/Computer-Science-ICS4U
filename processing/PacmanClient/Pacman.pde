@@ -90,7 +90,6 @@ public class Pacman {
       //println("BLUE"); 
       return true;
     } else {
-     // println("BLACK"); 
       if (extraX != 0 || extraY != 0) {
         if (extraX < 0) {
           extraX ++;

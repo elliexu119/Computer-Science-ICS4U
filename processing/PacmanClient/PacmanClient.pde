@@ -1,9 +1,15 @@
+import processing.sound.*;
+SoundFile file; 
+
 Pacman p;
 Ghost blinky, clyde, pinky, inky; 
 PImage img; 
 int index = 0, margin = 40, random = 1, life = 3000, inkyMove = 1, counter = 0; 
 void setup() {
-  size (600, 600); 
+  file = new SoundFile (this, "C:\\Users\\ellix\\Documents\\processing-3.3.6-windows64\\processing-3.3.6\\PacManFever.mp3");
+  file.play(); 
+  
+  size (700, 900); 
   p = new Pacman(); 
   p.a = 7; 
   blinky = new Ghost();
@@ -18,15 +24,16 @@ void draw() {
   if (crash(blinky) || crash(clyde) || crash(pinky) || crash(inky)) {
     end(); 
   } else {
-    image(img, 0,0);  
+    image(img, 0,0); 
+    //clear(); 
     p.draw(); 
-    blinky.draw(#FF0D00); 
+    //blinky.draw(#FF0D00); 
     clyde.draw(#FFAF00); 
-    pinky.draw(#FF6FEC); 
-    inky.draw(#0AFFE0); 
+    //pinky.draw(#FF6FEC); 
+    //inky.draw(#0AFFE0); 
 
     p.pacman(); 
-    blinky.follow();
+    //blinky.follow();
     clyde.randomly();
     //if (frameCount % 50 == 0) {
     //  inkyMove = (int) (Math.random()*2 + 1);
