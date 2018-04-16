@@ -15,7 +15,13 @@ public class StackMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Stack stack = new Stack(4);
+
+        stack.push(2);
+        stack.push(3);
+        stack.sopl();
+        System.out.println(stack.size());
+
     }
-    
+
 }
