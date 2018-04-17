@@ -4,19 +4,19 @@ SoundFile file;
 Pacman p;
 Ghost blinky, clyde, pinky, inky; 
 PImage img; 
-int index = 0, margin = 40, random = 1, life = 3000, inkyMove = 1, counter = 0; 
+int index = 0, margin = 10, random = 1, life = 3000, inkyMove = 1, counter = 0; 
 void setup() {
-  file = new SoundFile (this, "C:\\Users\\ellix\\Documents\\processing-3.3.6-windows64\\processing-3.3.6\\PacManFever.mp3");
-  file.play(); 
+  //file = new SoundFile (this, "G:\\ICS4U-Ellie\\processing\\PacManFever.mp3");
+  //file.play(); 
   
-  size (700, 900); 
+  size (500, 600); 
   p = new Pacman(); 
   p.a = 7; 
   blinky = new Ghost();
   clyde = new Ghost(); 
   pinky = new Ghost(); 
   inky = new Ghost();
- img = loadImage("Originalpacmaze.png");
+ img = loadImage("G:\\ICS4U-Ellie\\processing\\Originalpacmaze.png");
  img.resize(width, height); 
 }
 

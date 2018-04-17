@@ -15,13 +15,20 @@ public class StackMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Stack stack = new Stack(4);
+        Queue que = new Queue(4);
 
-        stack.push(2);
-        stack.push(3);
-        stack.sopl();
-        System.out.println(stack.size());
+        que.enqueue(2);
+        que.enqueue(5);
+        System.out.println(que.dequeue());
+        System.out.println(que.dequeue());
+        que.enqueue(6); 
+        que.enqueue(9); 
+        System.out.println(que.dequeue());
+        System.out.println(que.dequeue());
+        que.enqueue(7);
+        System.out.println(que.dequeue());
 
+        
     }
 
 }
