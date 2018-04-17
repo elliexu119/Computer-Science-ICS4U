@@ -25,7 +25,7 @@ public class StackMain {
         que.enqueue(9); 
         System.out.println(que.dequeue());
         System.out.println(que.dequeue());
-        que.enqueue(7);
+        que.enqueue(7); 
         System.out.println(que.dequeue());
 
         
