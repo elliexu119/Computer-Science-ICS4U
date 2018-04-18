@@ -11,11 +11,11 @@ package unti4;
  */
 public class Stack implements StackInterface{
     
-    int stack[];
+    Integer stack[];
     int pointer = -1; 
 
     public Stack(int size) {
-        stack = new int[size];
+        stack = new Integer[size];
         pointer = -1; 
     }
 
@@ -26,25 +26,44 @@ public class Stack implements StackInterface{
 
     public void sopl(){
         for (int i = 0; i < stack.length; i ++){
-            System.out.println(stack[i]);
+            System.out.println("stack[" + i + "] = " + stack[i]);
             
         }
     }
     public int top() {
-        return stack[size()-1];
+        if (pointer > -1){
+        return stack[pointer];
+        }
+        else {
+            System.out.println("stack is empty");
+            return -1; 
+        }
 
     }
 
     public int pop() {
-        int ans = stack[size()-1];
-        stack[size()-1] = 0;
+        if (pointer >= 0){
+        int ans = stack[pointer];
+        stack[pointer] = null;
         pointer --; 
         return ans;
+        }
+        else {
+            System.out.println("there's nothing to pop");
+            return -1;
+        }
     }
 
-    public void push(int value) {
+    public boolean push(int value) {
+        if (pointer+1 < stack.length){
         stack[this.pointer+1] = value; 
         pointer ++; 
+        return true; 
+        }
+        else{
+            System.out.println("stack is full");
+            return false; 
+        }
     }
 
     public int size() {
@@ -57,14 +76,19 @@ public class Stack implements StackInterface{
     }
 
     public boolean isEmpty() {
-        return stack == null;
+        if (pointer == -1){
+        return true;
+        }
+        else {
+            return false; 
+        }
     }
 
     public boolean isFull() {
-        return stack[stack.length - 1] != 0;
+        return stack[stack.length - 1] != null;
     }
 
     public void makeEmpty() {
-        stack = null;
+        pointer = -1;
     }
 }

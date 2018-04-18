@@ -12,7 +12,7 @@ public interface StackInterface {
 
     public int pop();
 
-    public void push( int value );
+    public boolean push( int value );
 
     public int size();
     

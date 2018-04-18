@@ -11,9 +11,9 @@ package unti4;
  */
 public class Queue implements QueueInterface {
 
-    int que[];
-    int pointer = -1; 
-    int front = 0; 
+    Integer que[];
+    int back = -1;
+    int front = 0;
 
     @Override
     public Integer front() {
@@ -21,9 +21,9 @@ public class Queue implements QueueInterface {
     }
 
     public Queue(int size) {
-        que = new int[size];
-        pointer = -1;
-        front = 0; 
+        que = new Integer[size];
+        back = -1;
+        front = 0;
     }
 
     @Override
@@ -32,30 +32,34 @@ public class Queue implements QueueInterface {
     }
 
     @Override
-    public void enqueue(Integer value) {
-        if (que.length -1 == pointer){
-            pointer = 0; 
+    public boolean enqueue(Integer value) {
+        if (que.length - 1 == back) {
+            System.out.println("queue is full");
+            return false; 
+        } else {
+            que[back + 1] = value;
+            back++;
+            return true; 
         }
-        que[this.pointer+1] = value;
-        pointer ++; 
-        
+
     }
 
     @Override
     public Integer dequeue() {
-        int ans = que[this.front];
-        que[this.front] = 0; 
-        front ++; 
-        
-        if (front  == que.length-1){
+        int ans = que[front];
+        que[front] = null;
+        front++;
+
+        if (front == que.length) {
             front = 0;
         }
-        return ans; 
+        //if (ans == )
+        return ans;
     }
 
     @Override
     public int size() {
-        return pointer + 1; 
+        return back + 1;
     }
 
     @Override
@@ -70,10 +74,10 @@ public class Queue implements QueueInterface {
 
     @Override
     public boolean isFull() {
-        if (que[que.length-1] != 0){
+        if (que[que.length - 1] != 0) {
             return true;
         }
-        return false; 
+        return false;
     }
 
     @Override

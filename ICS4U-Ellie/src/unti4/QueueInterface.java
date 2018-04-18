@@ -9,7 +9,7 @@ public interface QueueInterface {
     
     public Integer back();
     
-    public void enqueue( Integer value );
+    public boolean enqueue( Integer value );
 
     public Integer dequeue();
 

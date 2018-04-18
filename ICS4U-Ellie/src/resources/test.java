@@ -15,9 +15,10 @@ public class test {
      * @param args the command line arguments
      */
     
-    public int a = 3; 
     public static void main(String[] args) {
-    int a[] = new int[5];
+    Integer a [] = new Integer[1];
+    a = null; 
+        System.out.println(a[0]);
     
     }
 
