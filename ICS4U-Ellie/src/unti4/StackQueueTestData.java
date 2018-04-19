@@ -21,6 +21,12 @@ queue();
 
         
     }
+    
+    public static void linkedList(){
+        
+        
+    }
+    
     public static void stack(){
         Stack stack = new Stack(3); 
         
