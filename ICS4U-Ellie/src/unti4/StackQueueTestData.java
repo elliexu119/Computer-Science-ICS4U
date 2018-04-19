@@ -83,9 +83,14 @@ queue();
         System.out.println("size: " + que.size());
         
         System.out.println("\nEMPTY AND FULL");
+        System.out.println("enque: " + que.enqueue(9));
+        System.out.println("enque: " + que.enqueue(9));
+        System.out.println("enque: " + que.enqueue(9));
+        System.out.println("full: " + que.isFull());
         System.out.println("make empty");
         que.makeEmpty();
         System.out.println("size: " + que.size());
+        System.out.println("full: " + que.isFull());
       
     }
 

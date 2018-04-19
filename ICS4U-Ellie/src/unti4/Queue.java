@@ -14,6 +14,7 @@ public class Queue implements QueueInterface {
     Integer que[];
     Integer back = -1;
     Integer front = 0;
+    boolean empty;
 
     @Override
     public Integer front() {
@@ -24,6 +25,7 @@ public class Queue implements QueueInterface {
         que = new Integer[size];
         back = 0;
         front = 0;
+        empty = true;
     }
 
     @Override
@@ -33,46 +35,49 @@ public class Queue implements QueueInterface {
 
     @Override
     public boolean enqueue(Integer value) {
-        if (back == que.length){
-                back = 0; 
-            }
+
         if (isFull()) {
             System.out.println("queue is full");
-            return false; 
+            return false;
         } else {
             que[back] = value;
             back++;
-            return true; 
+            if (back == que.length) {
+                back = 0;
+            }
+            empty = false;
+            return true;
         }
 
     }
 
     @Override
     public Integer dequeue() {
-        Integer ans = que[front];
-        front++;
-
-        if (front == que.length) {
-            front = 0;
+        if (front != back || empty == false) {
+            Integer ans = que[front];
+            front++;
+            if (front == que.length) {
+                front = 0;
+            }
+            if (front == back) {
+                empty = true;
+            }
+            return ans;
+        } else {
+            System.out.println("There's nothing to deque.");
+            return -1;
         }
-//        if (ans == null){
-//            front --; 
-//        }
-
-        return ans;
     }
 
     @Override
     public int size() {
-        if (isFull()){
+        if (isFull()) {
             return que.length;
+        } else if (back >= front) {
+            return back - front;
+        } else {
+            return que.length - front + back;//(back + 1)%capacity();
         }
-        else 
-            if (back >= front){
-                return back-front;
-            }
-            else 
-                return que.length - front + back;//(back + 1)%capacity();
     }
 
     @Override
@@ -82,25 +87,23 @@ public class Queue implements QueueInterface {
 
     @Override
     public boolean isEmpty() {
-        if (front == back && que[1] != null) {
-        return false;
-        }
-        else {
-        return true; 
-        }
+        return empty;
     }
 
     @Override
     public boolean isFull() {
-        if (front == back && que[1] != null) {
+        if (front == back && empty == false) {
             return true;
         }
         return false;
     }
 
     @Override
-    public void makeEmpty() {
-        que = null;
+    public boolean makeEmpty() {
+        front = 0;
+        back = 0;
+        empty = true;
+        return true;
     }
 
 }

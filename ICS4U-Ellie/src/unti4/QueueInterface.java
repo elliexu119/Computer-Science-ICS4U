@@ -21,6 +21,6 @@ public interface QueueInterface {
     
     public boolean isFull();
 
-    public void makeEmpty();
+    public boolean makeEmpty();
 
 }
