@@ -69,17 +69,24 @@ queue();
         System.out.println("enque: " + que.enqueue(10)); 
         System.out.println("enque: " + que.enqueue(9));
         
-        System.out.println("DEQUE");
+        System.out.println("\nDEQUE");
         System.out.println("deque: " + que.dequeue());
         System.out.println("deque: " + que.dequeue());
         System.out.println("deque: " + que.dequeue());
         System.out.println("deque: " + que.dequeue());
         System.out.println("deque: " + que.dequeue());
-//        
-//        System.out.println(que.dequeue());
-//        System.out.println(que.dequeue());
-//        que.enqueue(7); 
-//        System.out.println(que.dequeue());
+        
+        System.out.println("\nSIZE AND CAPACITY");
+        System.out.println("capacity: " + que.capacity());
+        System.out.println("size: " + que.size());
+        System.out.println("enque: " + que.enqueue(9));
+        System.out.println("size: " + que.size());
+        
+        System.out.println("\nEMPTY AND FULL");
+        System.out.println("make empty");
+        que.makeEmpty();
+        System.out.println("size: " + que.size());
+      
     }
 
 }

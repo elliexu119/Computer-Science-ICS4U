@@ -12,8 +12,8 @@ package unti4;
 public class Queue implements QueueInterface {
 
     Integer que[];
-    int back = -1;
-    int front = 0;
+    Integer back = -1;
+    Integer front = 0;
 
     @Override
     public Integer front() {
@@ -22,7 +22,7 @@ public class Queue implements QueueInterface {
 
     public Queue(int size) {
         que = new Integer[size];
-        back = -1;
+        back = 0;
         front = 0;
     }
 
@@ -33,11 +33,14 @@ public class Queue implements QueueInterface {
 
     @Override
     public boolean enqueue(Integer value) {
-        if (que.length - 1 == back) {
+        if (back == que.length){
+                back = 0; 
+            }
+        if (isFull()) {
             System.out.println("queue is full");
             return false; 
         } else {
-            que[back + 1] = value;
+            que[back] = value;
             back++;
             return true; 
         }
@@ -46,20 +49,30 @@ public class Queue implements QueueInterface {
 
     @Override
     public Integer dequeue() {
-        int ans = que[front];
-        que[front] = null;
+        Integer ans = que[front];
         front++;
 
         if (front == que.length) {
             front = 0;
         }
-        //if (ans == )
+//        if (ans == null){
+//            front --; 
+//        }
+
         return ans;
     }
 
     @Override
     public int size() {
-        return back + 1;
+        if (isFull()){
+            return que.length;
+        }
+        else 
+            if (back >= front){
+                return back-front;
+            }
+            else 
+                return que.length - front + back;//(back + 1)%capacity();
     }
 
     @Override
@@ -69,12 +82,17 @@ public class Queue implements QueueInterface {
 
     @Override
     public boolean isEmpty() {
-        return this == null;
+        if (front == back && que[1] != null) {
+        return false;
+        }
+        else {
+        return true; 
+        }
     }
 
     @Override
     public boolean isFull() {
-        if (que[que.length - 1] != 0) {
+        if (front == back && que[1] != null) {
             return true;
         }
         return false;
