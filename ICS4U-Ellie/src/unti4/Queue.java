@@ -12,13 +12,13 @@ package unti4;
 public class Queue implements QueueInterface {
 
     Integer que[];
-    Integer back = -1;
-    Integer front = 0;
+    Integer back = back();
+    Integer front = front();
     boolean empty;
 
     @Override
     public Integer front() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 0; 
     }
 
     public Queue(int size) {
@@ -30,7 +30,7 @@ public class Queue implements QueueInterface {
 
     @Override
     public Integer back() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return -1; 
     }
 
     @Override
@@ -53,6 +53,7 @@ public class Queue implements QueueInterface {
 
     @Override
     public Integer dequeue() {
+        
         if (front != back || empty == false) {
             Integer ans = que[front];
             front++;
@@ -71,6 +72,7 @@ public class Queue implements QueueInterface {
 
     @Override
     public int size() {
+        //System.out.println((back + 1) % capacity());
         if (isFull()) {
             return que.length;
         } else if (back >= front) {

@@ -5,6 +5,7 @@
  */
 package unti4;
 
+import unti4.examples.BookInfo;
 import static resources.SOPL.sopl;
 
 /**
