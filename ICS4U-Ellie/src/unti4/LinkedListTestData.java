@@ -15,14 +15,19 @@ public class LinkedListTestData {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Node node = new Node ("1", null, null); 
-        Node next = new Node ("2", null, node);
-        node.setNext(next);
-        Node prev = new Node ("0", node, null); 
-        prev.setNext(node);
+        LinkList list = new LinkList();
+        list.addAtFront("2");
+        list.addAtFront("1");
+        list.addAtFront("0");
+
         
-        System.out.println(next.getNext().getValue());
-        
+        System.out.println("head " + list.head());
+        System.out.println("tail " + list.tail());
+        list.addAtEnd("0");
+        System.out.println("tail " + list.tail());
+        System.out.println("list " + list.head());
+        list.makeEmpty();
+        System.out.println(list.isEmpty());
     }
     
 }

@@ -10,14 +10,11 @@ package unti4;
  * @author Wm.Muir
  */
 public class Node implements NodeInterface{
-    String data; 
-    Node next;
-    Node prev; 
+    private String data; 
+    private Node next = null;
 
-    public Node(String data, Node next, Node prev) {
+    public Node(String data) {
         this.data = data;
-        this.next = next;
-        this.prev = prev;
     }
 
     @Override
@@ -32,7 +29,7 @@ public class Node implements NodeInterface{
 
     @Override
     public String getValue() {
-        return data; 
+        return this.data; 
     }
     
 

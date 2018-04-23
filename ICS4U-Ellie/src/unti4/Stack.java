@@ -30,6 +30,7 @@ public class Stack implements StackInterface{
             
         }
     }
+    @Override
     public int top() {
         if (pointer > -1){
         return stack[pointer];
@@ -41,6 +42,7 @@ public class Stack implements StackInterface{
 
     }
 
+    @Override
     public int pop() {
         if (pointer >= 0){
         int ans = stack[pointer];
@@ -66,15 +68,18 @@ public class Stack implements StackInterface{
         }
     }
 
+    @Override
     public int size() {
         return this.pointer+1; 
     }
 
+    @Override
     public int capacity() {
         return stack.length;
 
     }
 
+    @Override
     public boolean isEmpty() {
         if (pointer == -1){
         return true;
@@ -88,6 +93,7 @@ public class Stack implements StackInterface{
         return stack[stack.length - 1] != null;
     }
 
+    @Override
     public void makeEmpty() {
         pointer = -1;
     }

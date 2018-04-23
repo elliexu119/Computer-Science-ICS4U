@@ -18,7 +18,7 @@ public class Queue implements QueueInterface {
 
     @Override
     public Integer front() {
-        return 0; 
+        return this.front; 
     }
 
     public Queue(int size) {
@@ -30,12 +30,11 @@ public class Queue implements QueueInterface {
 
     @Override
     public Integer back() {
-        return -1; 
+        return this.back;  
     }
 
     @Override
     public boolean enqueue(Integer value) {
-
         if (isFull()) {
             System.out.println("queue is full");
             return false;
@@ -94,7 +93,7 @@ public class Queue implements QueueInterface {
 
     @Override
     public boolean isFull() {
-        if (front == back && empty == false) {
+        if (size() == capacity()) {
             return true;
         }
         return false;
