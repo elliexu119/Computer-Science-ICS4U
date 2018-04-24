@@ -18,33 +18,35 @@ public class Queue implements QueueInterface {
 
     @Override
     public Integer front() {
-        return this.front; 
+        return this.front;
     }
 
     public Queue(int size) {
-        que = new Integer[size];
-        back = 0;
-        front = 0;
-        empty = true;
+        this.que = new Integer[size];
+        this.back = -1;
+        this.front = -0;
+        this.empty = true;
     }
 
     @Override
     public Integer back() {
-        return this.back;  
+        return this.back;
     }
 
     @Override
     public boolean enqueue(Integer value) {
+
         if (isFull()) {
             System.out.println("queue is full");
             return false;
         } else {
-            que[back] = value;
-            back++;
-            if (back == que.length) {
-                back = 0;
+            this.back++;
+            if (this.back == this.que.length) {
+                this.back = 0;
             }
-            empty = false;
+            this.que[this.back] = value;
+
+            this.empty = false;
             return true;
         }
 
@@ -52,16 +54,17 @@ public class Queue implements QueueInterface {
 
     @Override
     public Integer dequeue() {
-        
-        if (front != back || empty == false) {
-            Integer ans = que[front];
-            front++;
+
+        if (empty == false) {
+            
             if (front == que.length) {
                 front = 0;
             }
             if (front == back) {
                 empty = true;
             }
+            Integer ans = que[front];
+            front++;
             return ans;
         } else {
             System.out.println("There's nothing to deque.");
@@ -70,14 +73,35 @@ public class Queue implements QueueInterface {
     }
 
     @Override
+    public String toString() {
+        String output = "";
+        for (int i = 0; i < que.length; i ++){
+            output = output + ("stack[" + i + "] = " + que[i] + " | " );
+            if (i == back){
+                output = output + ("B");
+            }
+            if (i == front){
+                output = output + ("F");
+            }
+            output = output + "\n";
+        }
+        return output;
+    }
+
+    @Override
     public int size() {
         //System.out.println((back + 1) % capacity());
-        if (isFull()) {
-            return que.length;
-        } else if (back >= front) {
-            return back - front;
+//        if (isFull()) {
+//            return que.length;
+//        } else 
+        if (isEmpty()) {
+            return 0;
         } else {
-            return que.length - front + back;//(back + 1)%capacity();
+            if (back >= front) {
+                return back - front +1;
+            } else {
+                return que.length - front + back +1;
+            }
         }
     }
 

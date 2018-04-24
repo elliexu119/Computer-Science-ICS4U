@@ -19,17 +19,21 @@ public class Stack implements StackInterface{
         pointer = -1; 
     }
 
-    @Override
-    public String toString() {
-        return "Stack{" + "stack=" + stack + '}';
+    public String toString(){
+        String output = "";
+        if (pointer == -1){
+            output = "P = -1 \n";
+        }
+        for (int i = 0; i < stack.length; i ++){
+            output = output + ("stack[" + i + "] = " + stack[i] + " | " );
+            if (i == pointer){
+                output = output + ("P");
+            }
+            output = output + ("\n");
+        }
+        return output;
     }
 
-    public void sopl(){
-        for (int i = 0; i < stack.length; i ++){
-            System.out.println("stack[" + i + "] = " + stack[i]);
-            
-        }
-    }
     @Override
     public int top() {
         if (pointer > -1){
@@ -57,9 +61,9 @@ public class Stack implements StackInterface{
     }
 
     public boolean push(int value) {
-        if (pointer+1 < stack.length){
-        stack[this.pointer+1] = value; 
-        pointer ++; 
+        if (this.pointer+1 < this.stack.length){
+        this.stack[this.pointer+1] = value; 
+        this.pointer ++; 
         return true; 
         }
         else{
