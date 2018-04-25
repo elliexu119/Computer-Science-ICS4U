@@ -31,7 +31,4 @@ public class Node implements NodeInterface{
     public String getValue() {
         return this.data; 
     }
-    
-
-    
 }

@@ -62,6 +62,7 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public void remove(String str) {
+        //node index -1 .setNext(node index +1); 
     }
 
     @Override
