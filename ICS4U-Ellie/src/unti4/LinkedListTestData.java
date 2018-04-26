@@ -16,16 +16,19 @@ public class LinkedListTestData {
      */
     public static void main(String[] args) {
         LinkList list = new LinkList();
-        list.addAtFront("2");
-        list.addAtFront("1");
-        list.addAtFront("0");
+//        list.addAtFront("2");
+//        list.addAtFront("1");
+        //list.addAtFront("0");
 
         
-        System.out.println("head " + list.head());
-        System.out.println("tail " + list.tail());
-        list.addAtEnd("0");
-        System.out.println("tail " + list.tail());
-        System.out.println("list " + list.head());
+        //System.out.println("head " + list.head());
+        //System.out.println("tail " + list.tail());
+        list.addAtEnd("6");
+        list.addAtEnd("6");
+        //System.out.println("tail " + list.tail());
+        //System.out.println("list " + list.head());
+        System.out.println("size " + list.size());
+        
         list.makeEmpty();
         System.out.println(list.isEmpty());
     }

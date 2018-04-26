@@ -16,9 +16,11 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public int size() {
-        int size = 0;
-        while (head.getNext()!= null){
-            
+        return sizeR(head); 
+    }
+    int sizeR(Node node){
+        if (node.getNext()!= null){
+            return sizeR(node.getNext()) + 1;
         }
         return 0; 
     }
