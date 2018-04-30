@@ -23,14 +23,26 @@ public class LinkedListTestData {
         
         //System.out.println("head " + list.head());
         //System.out.println("tail " + list.tail());
-        list.addAtEnd("6");
-        list.addAtEnd("6");
+        list.addAtFront("1");
+        list.addAtFront("2");
+        System.out.println(list. toString()); 
+        list.addAtFront("3");
+        System.out.println(list. toString()); 
+        list.addAtEnd("4");
+        System.out.println(list. toString()); 
+        System.out.println("isEmpty: " + list.isEmpty());
+        System.out.println("makeEmpty");
+        list.makeEmpty();
+        System.out.println(list. toString());
+        //System.out.println("isEmpty: " + list.isEmpty());
         //System.out.println("tail " + list.tail());
         //System.out.println("list " + list.head());
-        System.out.println("size " + list.size());
+        //System.out.println(list.head.getNext().getValue());
         
-        list.makeEmpty();
-        System.out.println(list.isEmpty());
+       // System.out.println("size " + list.size());
+        
+        //list.makeEmpty();
+        //System.out.println(list.isEmpty());
     }
     
 }

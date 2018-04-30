@@ -13,53 +13,65 @@ public class LinkList implements LinkListInterface {
 
     Node head;
     Node tail;
+    private String string = "toString \n"; 
 
     @Override
     public int size() {
-        return sizeR(head); 
+        return sizeR(head);
     }
-    int sizeR(Node node){
-        if (node.getNext()!= null){
+
+    private int sizeR(Node node) {
+        string = string + node.getValue() + " " ;
+        if (node.getNext() != tail.getNext()) {
             return sizeR(node.getNext()) + 1;
         }
-        return 0; 
+        return 0;
     }
 
     @Override
     public void makeEmpty() {
-        head = null; 
+        head = null;
     }
 
     @Override
     public boolean isEmpty() {
-        if (head == null){
+        if (head == null) {
             return true;
-        }
-        else {
-            return false; 
+        } else {
+            return false;
         }
     }
 
     @Override
     public void addAtFront(String str) {
-        if (isEmpty()){
-            this.tail = new Node (str); 
-            this.head = new Node (str); 
+        Node node = new Node(str);
+        if (isEmpty()) {
+            this.tail = node;
+            this.head = node;
+        } else {
+            node.setNext(head);
+            head = node;
+
         }
-        Node node = new Node (str);
-        node.setNext(head);
-        head = node; 
     }
 
     @Override
     public void addAtEnd(String str) {
-        if (isEmpty()){
-            this.tail = new Node (str); 
-            this.head = new Node (str); 
+        Node node = new Node(str);
+        if (isEmpty()) {
+            this.tail = node;
+            this.head = node;
+        } else {
+            tail.setNext(node);
+            tail = node;
         }
-        Node node = new Node (str);
-        node.setNext(tail);
-        tail = node;
+    }
+
+    @Override
+    public String toString() {
+        string = "toString \n"; 
+        sizeR(head);
+        return string; 
     }
 
     @Override

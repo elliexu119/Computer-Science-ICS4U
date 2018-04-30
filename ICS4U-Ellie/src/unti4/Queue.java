@@ -56,7 +56,7 @@ public class Queue implements QueueInterface {
     public Integer dequeue() {
 
         if (empty == false) {
-            
+
             if (front == que.length) {
                 front = 0;
             }
@@ -75,13 +75,15 @@ public class Queue implements QueueInterface {
     @Override
     public String toString() {
         String output = "";
-        for (int i = 0; i < que.length; i ++){
-            output = output + ("stack[" + i + "] = " + que[i] + " | " );
-            if (i == back){
-                output = output + ("B");
-            }
-            if (i == front){
-                output = output + ("F");
+        for (int i = 0; i < que.length; i++) {
+            output = output + ("stack[" + i + "] = " + que[i] + " | ");
+            if (!isEmpty()) {
+                if (i == back) {
+                    output = output + ("B");
+                }
+                if (i == front) {
+                    output = output + ("F");
+                }
             }
             output = output + "\n";
         }
@@ -98,9 +100,9 @@ public class Queue implements QueueInterface {
             return 0;
         } else {
             if (back >= front) {
-                return back - front +1;
+                return back - front + 1;
             } else {
-                return que.length - front + back +1;
+                return que.length - front + back + 1;
             }
         }
     }
