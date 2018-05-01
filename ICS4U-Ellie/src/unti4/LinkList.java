@@ -13,7 +13,7 @@ public class LinkList implements LinkListInterface {
 
     Node head;
     Node tail;
-    private String string = "toString \n"; 
+    private String string = "toString \n";
 
     @Override
     public int size() {
@@ -21,7 +21,7 @@ public class LinkList implements LinkListInterface {
     }
 
     private int sizeR(Node node) {
-        string = string + node.getValue() + " " ;
+        string = string + node.getValue() + " ";
         if (node.getNext() != tail.getNext()) {
             return sizeR(node.getNext()) + 1;
         }
@@ -69,34 +69,64 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public String toString() {
-        string = "toString \n"; 
+        string = "toString \n";
         sizeR(head);
-        return string; 
+        return string;
     }
 
     @Override
     public void remove(String str) {
-        //node index -1 .setNext(node index +1); 
+        //find 
+        Node value = head;
+        for (; value.getNext().getValue() != str && value.getNext() != null; value = value.getNext()) {
+        }
+
+        if (value.getNext() == null) {
+            System.out.println("this node doesn't exist.");
+        } else {
+            if (str == head.getValue()) {
+                removeHead();
+            } else if (value.getNext() == tail) {
+                removeTail();
+            } else {
+                value.setNext(value.getNext().getNext());
+            }
+        }
     }
 
     @Override
     public String removeHead() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String str = head.getValue();
+        head = head.getNext();
+        return str;
     }
 
     @Override
     public String removeTail() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String str = tail.getValue();
+        Node n = head;
+        for (; n.getNext() != tail; n = n.getNext()) {
+        }
+        tail = n;
+        return str;
     }
 
     @Override
     public String head() {
-        return this.head.getValue();
+        if (head == null) {
+            return null;
+        } else {
+            return this.head.getValue();
+        }
     }
 
     @Override
     public String tail() {
-        return this.tail.getValue();
+        if (tail == null) {
+            return null;
+        } else {
+            return this.tail.getValue();
+        }
     }
 
 }

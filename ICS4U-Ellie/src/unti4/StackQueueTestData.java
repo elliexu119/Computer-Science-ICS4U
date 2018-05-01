@@ -134,6 +134,20 @@ public class StackQueueTestData {
         System.out.println("size: " + que.size());
         System.out.println("full: " + que.isFull());
         System.out.println("\ntoString: \n" + que.toString());
+        
+        //ERROR FIX THIS 
+        que.makeEmpty(); 
+        que.enqueue(8);
+        que.enqueue(9);
+        que.enqueue(9);
+        que.enqueue(10);
+        System.out.println("\ntoString: \n" + que.toString());
+        que.dequeue();
+        que.dequeue();
+        que.dequeue();
+//        que.enqueue(9);
+//        que.enqueue(9);
+//        que.enqueue(9);
 
     }
 
