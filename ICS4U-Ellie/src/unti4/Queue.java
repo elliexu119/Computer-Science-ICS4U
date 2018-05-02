@@ -127,9 +127,9 @@ public class Queue implements QueueInterface {
 
     @Override
     public boolean makeEmpty() {
-        front = 0;
-        back = 0;
-        empty = true;
+        this.back = -1;
+        this.front = -0;
+        this.empty = true;
         return true;
     }
 

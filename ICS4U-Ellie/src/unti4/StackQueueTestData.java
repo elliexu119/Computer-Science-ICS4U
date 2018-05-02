@@ -80,6 +80,11 @@ public class StackQueueTestData {
 
         System.out.println("full?: " + stack.isFull());
         System.out.println("empty?: " + stack.isEmpty());
+        
+        String CYANb = "\u001B[46m";
+        String YELLOW = "\u001B[33m";
+        String RESET = "\u001B[0m";
+        System.out.println(CYANb + YELLOW + "\nSTACK WORKS" + RESET);
 
     }
 
@@ -135,8 +140,8 @@ public class StackQueueTestData {
         System.out.println("full: " + que.isFull());
         System.out.println("\ntoString: \n" + que.toString());
         
-        //ERROR FIX THIS 
-        que.makeEmpty(); 
+        System.out.println("\nIF FRONT POINTER IS AT THE MIDDLE OF THE ARRAY, "
+                + "\nTHEN FILLING IT UP AGAIN");
         que.enqueue(8);
         que.enqueue(9);
         que.enqueue(9);
@@ -145,9 +150,17 @@ public class StackQueueTestData {
         que.dequeue();
         que.dequeue();
         que.dequeue();
-//        que.enqueue(9);
-//        que.enqueue(9);
-//        que.enqueue(9);
+        System.out.println("\ntoString: \n" + que.toString());
+        que.enqueue(0);
+        que.enqueue(1);
+        assert (que.enqueue(2) == true);
+        assert (que.enqueue(3) == false);
+        System.out.println("\ntoString: \n" + que.toString());
+        
+        String CYANb = "\u001B[46m";
+        String YELLOW = "\u001B[33m";
+        String RESET = "\u001B[0m";
+        System.out.println(CYANb + YELLOW + "\nQUEUE WORKS" + RESET);
 
     }
 

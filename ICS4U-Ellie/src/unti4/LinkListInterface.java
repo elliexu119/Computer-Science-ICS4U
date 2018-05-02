@@ -7,7 +7,7 @@ public interface LinkListInterface {
 
     public int size();
     
-    public void makeEmpty();
+    public boolean makeEmpty();
     
     public boolean isEmpty();
     
@@ -30,7 +30,7 @@ public interface LinkListInterface {
      *
      * @param str
      */
-    public void remove( String str );
+    public boolean remove( String str );
     
     
     public String removeHead();

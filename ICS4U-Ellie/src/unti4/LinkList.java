@@ -13,24 +13,20 @@ public class LinkList implements LinkListInterface {
 
     Node head;
     Node tail;
-    private String string = "toString \n";
 
     @Override
     public int size() {
-        return sizeR(head);
-    }
-
-    private int sizeR(Node node) {
-        string = string + node.getValue() + " ";
-        if (node.getNext() != tail.getNext()) {
-            return sizeR(node.getNext()) + 1;
-        }
-        return 0;
+        int counter = 0;
+        Node n = head;
+            for (; n != null && n.getNext() != null; n = n.getNext(), counter++) {
+            }
+            return counter;
     }
 
     @Override
-    public void makeEmpty() {
+    public boolean makeEmpty() {
         head = null;
+        return true; 
     }
 
     @Override
@@ -51,7 +47,6 @@ public class LinkList implements LinkListInterface {
         } else {
             node.setNext(head);
             head = node;
-
         }
     }
 
@@ -69,46 +64,62 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public String toString() {
-        string = "toString \n";
-        sizeR(head);
+        String string = "toString \n";
+        Node n = head;
+        for (; n.getNext() != null; n = n.getNext()) {
+            string = string + n.getValue() + " ";
+        }
         return string;
     }
 
     @Override
-    public void remove(String str) {
-        //find 
+    public boolean remove(String str) {
         Node value = head;
-        for (; value.getNext().getValue() != str && value.getNext() != null; value = value.getNext()) {
-        }
-
-        if (value.getNext() == null) {
-            System.out.println("this node doesn't exist.");
-        } else {
-            if (str == head.getValue()) {
-                removeHead();
-            } else if (value.getNext() == tail) {
-                removeTail();
-            } else {
-                value.setNext(value.getNext().getNext());
+        boolean foundIt = false;
+            for (; value != null && value.getNext() != null; value = value.getNext()) {
+                if (value.getNext().getValue() == str) {
+                    foundIt = true; 
+                    break;
+                }
             }
-        }
+            if (foundIt == true){
+                if (str == head.getValue()) {
+                    removeHead();
+                } else if (value.getNext() == tail) {
+                    removeTail();
+                } else {
+                    value.setNext(value.getNext().getNext());
+                }
+                return true; 
+            }
+            else {
+                return false; 
+            }
     }
 
     @Override
     public String removeHead() {
-        String str = head.getValue();
-        head = head.getNext();
-        return str;
+        if (head != null) {
+            String str = head.getValue();
+            head = head.getNext();
+            return str;
+        } else {
+            return "-1";
+        }
     }
 
     @Override
     public String removeTail() {
-        String str = tail.getValue();
-        Node n = head;
-        for (; n.getNext() != tail; n = n.getNext()) {
+        if (tail != null) {
+            String str = tail.getValue();
+            Node n = head;
+            for (; n.getNext() != tail; n = n.getNext()) {
+            }
+            tail = n;
+            return str;
+        } else {
+            return "-1";
         }
-        tail = n;
-        return str;
     }
 
     @Override
