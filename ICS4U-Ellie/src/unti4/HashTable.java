@@ -13,8 +13,14 @@ public class HashTable implements HashTableInterface{
 /**
      * @return Returns the number of keys in this hashtable.
      */
-    public int size(){
+    
+    private Student s[]; 
+    
+    public HashTable(){
         
+    }
+
+    public int size() {
         return -1;
     }
     
@@ -66,6 +72,7 @@ public class HashTable implements HashTableInterface{
      */
     public Student get( int key ){
         
+        return null;
     }
     
     /**
@@ -104,6 +111,7 @@ public class HashTable implements HashTableInterface{
      */
     public int hash( int key ){
         
+        return -1; 
     }    
     
 }
