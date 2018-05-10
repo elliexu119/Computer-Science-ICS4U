@@ -15,11 +15,16 @@ public class HashTableTestData {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Student s = new Student("jim", "kirk", 1234567890);
-        System.out.println(s.getKey());
-        Student a = new Student("aaa", "kirk", 1234567890);
-        System.out.println(a.getKey());
-        
+        Student s = new Student("1", "2", 1234567890);
+        System.out.println(s.getkey());
+        Student a = new Student("3", "4", 1234567890);
+        System.out.println(a.getkey());
+        HashTable h = new HashTable(); 
+        h.put(s.getkey(), s);
+        h.put(a.getkey(), a);
+        System.out.println(h.size());
+        System.out.println("");
+        System.out.println(h.toString());
     }
     
 }

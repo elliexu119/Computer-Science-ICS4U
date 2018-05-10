@@ -45,9 +45,8 @@ public class Student {
         this.last = last;
     }
 
-    public int getKey() {
-        this.key = hashCode(); 
-        return key;
+    public int getkey() {
+        return hashCode(); 
     }
 
     public int getPhone() {
