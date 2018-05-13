@@ -54,9 +54,7 @@ public class Queue implements QueueInterface {
 
     @Override
     public Integer dequeue() {
-
         if (empty == false) {
-
             if (front == que.length) {
                 front = 0;
             }
@@ -92,10 +90,6 @@ public class Queue implements QueueInterface {
 
     @Override
     public int size() {
-        //System.out.println((back + 1) % capacity());
-//        if (isFull()) {
-//            return que.length;
-//        } else 
         if (isEmpty()) {
             return 0;
         } else {

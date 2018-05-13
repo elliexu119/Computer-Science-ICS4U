@@ -41,6 +41,10 @@ public class HashTable implements HashTableInterface {
      * @return The load factor of the hashtable.
      */
     public double loadFactor() {
+        if (size() == 0 ){
+            return 0; 
+        }
+        else
         return capacity() / size();
     }
 
@@ -68,7 +72,19 @@ public class HashTable implements HashTableInterface {
      * order to accommodate and access its entries more efficiently.
      */
     public void rehash() {
-        
+        int newSize = (int) Math.ceil(size() / 0.25);
+        for (int i = 2; 2 * i < newSize; i++) {
+            if (newSize % i == 0) {
+                newSize++;
+            }
+        }
+
+        Student temp[] = new Student[newSize];
+        for (int i = 0; i < s.length; i++){
+            if (s[i] != null ){
+                
+            }
+        }
     }
 
     /**
@@ -88,6 +104,9 @@ public class HashTable implements HashTableInterface {
      * @param value
      */
     public void put(int key, Student value) {
+        if (loadFactor() > .75) {
+            rehash();
+        }
         if (s[hash(key)] == null) {
             s[hash(key)] = value;
         } else {

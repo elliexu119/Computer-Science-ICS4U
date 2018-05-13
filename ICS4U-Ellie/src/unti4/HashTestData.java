@@ -7,9 +7,9 @@ package unti4;
 
 /**
  *
- * @author 1xuell
+ * @author ellix
  */
-public class HashTableTestData {
+public class HashTestData {
 
     /**
      * @param args the command line arguments
@@ -37,17 +37,6 @@ public class HashTableTestData {
         
         //DONT HAVE TO REMOVE 
         
-        Student s = new Student("1", "2", 1234567890);
-        System.out.println(s.getkey());
-        Student a = new Student("3", "4", 1234567890);
-        System.out.println(a.getkey());
-        HashTable h = new HashTable(); 
-        h.put(s.getkey(), s);
-        h.put(a.getkey(), a);
-        System.out.println(h.size());
-        System.out.println("");
-        System.out.println(h.toString());
-        System.out.println(h.hash(s.getkey()));
     }
     
 }
