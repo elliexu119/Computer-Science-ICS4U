@@ -37,17 +37,22 @@ public class HashTableTestData {
         
         //DONT HAVE TO REMOVE 
         
-        Student s = new Student("1", "2", 1234567890);
-        System.out.println(s.getkey());
-        Student a = new Student("3", "4", 1234567890);
-        System.out.println(a.getkey());
+        
+        
         HashTable h = new HashTable(); 
-        h.put(s.getkey(), s);
-        h.put(a.getkey(), a);
-        System.out.println(h.size());
+        int value; 
+        for (int i = 0; i < 42; i ++){
+            value = (int) (Math.random() * 100);
+            Student s = new Student("1", "2", value);
+            h.put(s.getkey(), s);
+            System.out.println(i+1 + ": " + value + " | SIZE " + h.size() + " CAPACITY " + h.capacity() + " LOAD FACTOR " + h.loadFactor());
+        }
+        
+        System.out.println("\nsize " + h.size());
+        System.out.println("capacity " + h.capacity());
         System.out.println("");
         System.out.println(h.toString());
-        System.out.println(h.hash(s.getkey()));
+        //System.out.println(h.hash(s.getkey())); 
     }
     
 }

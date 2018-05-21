@@ -5,6 +5,8 @@
  */
 package resources;
 
+import unti4.Student;
+
 /**
  *
  * @author 1xuell
@@ -16,11 +18,8 @@ public class test {
      */
     
     public static void main(String[] args) {
-    Integer a [] = new Integer[1];
-    a = null; 
-        System.out.println(a[0]);
-    
+        Student s[] = new Student[53];
+        System.out.println(s.length);
     }
 
-    }
-
+}

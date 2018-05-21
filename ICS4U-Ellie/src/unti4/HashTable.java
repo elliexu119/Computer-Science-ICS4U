@@ -41,11 +41,7 @@ public class HashTable implements HashTableInterface {
      * @return The load factor of the hashtable.
      */
     public double loadFactor() {
-        if (size() == 0 ){
-            return 0; 
-        }
-        else
-        return capacity() / size();
+        return size() / (double) capacity() ;
     }
 
     /**
@@ -72,6 +68,7 @@ public class HashTable implements HashTableInterface {
      * order to accommodate and access its entries more efficiently.
      */
     public void rehash() {
+        System.out.println("REHASH");
         int newSize = (int) Math.ceil(size() / 0.25);
         for (int i = 2; 2 * i < newSize; i++) {
             if (newSize % i == 0) {
@@ -79,10 +76,11 @@ public class HashTable implements HashTableInterface {
             }
         }
 
-        Student temp[] = new Student[newSize];
-        for (int i = 0; i < s.length; i++){
-            if (s[i] != null ){
-                
+        Student temp[] = s;
+        s = new Student[newSize];
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] != null) {
+                put(temp[i].getkey(), temp[i]);
             }
         }
     }
@@ -110,10 +108,15 @@ public class HashTable implements HashTableInterface {
         if (s[hash(key)] == null) {
             s[hash(key)] = value;
         } else {
-            for (int i = hash(key); i < s.length; i++) {
+            boolean in = false;
+            for (int i = hash(key); i < s.length && in == false; i++) {
                 if (s[i] == null) {
                     s[i] = value;
+                    in = true; 
                 }
+            }
+            if (in == false){
+                System.out.println("UNSUCCESSFUL" + " hash code: " + hash(key));
             }
         }
     }
@@ -125,7 +128,8 @@ public class HashTable implements HashTableInterface {
             if (s[i] == null) {
                 value += "null \n";
             } else {
-                value += s[i].getFirst() + " " + s[i].getLast() + "\n";
+                value += "[" + i + "] first name: " + s[i].getFirst() + " last name: " + s[i].getLast() + " phone: " + s[i].getPhone()
+                        + " key: " + s[i].getkey() + " hash: " + hash(s[i].getkey()) + "\n";
             }
         }
         return value;
@@ -165,7 +169,7 @@ public class HashTable implements HashTableInterface {
      * @return
      */
     public int hash(int key) {
-        return key & capacity();
+        return key % capacity();
     }
 
 }
