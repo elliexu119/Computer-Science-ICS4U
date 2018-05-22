@@ -1,4 +1,6 @@
-package unti4;
+package unit5;
+
+import unit5.Node;
 
 /**
  * Lesson: 6.03 - a Node, in a Linked List

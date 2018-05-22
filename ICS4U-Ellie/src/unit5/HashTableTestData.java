@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unti4;
+package unit5;
 
+import unit5.HashTable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,8 +46,16 @@ public class HashTableTestData {
         int phone;
         String first, last; 
         Student s = new Student ((int) (Math.random() * 100) + "", (int) (Math.random() * 100) + "", (int) (Math.random() * 100));
+        Student random = null;
+        
+        //ADD ONE STUDENT
+        h.put(s.getkey(), s);
+        assert(h.isEmpty() == false);
+        assert(h.size() == 1);
         
         //EMPTY CASE
+        h.makeEmpty();
+        assert(h.isEmpty() == true);
         assert(h.size() == 0);
         assert(h.capacity() == 53);
         assert(h.contains(s) == false);
@@ -54,14 +63,18 @@ public class HashTableTestData {
         assert(h.containsKey(s.getkey()) == false); 
         assert(h.loadFactor() == 0); 
         
-        //REHASH
-        System.out.println(colours[4] + "INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT" + RESET);
+        //enter data and REHASH
+        System.out.println(colours[4] + "  INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT" + RESET);
         for (int i = 0; i < 42; i ++){
             phone = (int) (Math.random() * 100);
             first = (int) (Math.random() * 100) + "";
             last = (int) (Math.random() * 100) + "";
             
             s = new Student(first, last, phone);
+            if (i == 5){
+                random = s;
+            }
+            
             h.put(s.getkey(), s);
             System.out.println(colours[(int) (Math.random() * 6)]);
             System.out.format("%2s %12s%2s %11s%2s %7s%2s %20s %4s %9s %4s %11s %s",
@@ -69,12 +82,31 @@ public class HashTableTestData {
             System.out.println(RESET);
         }
         
-        System.out.println("\nsize " + h.size());
-        System.out.println("capacity " + h.capacity());
-        System.out.println(colours[4] + "\n \nDA HASH TABLE" + RESET);
-        System.out.println(h.toString());
+        assert(h.size() == 42);
+        assert(h.capacity() == 163);
         
-        System.out.println(h.get(s.getkey()).getFirst()); 
+        //SOPL
+        System.out.println(colours[4] + "\n \nDA HASH TABLE" + RESET);
+        //System.out.println(h.toString());
+        System.out.println("");
+        
+        //CONTAINS
+
+        assert(h.contains(random) == true);
+        assert(h.containsKey(random.getkey()) == true);
+        s = new Student ("101", "101", 101);
+        assert(h.contains(s) == false);
+        assert(h.containsKey(s.getkey()) == false);
+        
+        //GET
+        System.out.println("FIND STUDENT BASED ON KEY");
+        System.out.println("key: " + random.getkey());
+        System.out.println("first name: " + h.get(random.getkey()).getFirst() + " last name: " + h.get(random.getkey()).getLast());
+        assert(h.get(random.getkey()).getFirst() .equals(random.getFirst()));
+        assert(h.get(random.getkey()).getLast() .equals(random.getLast()));
+        assert(h.get(random.getkey()).getPhone() == (random.getPhone()));
+        
+        
     }
     
 }

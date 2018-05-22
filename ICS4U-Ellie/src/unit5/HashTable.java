@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unti4;
+package unit5;
 
 /**
  *
@@ -48,7 +48,7 @@ public class HashTable implements HashTableInterface {
      * Clears this hashtable so that it contains no keys.
      */
     public void makeEmpty() {
-        s = null;
+        s = new Student[s.length];
     }
 
     /**
