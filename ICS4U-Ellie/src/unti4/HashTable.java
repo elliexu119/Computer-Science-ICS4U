@@ -41,7 +41,7 @@ public class HashTable implements HashTableInterface {
      * @return The load factor of the hashtable.
      */
     public double loadFactor() {
-        return size() / (double) capacity() ;
+        return size() / (double) capacity();
     }
 
     /**
@@ -93,7 +93,19 @@ public class HashTable implements HashTableInterface {
      * @return
      */
     public Student get(int key) {
-        return s[hash(key)];
+        if (s[hash(key)] != null) {
+            for (int i = hash(key); s[i].getkey() != key; i++) {
+                if (i == s.length - 1) {
+                    i = 0;
+                }
+                if (i + 1 == hash(key)) {
+                    return null;
+                }
+            }
+            return s[hash(key)];
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -108,15 +120,14 @@ public class HashTable implements HashTableInterface {
         if (s[hash(key)] == null) {
             s[hash(key)] = value;
         } else {
-            boolean in = false;
-            for (int i = hash(key); i < s.length && in == false; i++) {
+            for (int i = hash(key); i < s.length; i++) {
                 if (s[i] == null) {
                     s[i] = value;
-                    in = true; 
+                    break;
                 }
-            }
-            if (in == false){
-                System.out.println("UNSUCCESSFUL" + " hash code: " + hash(key));
+                if (i == s.length - 1) {
+                    i = 0;
+                }
             }
         }
     }
@@ -156,8 +167,10 @@ public class HashTable implements HashTableInterface {
      */
     public boolean containsKey(int key) {
         for (int i = 0; i < s.length; i++) {
-            if (s[i].getkey() == key) {
-                return true;
+            if (s[i] != null) {
+                if (s[i].getkey() == key) {
+                    return true;
+                }
             }
         }
         return false;

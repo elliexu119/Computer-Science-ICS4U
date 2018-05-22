@@ -18,8 +18,12 @@ public class test {
      */
     
     public static void main(String[] args) {
-        Student s[] = new Student[53];
-        System.out.println(s.length);
+        int random = (int) (Math.random() * 6);
+        while ( random != 7 ){
+            random = (int) (Math.random() * 6);
+            System.out.println(random);
+        }
+        System.out.println( random );
     }
 
 }
