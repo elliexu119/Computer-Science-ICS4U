@@ -9,12 +9,14 @@ package unti4.ifThereIsALock_ThenThereMustBeAKey;
  *
  * @author 1xuell
  */
-public class Parent {
-    private boolean state = false; //true == open, false == closed
-    public int combo[]; 
+public class Dudley extends Fixxed{
 
-    public void setCombo(int[] combo) {
-        this.combo = combo;
+    public Dudley() {
+        combo = new int[3]; 
+        for (int i = 0; i < 3; i++){
+            combo[i] = (int) (Math.random()*60);
+        } 
+        int a[] = {1, 2, 3}; 
     }
-
+    
 }

@@ -9,12 +9,8 @@ package unti4.ifThereIsALock_ThenThereMustBeAKey;
  *
  * @author 1xuell
  */
-public class Parent {
-    private boolean state = false; //true == open, false == closed
-    public int combo[]; 
-
-    public void setCombo(int[] combo) {
-        this.combo = combo;
-    }
-
+public class Fixxed extends Parent{
+    
+    
+    
 }

@@ -9,12 +9,14 @@ package unti4.ifThereIsALock_ThenThereMustBeAKey;
  *
  * @author 1xuell
  */
-public class Parent {
-    private boolean state = false; //true == open, false == closed
-    public int combo[]; 
+public class Main {
 
-    public void setCombo(int[] combo) {
-        this.combo = combo;
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Dudley a = new Dudley();
+        int b[] = {0, 1, 2, 4, 5};
+        a.setCombo(b); 
     }
-
 }

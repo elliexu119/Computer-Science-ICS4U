@@ -9,6 +9,6 @@ package unti4.ifThereIsALock_ThenThereMustBeAKey;
  *
  * @author 1xuell
  */
-public class Dubley {
+public class MasterU extends Config{
     
 }

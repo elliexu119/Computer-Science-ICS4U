@@ -9,6 +9,6 @@ package unti4.ifThereIsALock_ThenThereMustBeAKey;
  *
  * @author 1xuell
  */
-public class Master {
+public class Master extends Fixxed{
     
 }
