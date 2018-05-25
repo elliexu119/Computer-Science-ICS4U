@@ -11,17 +11,16 @@ package unti4.ifThereIsALock_ThenThereMustBeAKey;
  */
 public class Parent {
 
-    public boolean state; //true == open, false == closed
-    public int combo[];
-    public boolean special1 = false;
+    private boolean state; //true == open, false == closed
+    private int tries;
+    public int serial = 0; <<<<<<<<<<
 
     public Parent() {
         state = true;
-        int temp[] = {(int) (Math.random() * 10), (int) (Math.random() * 10), (int) (Math.random() * 10)};
-        combo = temp;
+        tries = 3; 
     }
-
-    public String getCombo() {
+    
+    public String toString(int combo[]) {
         String a = "";
         for (int i = 0; i < combo.length; i++) {
             a += combo[i] + " ";
@@ -33,12 +32,31 @@ public class Parent {
         state = false;
     }
 
-    public boolean unlock(int a, int b, int c) {
-        if (special1 == false && combo[0] == a && combo[1] == b && combo[2] == c) {
+    public boolean check(int combo[], int a, int b, int c, int d) {
+        if (d == -1 && combo[0] == a && combo[1] == b && combo[2] == c && tries > 0) {
             state = true;
-            return true;
+            tries = 3; 
+            return state;
         }
-        return state;
+        else if (d != -1 && combo[0] == a && combo[1] == b && combo[2] == c && combo[3] == d && tries > 0){
+            state = true; 
+            tries = 3; 
+            return state; 
+        }
+        tries --; 
+        if (tries == 0){
+            System.out.println("THIS LOCK IS LOCKED FOREVER...");
+        }
+        return state; 
     }
 
+    public void setCombo(int combo[], int max){
+        for (int i = 0; i < combo.length; i++){
+            combo[i] = (int) (Math.random() * max + 1);
+        }
+    }
+
+    public boolean isState() {
+        return state;
+    }
 }
