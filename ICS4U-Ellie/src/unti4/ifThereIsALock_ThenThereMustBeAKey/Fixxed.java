@@ -10,7 +10,9 @@ package unti4.ifThereIsALock_ThenThereMustBeAKey;
  * @author 1xuell
  */
 public class Fixxed extends Parent{
-    
-    
+
+    public Fixxed() {
+         System.out.println(getCombo()); 
+    }
     
 }

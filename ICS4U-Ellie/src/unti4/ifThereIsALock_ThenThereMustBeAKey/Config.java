@@ -10,5 +10,9 @@ package unti4.ifThereIsALock_ThenThereMustBeAKey;
  * @author 1xuell
  */
 public class Config extends Parent{
-    private boolean config; 
+    
+    public void setCombo(int[] combo) {
+        this.combo = combo;
+    }
+    
 }

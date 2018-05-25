@@ -5,6 +5,8 @@
  */
 package unti4.ifThereIsALock_ThenThereMustBeAKey;
 
+import java.util.Scanner;
+
 /**
  *
  * @author 1xuell
@@ -15,8 +17,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Dudley a = new Dudley();
-        int b[] = {0, 1, 2, 4, 5};
-        a.setCombo(b); 
+        Scanner input = new Scanner (System.in);
+        MasterU master = new MasterU();
+        Dudley dudley = new Dudley();
+        
+        int a = input.nextInt();
+        int b = input.nextInt();
+        int c = input.nextInt(); 
+        
+        
     }
 }

@@ -11,4 +11,11 @@ package unti4.ifThereIsALock_ThenThereMustBeAKey;
  */
 public class Android extends Config{
 
+    public Android() {
+         System.out.println(getCombo()); 
+    }
+    //3 combo nums
+    //
+    
+    
 }
