@@ -9,7 +9,7 @@ package unti4.ifThereIsALock_ThenThereMustBeAKey;
  *
  * @author 1xuell
  */
-public class Parent {
+public class Parent implements ParentInterface{
 
     private boolean state; //true == open, false == closed
     private int tries;
