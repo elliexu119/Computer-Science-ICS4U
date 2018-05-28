@@ -40,7 +40,7 @@ public class Android extends Config {
         if (combo[0] == -1 && combo[1] == -1 && combo[2] == -1 && combo[3] == -1) {
             System.out.println("can't lock, no combo set");
         } else {
-            lock(); <<<<
+            super.lock();
         }
     }
 
