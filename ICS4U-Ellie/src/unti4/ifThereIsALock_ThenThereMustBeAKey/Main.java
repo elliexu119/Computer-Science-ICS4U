@@ -8,7 +8,6 @@ package unti4.ifThereIsALock_ThenThereMustBeAKey;
 import unti4.ifThereIsALock_ThenThereMustBeAKey.locks.Dudley;
 import unti4.ifThereIsALock_ThenThereMustBeAKey.locks.MasterU;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 import unti4.ifThereIsALock_ThenThereMustBeAKey.locks.Android;
 import unti4.ifThereIsALock_ThenThereMustBeAKey.locks.Master;
 
@@ -60,10 +59,9 @@ public class Main {
         assert(lock.unlock(-1, -1, -1) == false);
         assert(lock.unlock(-1, -1, -1) == false);
         assert(lock.unlock(password[0], password[1], password[2]) == false);
-        assert(lock.isState() == false); 
+        assert(lock.isState() == false);
+        System.out.println("Serial num: " + lock.serial);
         System.out.println("");
-        
-        System.out.println(lock.serial);
     }
     
     public static void master(){
@@ -83,9 +81,8 @@ public class Main {
         assert(lock.unlock(-1, -1, -1) == false);
         assert(lock.unlock(password[0], password[1], password[2]) == false);
         assert(lock.isState() == false); 
+        System.out.println("Serial num: " + lock.serial);
         System.out.println("");
-        
-        System.out.println(lock.serial);
     }
     
     public static void dudley(){
@@ -105,8 +102,8 @@ public class Main {
         assert(lock.unlock(-1, -1, -1) == false);
         assert(lock.unlock(password[0], password[1], password[2]) == false);
         assert(lock.isState() == false); 
-        System.out.println("");
-    
+        System.out.println("Serial num: " + lock.serial);
+        System.out.println("");    
     }
     public static void masteru(){
         System.out.println("MASTERU");
@@ -136,6 +133,7 @@ public class Main {
         assert(lock.unlock(-1, -1, -1, -1) == false);
         assert(lock.unlock(password[0], password[1], password[2], password[3]) == false);
         assert(lock.isState() == false); 
+        System.out.println("Serial num: " + lock.serial);
         System.out.println("");
     }
 }

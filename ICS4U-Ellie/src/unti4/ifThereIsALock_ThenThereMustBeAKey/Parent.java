@@ -13,11 +13,12 @@ public class Parent implements ParentInterface{
 
     private boolean state; //true == open, false == closed
     private int tries;
-    public int serial = 0; <<<<<<<<<<
+    public static int serial = 0;
 
     public Parent() {
         state = true;
         tries = 3; 
+        serial++;
     }
     
     public String toString(int combo[]) {

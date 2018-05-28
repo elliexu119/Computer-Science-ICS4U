@@ -31,13 +31,11 @@ public class MasterU extends Config {
     }
     
     public boolean unlock(int a , int b, int c, int d){
-        first = false; 
         return check(combo, a, b, c, d);
     }
 
     public boolean configCombo(int a, int b, int c, int d){
         if (-1 < a && a < 10 && -1 < b && b < 10 && -1 < c && c < 10 && -1 < d && d < 10){
-            first = true;
             return setCombo(combo, a, b, c, d);
         }
         return false; 

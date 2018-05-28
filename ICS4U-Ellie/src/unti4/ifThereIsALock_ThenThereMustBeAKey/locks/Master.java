@@ -30,7 +30,6 @@ public class Master extends Parent{
     }
     
     public boolean unlock(int a , int b, int c){
-        first = false; 
         return check(combo, a, b, c, -1);
     }
     
