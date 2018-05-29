@@ -23,14 +23,16 @@ public class Master extends Parent{
     public int[] getCombo() {
         if (first == true) {
             first = false;
+            trace(); 
             return combo;
         } else {
+            trace(); 
             return null;
         }
     }
     
     public boolean unlock(int a , int b, int c){
-        return check(combo, a, b, c, -1);
+        return super.unlock(combo, a, b, c, -1);
     }
     
 }

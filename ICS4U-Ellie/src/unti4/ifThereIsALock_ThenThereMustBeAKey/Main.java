@@ -35,32 +35,33 @@ public class Main {
     public static void android(){
         System.out.println("ANDROID");
         Android lock = new Android ();
+        
+        //tries to lock without combo
         lock.lock(); 
-        int password [] = lock.getCombo();
         
-        assert (lock.unlock(-1, -1, -1) == false);
-        assert (lock.getCombo() == null);
-        assert (lock.configCombo(1, 1, 1) == false);
+        //set combo 
+        lock.configCombo(1,1,1);
+        lock.lock();
+
+        //testing out unlock witth the wrong combo and configcombo when the lock is still locked
+        assert (lock.unlock(-2, -2, -2) == false);
+        assert (lock.configCombo(2, 2, 2) == false);
+        assert (lock.unlock(1, 1, 1) == true);
         
-        assert (lock.unlock(password[0], password[1], password[2]) == true);
+        //testing the range of values valid for config combo
         assert (lock.configCombo(10, 12, 14) == false);
         assert (lock.configCombo(2,2,2) == true);
-        password = lock.getCombo();
-        
-        for (int i = 0; i < password.length; i ++){
-            System.out.print(password[i] + " ");
-        }
-        
-        System.out.println("");
         lock.lock();
-        assert(lock.getCombo() == null);
+        assert (lock.unlock(2, 2, 2) == true);
+        
+        //locking the lock forever 
+        lock.lock();
         assert(lock.unlock(-1, -1, -1) == false);
         assert(lock.unlock(-1, -1, -1) == false);
         assert(lock.unlock(-1, -1, -1) == false);
         assert(lock.unlock(-1, -1, -1) == false);
-        assert(lock.unlock(password[0], password[1], password[2]) == false);
+        assert(lock.unlock(2, 2, 2) == false);
         assert(lock.isState() == false);
-        System.out.println("Serial num: " + lock.serial);
         System.out.println("");
     }
     
@@ -70,10 +71,12 @@ public class Main {
         lock.lock(); 
         int password [] = lock.getCombo(); 
         
+        //unlock, and getCombo() when it's been called once already 
         assert (lock.unlock(-1, -1, -1) == false);
         assert (lock.getCombo() == null);
         assert (lock.unlock(password[0], password[1], password[2]) == true);
         
+        //locking the lock forever
         lock.lock();
         assert(lock.unlock(-1, -1, -1) == false);
         assert(lock.unlock(-1, -1, -1) == false);
@@ -81,7 +84,6 @@ public class Main {
         assert(lock.unlock(-1, -1, -1) == false);
         assert(lock.unlock(password[0], password[1], password[2]) == false);
         assert(lock.isState() == false); 
-        System.out.println("Serial num: " + lock.serial);
         System.out.println("");
     }
     
@@ -91,10 +93,12 @@ public class Main {
         lock.lock();
         int password [] = lock.getCombo();
         
+        //unlock, and getCombo() when it's been called once already 
         assert(lock.unlock(-1, -1, -1) == false);
         assert (lock.getCombo() == null);
         assert(lock.unlock(password[0], password[1], password[2]) == true);
         
+        //locking the lock forever
         lock.lock();
         assert(lock.unlock(-1, -1, -1) == false);
         assert(lock.unlock(-1, -1, -1) == false);
@@ -102,29 +106,31 @@ public class Main {
         assert(lock.unlock(-1, -1, -1) == false);
         assert(lock.unlock(password[0], password[1], password[2]) == false);
         assert(lock.isState() == false); 
-        System.out.println("Serial num: " + lock.serial);
         System.out.println("");    
     }
+    
     public static void masteru(){
         System.out.println("MASTERU");
         MasterU lock = new MasterU();
         lock.lock(); 
         int password [] = lock.getCombo();
         
+        //test unlock with the wrong combo
+        //test getcombo (when it's already been called once)
+        //test configcombo when the lock is still locked 
         assert (lock.unlock(-1, -1, -1, -1) == false);
         assert (lock.getCombo() == null);
         assert (lock.configCombo(1, 1, 1, 1) == false);
         
+        //test for the range of values valid for config combo
         assert (lock.unlock(password[0], password[1], password[2], password[3]) == true);
         assert (lock.configCombo(10, 12, 14, 2) == false);
         assert (lock.configCombo(2,2,2,2) == true);
-        password = lock.getCombo();
-        
-        for (int i = 0; i < password.length; i ++){
-            System.out.print(password[i] + " ");
-        }
-        
-        System.out.println("");
+        lock.lock(); 
+        assert (lock.unlock(0, 0, 0, 0) == false);
+        assert (lock.unlock(2,2,2,2) == true);
+
+        //locking the lock foreveh 
         lock.lock();
         assert(lock.getCombo() == null);
         assert(lock.unlock(-1, -1, -1, -1) == false);
@@ -133,7 +139,6 @@ public class Main {
         assert(lock.unlock(-1, -1, -1, -1) == false);
         assert(lock.unlock(password[0], password[1], password[2], password[3]) == false);
         assert(lock.isState() == false); 
-        System.out.println("Serial num: " + lock.serial);
         System.out.println("");
     }
 }

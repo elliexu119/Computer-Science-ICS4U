@@ -18,7 +18,7 @@ public interface ParentInterface {
     public void setCombo(int combo[], int max);
 
     //checks if the entered combo matches the actual combo to unlock the lock 
-    public boolean check(int combo[], int a, int b, int c, int d);
+    public boolean unlock(int combo[], int a, int b, int c, int d);
 
     //locks the lock 
     public void lock();
