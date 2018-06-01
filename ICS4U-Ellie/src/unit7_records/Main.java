@@ -9,13 +9,15 @@ package unit7_records;
  *
  * @author 1xuell
  */
-public class RecordsTestData {
+public class Main {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Records a = new Records ("s", "asdf", 2001);
+        a.together(); 
+        
     }
     
 }

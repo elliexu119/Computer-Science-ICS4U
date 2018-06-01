@@ -19,7 +19,6 @@ public class Android extends Config {
         for (int i = 0; i < combo.length; i++) {
             combo[i] = -1;
         }
-        //setCombo(combo, 9);
     }
 
     public void lock() {
