@@ -16,62 +16,19 @@ public class Records {
     protected final int SONG_SIZE = 36;
     protected final int WRITER_SIZE = 15;
     protected final int YEAR_SIZE = 4;
-    protected final int DURATION_SIZE = 3;
-    protected final int FAVOURITE_SIZE = 10;
-    protected final int RECORD_SIZE = 115; //(SONG_SIZE + WRITER_SIZE)*2 + YEAR_SIZE + RATING_SIZE + 1;
+    protected final int RATING_SIZE = 3;
     private String song;
     private String writer;
     private int year;
-    private double duration;
+    private double rating;
     private boolean favourite;
-    private RandomAccessFile file;
-    //private char
 
-    public Records(String song, String writer, int year, double duration, boolean favourite) {
+    public Records(String song, String writer, int year, double rating, boolean favourite) {
         this.song = song;
         this.writer = writer;
         this.year = year;
-        this.duration = duration;
+        this.rating = rating;
         this.favourite = favourite;
-    }
-
-    public Records() throws Exception {
-        file = new RandomAccessFile("song_info.txt", "rw");
-    }
-    
-    public int length()throws Exception {
-        return (int) file.length(); 
-    }
-
-    public void write(Records records) throws Exception {
-        file.writeChars(records.getSong());
-        file.writeChars(records.getWriter());
-        file.writeInt(records.getYear());
-        file.writeDouble(records.getDuration());
-        file.writeBoolean(records.getFavourite());
-    }
-
-    public void read(int begin, Records records) throws Exception {
-        int i = begin;
-        for (; i < records.SONG_SIZE * 2 + begin; i = i + 2) {
-            file.seek(i);
-            System.out.print(file.readChar());
-        }
-        System.out.println("");
-        for (; i < (records.SONG_SIZE + records.WRITER_SIZE) * 2 + begin; i = i + 2) {
-            file.seek(i);
-            System.out.print(file.readChar());
-        }
-        System.out.println("");
-
-        file.seek((records.SONG_SIZE + records.WRITER_SIZE) * 2 + begin);
-        System.out.println(file.readInt());
-
-        file.seek((records.SONG_SIZE + records.WRITER_SIZE) * 2 + records.YEAR_SIZE + begin);
-        System.out.println(file.readDouble());
-
-        file.seek((records.SONG_SIZE + records.WRITER_SIZE) * 2 + records.YEAR_SIZE + records.DURATION_SIZE + 5 + begin);
-        System.out.println(file.readBoolean());
     }
 
     public void setSong(String song) {
@@ -86,26 +43,24 @@ public class Records {
         this.year = year;
     }
 
-    public void setDuration(double duration) {
-        this.duration = duration;
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     public void setFavourite(boolean favourite) {
         this.favourite = favourite;
     }
 
-    public double getDuration() {
-        return Double.parseDouble(methodNum(duration, DURATION_SIZE));
+    public double getRating() {
+        return Double.parseDouble(methodNum(rating, RATING_SIZE));
     }
 
     public String getSong() {
-        this.song = method(song, SONG_SIZE);
-        return song;
+        return method(song, SONG_SIZE);
     }
 
     public String getWriter() {
-        this.writer = method(writer, WRITER_SIZE);
-        return writer;
+        return method(writer, WRITER_SIZE);
     }
 
     public int getYear() {
@@ -113,10 +68,7 @@ public class Records {
     }
 
     public boolean getFavourite() {
-        StringBuilder temp = new StringBuilder();
-        temp.append(favourite);
-        temp.setLength(FAVOURITE_SIZE);
-        return Boolean.parseBoolean(temp.toString());
+        return favourite;
     }
 
     public String method(String a, int b) {

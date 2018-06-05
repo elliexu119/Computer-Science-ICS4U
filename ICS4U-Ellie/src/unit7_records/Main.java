@@ -9,7 +9,6 @@ package unit7_records;
  *
  * @author 1xuell
  */
-import java.io.*;
 
 public class Main {
 
@@ -18,27 +17,25 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
         Records a = new Records("Eye of the tiger", "Survivor", 1982, 3.5, true);
-        Records b = new Records("Thunderstruck", "AC/DC", 1990, 3.2, false);
+        Records b = new Records("Thunderstruck", "AC/DC", 1990, 3.2, true);
         Records c = new Records("Back in black", "AC/DC", 1980, 5, false);
-        Records master = new Records(); 
 
-        master.write(a); 
-        master.write(b);
-        master.write(c);
-        master.read(0, a); 
-        System.out.println("");
-        master.read(master.length()/3, b);
-        System.out.println("");
-        master.read(master.length()/3*2  , c);
-
+        RandomAccess file = new RandomAccess("song_info.txt");
         
-        //read(0, a, file);
-        //read(a.RECORD_SIZE, b, file);
-//        for (int i = 59; i < b.SONG_SIZE * 2 + 59 ; i = i + 2) {
-//            file.seek(i);
-//            System.out.print(file.readChar());
-//        }
+        System.out.println(file.length());
+        file.write(a);
+        System.out.println(file.length());
+        file.write(b);
+        file.write(c);
+//        file.seek(0);
+//        read(file, a);
+//        System.out.println("");
+//        read(file, b);
+//        System.out.println("");
+//        read(file, c);
         
-        
+        System.out.println(file.length());
     }
+
+    
 }
