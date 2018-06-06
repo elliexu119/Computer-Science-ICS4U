@@ -11,19 +11,23 @@ import java.io.RandomAccessFile;
  *
  * @author 1xuell
  */
-public class Records {
+public class Records extends Parent{
 
-    protected final int SONG_SIZE = 36;
-    protected final int WRITER_SIZE = 15;
-    protected final int YEAR_SIZE = 4;
-    protected final int RATING_SIZE = 3;
+    private int id;
     private String song;
     private String writer;
     private int year;
     private double rating;
     private boolean favourite;
 
+    public Records() {
+        this.id = -1;
+    }
+
+    
+    
     public Records(String song, String writer, int year, double rating, boolean favourite) {
+        this();
         this.song = song;
         this.writer = writer;
         this.year = year;
@@ -31,6 +35,10 @@ public class Records {
         this.favourite = favourite;
     }
 
+    public void setid(int id){
+        this.id = id; 
+    }
+    
     public void setSong(String song) {
         this.song = song;
     }
@@ -51,6 +59,9 @@ public class Records {
         this.favourite = favourite;
     }
 
+    public int getid(){
+        return id; 
+    }
     public double getRating() {
         return Double.parseDouble(methodNum(rating, RATING_SIZE));
     }
