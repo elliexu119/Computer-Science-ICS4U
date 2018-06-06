@@ -23,9 +23,7 @@ public class Records extends Parent{
     public Records() {
         this.id = -1;
     }
-
-    
-    
+      
     public Records(String song, String writer, int year, double rating, boolean favourite) {
         this();
         this.song = song;

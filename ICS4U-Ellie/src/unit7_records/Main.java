@@ -29,6 +29,7 @@ public class Main {
         File file2 = new File( "song_info.txt");
         file2.delete();        
         DataBase file = new DataBase("song_info.txt");
+        file.open();
         
         assert(file.get(2).getSong() .trim().equals ("TBD"));
         assert(file.length() == 0);
@@ -49,7 +50,8 @@ public class Main {
         file.save(a);
         assert(file.get(0).getFavourite() == false);
         
-        boolean end = input.nextBoolean();
+        String end = input.nextLine();
+        file.close();
     }
 
     

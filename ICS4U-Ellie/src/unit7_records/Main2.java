@@ -16,6 +16,10 @@ public class Main2 {
      */
     public static void main(String[] args) throws Exception {
         DataBase file = new DataBase("song_info.txt");
+        file.open(); 
+        System.out.println(file.get(0).getSong());
+        file = new DataBase("song_info.txt");
+        file.open(); 
         System.out.println(file.get(0).getSong());
     }
     

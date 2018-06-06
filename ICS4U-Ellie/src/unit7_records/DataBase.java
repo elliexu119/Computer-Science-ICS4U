@@ -15,56 +15,52 @@ import java.util.Scanner;
 public class DataBase extends Parent {
 
     private RandomAccessFile file;
-    private static boolean open = false; 
-    private static boolean closed = true; 
+    private static boolean status = false; //true = open 
 
     public DataBase(String file) throws Exception {
-        if (open == true){
-            open = false; 
+        if (status == false) {
             this.file = new RandomAccessFile(file, "rw");
-        }
-        else {
-            System.out.println("This file is opened elsewhere.");   
-        }
-    }
-    
-    public void open(){
-        if (closed == true){
-            open = true;
-            closed = false;
+        } else {
+            System.out.println("This file is opened elsewhere.");
         }
     }
-    
-    public void close(){
-        if (open == true){
-            open = false; 
-            closed = true; 
-        }
+
+    public void open() {
+        status = true;
+    }
+
+    public void close() {
+        status = false; 
     }
 
     public void save(Records records) throws Exception {
-        if (records.getid() == -1){
-            file.seek(file.length());
-            write(records); 
+        if  (status == true) {
+            if (records.getid() == -1) {
+                file.seek(file.length());
+                write(records);
+            } else {
+                file.seek(file.length() * (records.getid()));
+                write(records);
+            }
         }
         else {
-            file.seek(file.length() * (records. getid()));
-            write(records); 
+            System.out.println("pleaase open the file first.");
         }
     }
-    
-    public void write(Records records) throws Exception {
+
+    private void write(Records records) throws Exception {
         file.writeChars(records.getSong());
         file.writeChars(records.getWriter());
         file.writeInt(records.getYear());
         file.writeDouble(records.getRating());
         file.writeBoolean(records.getFavourite());
-        records.setid(((int) file.length()/RECORD)-1);
+        records.setid(((int) file.length() / RECORD) - 1);
     }
 
     public Records get(long index) throws Exception {
-        if ((file.length() / RECORD) > index) {
-            
+        if (status == true) {
+            if ((file.length() / RECORD) > index) {
+
             file.seek(index * RECORD);
             char array[] = new char[SONG_SIZE];
             for (int i = 0; i < SONG_SIZE; i++) {
@@ -76,10 +72,15 @@ public class DataBase extends Parent {
             for (int i = 0; i < WRITER_SIZE; i++) {
                 array[i] = file.readChar();
             }
-            
-            return new Records (song, (new String(array)), file.readInt(), file.readDouble(), file.readBoolean()); 
+
+            return new Records(song, (new String(array)), file.readInt(), file.readDouble(), file.readBoolean());
         } else {
-            return new Records ("TBD", "TBD", 0, 0, false);
+            return new Records("TBD", "TBD", 0, 0, false);
+        }
+        }
+        else {
+            System.out.println("pleaase open the file first.");
+            return null;
         }
     }
 
