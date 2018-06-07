@@ -16,11 +16,11 @@ public class Main2 {
      */
     public static void main(String[] args) throws Exception {
         DataBase file = new DataBase("song_info.txt");
-        file.open(); 
-        System.out.println(file.get(0).getSong());
-        file = new DataBase("song_info.txt");
-        file.open(); 
-        System.out.println(file.get(0).getSong());
+        file.open();
+Records a = new Records("Eye of the tiger", "Survivor", 1982, 3.5, true);
+file.save(a); 
+        
+
     }
     
 }

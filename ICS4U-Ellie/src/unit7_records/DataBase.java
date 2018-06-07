@@ -6,7 +6,6 @@
 package unit7_records;
 
 import java.io.RandomAccessFile;
-import java.util.Scanner;
 
 /**
  *
