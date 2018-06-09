@@ -5,6 +5,7 @@
  */
 package unit7_records;
 
+import java.io.IOException;
 import java.io.RandomAccessFile;
 
 /**
@@ -20,20 +21,26 @@ public class DataBase extends Parent {
         if (status == false) {
             this.file = new RandomAccessFile(file, "rw");
         } else {
-            System.out.println("This file is opened elsewhere.");
+            System.out.println("This file is opened somewhere else.");
         }
     }
 
-    public void open() {
+    public void openFile() {
         status = true;
     }
 
-    public void close() {
-        status = false; 
+    public void closeFile() throws Exception {
+        try {
+            status = false;
+            file.close();
+        } catch (NullPointerException ex) {
+            
+        }
+
     }
 
     public void save(Records records) throws Exception {
-        if  (status == true) {
+        if (status == true) {
             if (records.getid() == -1) {
                 file.seek(file.length());
                 write(records);
@@ -41,8 +48,7 @@ public class DataBase extends Parent {
                 file.seek(file.length() * (records.getid()));
                 write(records);
             }
-        }
-        else {
+        } else {
             System.out.println("pleaase open the file first.");
         }
     }
@@ -56,29 +62,32 @@ public class DataBase extends Parent {
         records.setid(((int) file.length() / RECORD) - 1);
     }
 
-    public Records get(long index) throws Exception {
-        if (status == true) {
-            if ((file.length() / RECORD) > index) {
+    public Records get(long index) {
+        try {
+            if (status == true) {
+                if ((file.length() / RECORD) > index) {
 
-            file.seek(index * RECORD);
-            char array[] = new char[SONG_SIZE];
-            for (int i = 0; i < SONG_SIZE; i++) {
-                array[i] = file.readChar();
+                    file.seek(index * RECORD);
+                    char array[] = new char[SONG_SIZE];
+                    for (int i = 0; i < SONG_SIZE; i++) {
+                        array[i] = file.readChar();
+                    }
+                    String song = ((new String(array)));
+
+                    array = new char[WRITER_SIZE];
+                    for (int i = 0; i < WRITER_SIZE; i++) {
+                        array[i] = file.readChar();
+                    }
+
+                    return new Records(song, (new String(array)), file.readInt(), file.readDouble(), file.readBoolean());
+                } else {
+                    return new Records("TBD", "TBD", 0, 0, false);
+                }
+            } else {
+                System.out.println("pleaase open the file first.");
+                return null;
             }
-            String song = ((new String(array)));
-
-            array = new char[WRITER_SIZE];
-            for (int i = 0; i < WRITER_SIZE; i++) {
-                array[i] = file.readChar();
-            }
-
-            return new Records(song, (new String(array)), file.readInt(), file.readDouble(), file.readBoolean());
-        } else {
-            return new Records("TBD", "TBD", 0, 0, false);
-        }
-        }
-        else {
-            System.out.println("pleaase open the file first.");
+        } catch (IOException ex) {
             return null;
         }
     }

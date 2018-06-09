@@ -16,7 +16,7 @@ public class StackQueueTestData {
      */
     public static void main(String[] args) {
         
-        stack();
+        //stack();
         queue();
 
     }

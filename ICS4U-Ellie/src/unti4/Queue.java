@@ -12,8 +12,8 @@ package unti4;
 public class Queue implements QueueInterface {
 
     Integer que[];
-    Integer back = back();
-    Integer front = front();
+    int back = back();
+    int front = front();
     boolean empty;
 
     @Override

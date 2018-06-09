@@ -11,7 +11,7 @@ import java.io.RandomAccessFile;
  *
  * @author 1xuell
  */
-public class Records extends Parent{
+public class Records extends Parent {
 
     private int id;
     private String song;
@@ -23,7 +23,7 @@ public class Records extends Parent{
     public Records() {
         this.id = -1;
     }
-      
+
     public Records(String song, String writer, int year, double rating, boolean favourite) {
         this();
         this.song = song;
@@ -33,10 +33,10 @@ public class Records extends Parent{
         this.favourite = favourite;
     }
 
-    public void setid(int id){
-        this.id = id; 
+    public void setid(int id) {
+        this.id = id;
     }
-    
+
     public void setSong(String song) {
         this.song = song;
     }
@@ -57,15 +57,16 @@ public class Records extends Parent{
         this.favourite = favourite;
     }
 
-    public int getid(){
-        return id; 
+    public int getid() {
+        return id;
     }
+
     public double getRating() {
         return Double.parseDouble(methodNum(rating, RATING_SIZE));
     }
 
     public String getSong() {
-        return method(song, SONG_SIZE);
+            return method(song, SONG_SIZE);
     }
 
     public String getWriter() {

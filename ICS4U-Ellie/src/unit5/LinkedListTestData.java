@@ -19,36 +19,47 @@ public class LinkedListTestData {
     public static void main(String[] args) {
         LinkList list = new LinkList();
 
-        System.out.println("IN THE BEGINING");
-        System.out.println("THERE WAS NO HEAD");
+        //System.out.println("IN THE BEGINING");
+        //System.out.println("THERE WAS NO HEAD");
         assert (list.head() == null);
-        System.out.println("NO TAIL");
+        //System.out.println("NO TAIL");
         assert (list.tail() == null);
-        System.out.println("NOTHING BUT THE GREAT EMPTY");
+        //System.out.println("NOTHING BUT THE GREAT EMPTY");
         assert(list.isEmpty() == true);
         assert(list.removeHead() == "-1");
         assert(list.removeTail() == "-1"); 
         assert(list.size() == 0);
-        assert(list.remove("10" )== false);
+        assert(list.remove("10" ) == false);
         
-        System.out.println("\nTHEN THERE WAS 1");
+        //System.out.println("\nTHEN THERE WAS 1");
+        
+        //remove only element at both front and end 
         list.addAtFront("1");
+        list.remove("1");
+        assert(list.isEmpty() == true);
+        list.addAtEnd("1");
+        list.remove("1");
+        assert(list.isEmpty() == true);
+        list.addAtFront("1");
+        System.out.println("");
+        
         System.out.println("AND 2");
         list.addAtFront("2");
-        System.out.println("AND MANY MORE FOLLOWED");
+        //System.out.println("AND MANY MORE FOLLOWED");
         list.addAtFront("2");
-        list.addAtFront("3");
+        list.addAtFront("3");        
         list.addAtFront("4");
         list.addAtFront("5");
         list.addAtFront("6");
+        
         list.addAtEnd("0");
         assert(list.head() == "6");
         assert(list.tail() == "0");
-
-        System.out.println("THE POPULATION QUICKLY GREW");
-        System.out.println(list.toString());
-
-        System.out.println("\nBUT LIKE ANY GREAT CIVILIZATION, A WAR ROSE, AND MANY DIED...");
+//
+//        System.out.println("THE POPULATION QUICKLY GREW");
+//        System.out.println(list.toString());
+//
+//        System.out.println("\nBUT LIKE ANY GREAT CIVILIZATION, A WAR ROSE, AND MANY DIED...");
         System.out.println(list.removeHead());
         System.out.println(list.removeTail());
         assert(list.head() == "5");

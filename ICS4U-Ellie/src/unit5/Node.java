@@ -19,7 +19,12 @@ public class Node implements NodeInterface{
 
     @Override
     public Node getNext() {
+        try{
         return next; 
+        }
+        catch (NullPointerException ex){
+            return null; 
+        }
     }
 
     @Override
@@ -31,4 +36,11 @@ public class Node implements NodeInterface{
     public String getValue() {
         return this.data; 
     }
+
+    @Override
+    public String toString() {
+        return "Node{" + "data= " + data + '}';
+    }
+    
+    
 }

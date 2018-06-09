@@ -18,20 +18,23 @@ public class LinkList implements LinkListInterface {
     public int size() {
         int counter = 0;
         Node n = head;
-            for (; n != null && n.getNext() != null; n = n.getNext(), counter++) {
-            }
-            return counter;
+        for (; n != null && n.getNext() != null; n = n.getNext(), counter++) {
+        }
+        if (counter == 0 && head != null) {
+            return 1;
+        }
+        return counter;
     }
 
     @Override
     public boolean makeEmpty() {
         head = null;
-        return true; 
+        return true;
     }
 
     @Override
     public boolean isEmpty() {
-        if (head == null) {
+        if (this.size() == 0) {
             return true;
         } else {
             return false;
@@ -76,25 +79,29 @@ public class LinkList implements LinkListInterface {
     public boolean remove(String str) {
         Node value = head;
         boolean foundIt = false;
+        if (head != null && head.getValue() == str) {
+            foundIt = true;
+        } else {
             for (; value != null && value.getNext() != null; value = value.getNext()) {
                 if (value.getNext().getValue() == str) {
-                    foundIt = true; 
+                    foundIt = true;
                     break;
                 }
             }
-            if (foundIt == true){
-                if (str == head.getValue()) {
-                    removeHead();
-                } else if (value.getNext() == tail) {
-                    removeTail();
-                } else {
-                    value.setNext(value.getNext().getNext());
-                }
-                return true; 
+        }
+
+        if (foundIt == true) {
+            if (str == head.getValue()) {
+                removeHead();
+            } else if (value.getNext() == tail) {
+                removeTail();
+            } else {
+                value.setNext(value.getNext().getNext());
             }
-            else {
-                return false; 
-            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

@@ -114,9 +114,6 @@ public class HashTable implements HashTableInterface {
      * @param value
      */
     public void put(int key, Student value) {
-        if (loadFactor() > .75) {
-            rehash();
-        }
         if (s[hash(key)] == null) {
             s[hash(key)] = value;
         } else {
@@ -129,6 +126,9 @@ public class HashTable implements HashTableInterface {
                     i = 0;
                 }
             }
+        }
+        if (loadFactor() > .75) {
+            rehash();
         }
     }
 
