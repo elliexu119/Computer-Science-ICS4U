@@ -12,25 +12,35 @@ package unti4;
 public class Queue implements QueueInterface {
 
     Integer que[];
-    Integer back = back();
-    Integer front = front();
+    Integer back;
+    Integer front;
     boolean empty;
 
     @Override
     public Integer front() {
-        return this.front;
+        if (!empty){
+            return que[front];
+        }
+        else {
+            return null;
+        }
     }
 
     public Queue(int size) {
         this.que = new Integer[size];
         this.back = -1;
-        this.front = -0;
+        this.front = 0;
         this.empty = true;
     }
 
     @Override
     public Integer back() {
-        return this.back;
+        if (!empty){
+            return que[back];
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
@@ -45,7 +55,6 @@ public class Queue implements QueueInterface {
                 this.back = 0;
             }
             this.que[this.back] = value;
-
             this.empty = false;
             return true;
         }
@@ -54,10 +63,11 @@ public class Queue implements QueueInterface {
 
     @Override
     public Integer dequeue() {
-        if (empty == false) {
-            if (front == que.length) {
+        if (front == que.length) {
                 front = 0;
             }
+        if (empty == false) {
+            
             if (front == back) {
                 empty = true;
             }

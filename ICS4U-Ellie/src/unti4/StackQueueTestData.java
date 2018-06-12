@@ -122,17 +122,24 @@ public class StackQueueTestData {
         System.out.println("deque: " + que.dequeue());
         System.out.println("deque: " + que.dequeue());
         System.out.println("deque: " + que.dequeue());
-
+        System.out.println(que.front());
+        assert(que.front() == null);
+        assert(que.back() == null);
+        
         System.out.println("\nSIZE AND CAPACITY");
         System.out.println("capacity: " + que.capacity());
         System.out.println("size: " + que.size());
-        System.out.println("enque: " + que.enqueue(9));
+        System.out.println("enque: " + que.enqueue(4));
         System.out.println("size: " + que.size());
 
         System.out.println("\nEMPTY AND FULL");
         System.out.println("enque: " + que.enqueue(9));
         System.out.println("enque: " + que.enqueue(9));
         System.out.println("enque: " + que.enqueue(9));
+        assert(que.front() == 4);
+        assert(que.back() == 9);
+        System.out.println(que.toString());
+        
         System.out.println("full: " + que.isFull());
         System.out.println("make empty");
         que.makeEmpty();
