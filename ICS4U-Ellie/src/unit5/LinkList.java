@@ -22,7 +22,7 @@ public class LinkList implements LinkListInterface {
         }
 
         Node n = head;
-        for (; n.getNext() != tail.getNext(); n = n.getNext(), counter++) {
+        for (; n.getNext() != null; n = n.getNext(), counter++) {
         }
         return counter;
     }
@@ -71,14 +71,13 @@ public class LinkList implements LinkListInterface {
     public String toString() {
         String string = "toString \n";
         Node n = head;
-        if (head == null) {
-            return null;
+        if (head == null && tail == null) {
+            return string;
         }
-
-        for (; n != tail.getNext(); n = n.getNext()) {
-            string = string + n.getValue() + " ";
+        while (n.getNext() != null){
+            string = n.getValue() + " " ;
+            n = n. getNext(); 
         }
-
         return string;
     }
 
@@ -137,9 +136,11 @@ public class LinkList implements LinkListInterface {
                 head = null;
             } else {
                 Node n = head;
-                for (; n.getNext() != tail; n = n.getNext()) {
+                while (n.getNext().getNext() != null){
+                    n = n.getNext();
                 }
                 tail = n;
+                tail.setNext(null); 
             }
             return str;
         } else {
