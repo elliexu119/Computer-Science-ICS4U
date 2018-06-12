@@ -98,7 +98,7 @@ public class StackQueueTestData {
         assert(que.isFull() == false);
         assert(que.size() == 0);
         assert(que.capacity() == 4);
-        assert(que.dequeue() == -1); 
+        assert(que.dequeue() == null); 
         assert(que.front == 0);
         assert(que.back == -1);
         System.out.println("");

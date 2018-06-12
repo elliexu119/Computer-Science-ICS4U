@@ -36,6 +36,8 @@ public class LinkedListTestData {
         //remove only element at both front and end 
         list.addAtFront("1");
         list.remove("1");
+        assert(list.head == null);
+        assert(list.tail == null);
         assert(list.isEmpty() == true);
         list.addAtEnd("1");
         list.remove("1");
@@ -51,31 +53,52 @@ public class LinkedListTestData {
         list.addAtFront("4");
         list.addAtFront("5");
         list.addAtFront("6");
-        
         list.addAtEnd("0");
-        assert(list.head() == "6");
-        assert(list.tail() == "0");
-//
-//        System.out.println("THE POPULATION QUICKLY GREW");
-//        System.out.println(list.toString());
-//
-//        System.out.println("\nBUT LIKE ANY GREAT CIVILIZATION, A WAR ROSE, AND MANY DIED...");
-        System.out.println(list.removeHead());
-        System.out.println(list.removeTail());
-        assert(list.head() == "5");
-        assert(list.tail() == "1");
-        System.out.println("2");
-        assert(list.remove("2") == true);
-        System.out.println("FORUNATELY, IT REBUILT ITSELF ON ITS MISTAKES, AND EVERYTHING WAS BETTER");
-        assert (list.remove("10") == false);
-        System.out.println(list.toString());
+        assert (list.head() == "6");
+        assert (list.tail() == "0");
         
-        System.out.println("\nsize: " + list.size());
-        System.out.println("HOWEVER IN THE END, DESPITE THE RISES AND FALLS OF THIS GREAT CIVILIZATION, "
-                + "\nNATURE EVENTUALLY FOUND ITS WAY WITH IT, AND...");
-        System.out.println("make empty: " + list.makeEmpty());
-        System.out.println("size: " + list.size());
-        assert(list.size() == 0);
+        list.removeTail();
+        list.removeTail();
+        System.out.println(list.tail.getValue());
+        System.out.println(list.size());
+        assert (list.size() == 6);
+        list.removeTail();
+        list.removeTail();
+        list.removeTail();
+        assert (list.size() == 3);
+        list.removeTail(); 
+        System.out.println(list.toString());
+        list.removeTail(); 
+        list.removeTail(); 
+        assert (list.size() == 0); 
+        System.out.println(list.toString());
+        list.addAtFront("1");
+        list.removeHead(); 
+        assert (list.size() == 0);
+        
+        
+
+////
+////        System.out.println("THE POPULATION QUICKLY GREW");
+////        System.out.println(list.toString());
+////
+////        System.out.println("\nBUT LIKE ANY GREAT CIVILIZATION, A WAR ROSE, AND MANY DIED...");
+//        System.out.println(list.removeHead());
+//        System.out.println(list.removeTail());
+//        assert(list.head() == "5");
+//        assert(list.tail() == "1");
+//        System.out.println("2");
+//        assert(list.remove("2") == true);
+//        System.out.println("FORUNATELY, IT REBUILT ITSELF ON ITS MISTAKES, AND EVERYTHING WAS BETTER");
+//        assert (list.remove("10") == false);
+//        System.out.println(list.toString());
+//        
+//        System.out.println("\nsize: " + list.size());
+//        System.out.println("HOWEVER IN THE END, DESPITE THE RISES AND FALLS OF THIS GREAT CIVILIZATION, "
+//                + "\nNATURE EVENTUALLY FOUND ITS WAY WITH IT, AND...");
+//        System.out.println("make empty: " + list.makeEmpty());
+//        System.out.println("size: " + list.size());
+//        assert(list.size() == 0);
     }
 
 }

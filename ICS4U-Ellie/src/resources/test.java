@@ -18,12 +18,13 @@ public class test {
      */
     
     public static void main(String[] args) {
-        int random = (int) (Math.random() * 6);
-        while ( random != 7 ){
-            random = (int) (Math.random() * 6);
-            System.out.println(random);
-        }
-        System.out.println( random );
+    String s1 = null;
+    String array[] = new String[1]; 
+    array[1] = ""; 
+    //StringList<> list = new StringList<>; 
+    System.out.println(s1.equals(array[1]));
+    
+    
     }
 
 }

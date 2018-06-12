@@ -16,12 +16,13 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public int size() {
-        int counter = 0;
-        Node n = head;
-        for (; n != null && n.getNext() != null; n = n.getNext(), counter++) {
+        int counter = 1;
+        if (head == null && tail == null) {
+            return 0;
         }
-        if (counter == 0 && head != null) {
-            return 1;
+
+        Node n = head;
+        for (; n.getNext() != tail.getNext(); n = n.getNext(), counter++) {
         }
         return counter;
     }
@@ -29,12 +30,13 @@ public class LinkList implements LinkListInterface {
     @Override
     public boolean makeEmpty() {
         head = null;
+        tail = null;
         return true;
     }
 
     @Override
     public boolean isEmpty() {
-        if (this.size() == 0) {
+        if (head == null && tail == null) {
             return true;
         } else {
             return false;
@@ -69,9 +71,14 @@ public class LinkList implements LinkListInterface {
     public String toString() {
         String string = "toString \n";
         Node n = head;
-        for (; n.getNext() != null; n = n.getNext()) {
+        if (head == null) {
+            return null;
+        }
+
+        for (; n != tail.getNext(); n = n.getNext()) {
             string = string + n.getValue() + " ";
         }
+
         return string;
     }
 
@@ -82,7 +89,7 @@ public class LinkList implements LinkListInterface {
         if (head != null && head.getValue() == str) {
             foundIt = true;
         } else {
-            for (; value != null && value.getNext() != null; value = value.getNext()) {
+            for (; value != null && value.getNext() != tail.getNext(); value = value.getNext()) {
                 if (value.getNext().getValue() == str) {
                     foundIt = true;
                     break;
@@ -92,8 +99,10 @@ public class LinkList implements LinkListInterface {
 
         if (foundIt == true) {
             if (str == head.getValue()) {
+                System.out.println("REMOVE HEAD");
                 removeHead();
             } else if (value.getNext() == tail) {
+                System.out.println("REMOVE TAIL");
                 removeTail();
             } else {
                 value.setNext(value.getNext().getNext());
@@ -108,6 +117,9 @@ public class LinkList implements LinkListInterface {
     public String removeHead() {
         if (head != null) {
             String str = head.getValue();
+            if (head == tail) {
+                tail = null;
+            }
             head = head.getNext();
             return str;
         } else {
@@ -119,10 +131,16 @@ public class LinkList implements LinkListInterface {
     public String removeTail() {
         if (tail != null) {
             String str = tail.getValue();
-            Node n = head;
-            for (; n.getNext() != tail; n = n.getNext()) {
+
+            if (head == tail) {
+                tail = null;
+                head = null;
+            } else {
+                Node n = head;
+                for (; n.getNext() != tail; n = n.getNext()) {
+                }
+                tail = n;
             }
-            tail = n;
             return str;
         } else {
             return "-1";

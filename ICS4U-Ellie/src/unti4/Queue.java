@@ -12,8 +12,8 @@ package unti4;
 public class Queue implements QueueInterface {
 
     Integer que[];
-    int back = back();
-    int front = front();
+    Integer back = back();
+    Integer front = front();
     boolean empty;
 
     @Override
@@ -66,7 +66,7 @@ public class Queue implements QueueInterface {
             return ans;
         } else {
             System.out.println("There's nothing to deque.");
-            return -1;
+            return null;
         }
     }
 
