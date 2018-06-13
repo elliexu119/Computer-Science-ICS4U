@@ -42,7 +42,8 @@ public class HashTableTestData {
     };
         
         String RESET = "\u001B[0m";
-        HashTable h = new HashTable(); 
+        HashTable h = new HashTable(48); 
+        assert (h.capacity() == 53); 
         int phone;
         String first, last; 
         Student s = new Student ((int) (Math.random() * 100) + "", (int) (Math.random() * 100) + "", (int) (Math.random() * 100));
@@ -65,7 +66,7 @@ public class HashTableTestData {
         
         //enter data and REHASH
         System.out.println(colours[4] + "  INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT INPUT" + RESET);
-        for (int i = 0; i < 42; i ++){
+        for (int i = 0; i < 126; i ++){
             phone = (int) (Math.random() * 100);
             first = (int) (Math.random() * 100) + "";
             last = (int) (Math.random() * 100) + "";
@@ -82,8 +83,9 @@ public class HashTableTestData {
             System.out.println(RESET);
         }
         
-        assert(h.size() == 42);
-        assert(h.capacity() == 163);
+        assert(h.size() == 126);
+        System.out.println(h.capacity());
+        assert(h.capacity() == 499); 
         
         //SOPL
         System.out.println(colours[4] + "\n \nDA HASH TABLE" + RESET);

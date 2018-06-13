@@ -19,6 +19,16 @@ public class HashTable implements HashTableInterface {
     public HashTable() {
         s = new Student[53];
     }
+    
+    public HashTable(int size){
+        for (int i = 2; i < size; i++) {
+            if (size % i == 0){ 
+                size++;
+                i = 2; 
+            }
+        }
+        s = new Student [size]; 
+    }
 
     public int size() {
         int full = 0;
@@ -70,9 +80,10 @@ public class HashTable implements HashTableInterface {
     public void rehash() {
         System.out.println("REHASH");
         int newSize = (int) Math.ceil(size() / 0.25);
-        for (int i = 2; 2 * i < newSize; i++) {
+        for (int i = 2; i < newSize; i++) {
             if (newSize % i == 0) {
                 newSize++;
+                i = 2;
             }
         }
 
