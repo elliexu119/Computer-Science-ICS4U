@@ -5,7 +5,7 @@
  */
 package resources;
 
-import java.io.RandomAccessFile;
+import unti4.Queue;
 
 /**
  *
@@ -17,12 +17,18 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String s1 = null;
-        String array[] = new String[1];
-        array[1] = "";
-        //StringList<> list = new StringList<>; 
-        System.out.println(s1.equals(array[1]));
-
+        Queue q = new Queue();
+        
+        System.out.println(q.size());
+        
+        q.enqueue(3);
+        q.enqueue(3);q.enqueue(3);q.enqueue(3);q.enqueue(3);q.enqueue(3);q.enqueue(3);q.enqueue(3);q.enqueue(3);
+        
+        q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();
+        
+        
+        
+        
     }
 
     

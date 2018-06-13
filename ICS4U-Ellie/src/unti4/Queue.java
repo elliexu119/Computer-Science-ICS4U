@@ -26,6 +26,13 @@ public class Queue implements QueueInterface {
         }
     }
 
+    public Queue (){
+        this.que = new Integer[5];
+        this.back = -1;
+        this.front = 0;
+        this.empty = true;
+    }
+    
     public Queue(int size) {
         this.que = new Integer[size];
         this.back = -1;
