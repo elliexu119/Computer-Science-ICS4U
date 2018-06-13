@@ -20,6 +20,7 @@ public class DataBase extends Parent {
     public DataBase(String file) throws Exception {
         if (status == false) {
             this.file = new RandomAccessFile(file, "rw");
+
         } else {
             System.out.println("This file is opened somewhere else.");
         }

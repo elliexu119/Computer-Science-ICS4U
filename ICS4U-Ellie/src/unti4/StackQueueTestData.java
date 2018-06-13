@@ -102,18 +102,17 @@ public class StackQueueTestData {
         assert(que.front == 0);
         assert(que.back == -1);
         System.out.println("");
+        assert(que.back() == null);
+        assert(que.front() == null);
 
-//        front back
-//        enqueue dequeue
-//        size capacity
-//        isEmpty isFull
-//        makeEmpty
         System.out.println("ENQUE");      
         System.out.println("enque: " + que.enqueue(2));
         System.out.println("enque: " + que.enqueue(5));
         System.out.println("enque: " + que.enqueue(6));
         System.out.println("enque: " + que.enqueue(10));
+        assert(que.front() == 2);
         System.out.println("enque: " + que.enqueue(9));
+        assert(que.back() == 10);
         System.out.println("\ntoString: \n" + que.toString());
 
         System.out.println("\nDEQUE");
@@ -121,6 +120,8 @@ public class StackQueueTestData {
         System.out.println("deque: " + que.dequeue());
         System.out.println("deque: " + que.dequeue());
         System.out.println("deque: " + que.dequeue());
+        assert(que.front() == null);
+        assert(que.back() == null);
         System.out.println("deque: " + que.dequeue());
         System.out.println(que.front());
         assert(que.front() == null);
@@ -143,6 +144,8 @@ public class StackQueueTestData {
         System.out.println("full: " + que.isFull());
         System.out.println("make empty");
         que.makeEmpty();
+        assert (que.front() == null);
+        assert (que.back() == null);
         System.out.println("size: " + que.size());
         System.out.println("full: " + que.isFull());
         System.out.println("\ntoString: \n" + que.toString());
@@ -153,15 +156,23 @@ public class StackQueueTestData {
         que.enqueue(9);
         que.enqueue(9);
         que.enqueue(10);
+        assert (que.front() == 8);
+        assert (que.back() == 10);
         System.out.println("\ntoString: \n" + que.toString());
         que.dequeue();
         que.dequeue();
         que.dequeue();
+        assert (que.front() == 10);
+        assert (que.back() == 10);
         System.out.println("\ntoString: \n" + que.toString());
         que.enqueue(0);
         que.enqueue(1);
+        assert (que.back() == 1); 
+        assert (que.front() == 10);
         assert (que.enqueue(2) == true);
         assert (que.enqueue(3) == false);
+        assert (que.back() == 2); 
+        assert(que.front() == 10);
         System.out.println("\ntoString: \n" + que.toString());
         
         String CYANb = "\u001B[46m";
