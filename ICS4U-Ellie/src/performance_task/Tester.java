@@ -73,8 +73,11 @@ public class Tester {
         
         //make empty
         tab.makeEmpty();
+        assert(tab.size() == 0);
         assert(tab.isEmpty() == true);
+        assert(tab.capacity() == 11);
         assert(tab.containsKey(1234) == false);
+        assert(tab.get(1234) == null);
     }
 
     public static void linkedList() {
