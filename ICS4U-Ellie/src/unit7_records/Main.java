@@ -44,9 +44,11 @@ public class Main {
         assert(a.getid() == 0);
         file.save(b);
         file.save(c);
-        assert(file.get(2).getSong() .trim().equals ("Back in black"));
-        assert(file.get(0).getSong().trim().equals("Eye of the tiger"));
-        assert(file.get(1).getSong().trim().equals("Thunderstruck"));
+        assert(file.get(2).getSong() .trim (
+        ).equals ("Back in black"));
+        assert(file.get(0).getSong() .trim (
+        ).equals("Eye of the tiger"));
+        assert(file.get(1).getSong() .trim ().equals("Thunderstruck"));
         file.save(d);
         assert(file.get(3).getSong().trim().equals("Ghostbusters")); 
         assert(file.length() == 115*4);
