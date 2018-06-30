@@ -5,7 +5,7 @@ from __future__ import print_function
 
 class object:
     
-    def egg (self):
+    def egg (self): 
         print ("egg")
         
         
