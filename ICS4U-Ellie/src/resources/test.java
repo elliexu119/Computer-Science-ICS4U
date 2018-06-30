@@ -17,19 +17,11 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Queue q = new Queue();
-        
-        System.out.println(q.size());
-        
-        q.enqueue(3);
-        q.enqueue(3);q.enqueue(3);q.enqueue(3);q.enqueue(3);q.enqueue(3);q.enqueue(3);q.enqueue(3);q.enqueue(3);
-        
-        q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();q.dequeue();
-        
-        
-        
-        
+        String a = new String ("");
+        String b = null;
+        int c = 0; 
+        System.out.println(a.equals(null));
+
     }
 
-    
 }
