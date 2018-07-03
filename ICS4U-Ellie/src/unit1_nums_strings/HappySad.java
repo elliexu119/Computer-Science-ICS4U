@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Ellie
+ * Thursday, Feb 8, 2018
+ * finds happy and sad faces in a string
  */
 package unit1_nums_strings;
 
@@ -21,45 +21,43 @@ public class HappySad {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String original = "", phrase = "";
-        int happy = 0, sad = 0, sub1 = 0, sub2 = 0;
+        int happy = 0, sad = 0, sub1 = 0;
 
+        //user input
         sop("Enter in the phrase: ");
         original = input.nextLine();
-        
         phrase = original;
-        while (sub1 != -1) {
-            sub1++;
-            sub2 = sub1;
+        
+        //finding the happy faces 
+        while (phrase.indexOf(":-)") != -1) {
             phrase = phrase.substring(sub1, phrase.length()) + " ";
             phrase = phrase.trim();
             sub1 = phrase.indexOf(":-)");
             happy++;
+            sub1++;
         }
         happy--;
 
+        //finding the sad faces
         sub1 = 0;
-        sub2 = 0;
         phrase = original;
-        while (sub1 != -1) {
-            sub1++;
-            sub2 = sub1;
+        while (phrase.indexOf(":-(") != -1) {
             phrase = phrase.substring(sub1, phrase.length()) + " ";
             phrase = phrase.trim();
             sub1 = phrase.indexOf(":-(");
+            sub1++;
             sad++;
         }
         sad--;
-        
-        if (sad > happy){
+
+        //outputting an answer 
+        if (sad > happy) {
             sopl("sad");
-        }
-        else if (sad < happy){
+        } else if (sad < happy) {
             sopl("happy");
-        }
-        else if (sad == happy && sad != 0){
+        } else if (sad == happy && sad != 0) {
             sopl("unsure");
-        }
-        else {
+        } else {
             sopl("none");
         }
     }

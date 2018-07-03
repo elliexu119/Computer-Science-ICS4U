@@ -1,6 +1,7 @@
 /*
- * Name:            Let Me Out
- * Date:            March, 2017
+ * Ellie         
+ * March, 2018
+ * Let Me Out. Finds a path in a maze using recursion 
  */
 package unit3_recursion;
 

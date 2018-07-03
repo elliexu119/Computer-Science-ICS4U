@@ -1,11 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Ellie
+ * June 2018 
+ * creates a record object used for the DataBase Object. Stores information about a record.
  */
 package unit7_records;
 
-import java.io.RandomAccessFile;
 
 /**
  *
@@ -82,6 +81,7 @@ public class Records extends Parent {
     }
 
     public String method(String a, int b) {
+        //formating the data so that they are a desired size. 
         StringBuilder temp = new StringBuilder();
         if (a != null) {
             temp.append(a.trim());
@@ -93,6 +93,7 @@ public class Records extends Parent {
     }
 
     public String methodNum(double a, int b) {
+        //formating the data so that they are a desired size.
         StringBuilder temp = new StringBuilder();
         if (a != 0) {
             temp.append(a);

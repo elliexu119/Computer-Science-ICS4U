@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Ellie 
+ * May 2018 
+ * Unconfigurable lock that has a 3 number combo ramging from 0 - 39. 
  */
 package unti4.ifThereIsALock_ThenThereMustBeAKey.locks;
 import unti4.ifThereIsALock_ThenThereMustBeAKey.Parent;
@@ -16,11 +16,13 @@ public class Master extends Parent{
     private boolean first = true; 
     
     public Master() {
+        //generates a random combo on instantiation 
         setCombo(combo, 39); 
         System.out.println(toString(combo));
     }
     
     public int[] getCombo() {
+        //returns the combo only once. 
         if (first == true) {
             first = false;
             trace(); 

@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Ellie
+ * May 2018 
+ * creates a queue object. 
  */
 package unti4;
 
@@ -27,6 +27,7 @@ public class Queue implements QueueInterface {
     }
 
     public Queue (){
+        //default constructor 
         this.que = new Integer[5];
         this.back = -1;
         this.front = 0;
@@ -42,6 +43,7 @@ public class Queue implements QueueInterface {
 
     @Override
     public Integer back() {
+        //returns the value at the back of the queue. 
         if (!empty){
             return que[back];
         }
@@ -52,7 +54,7 @@ public class Queue implements QueueInterface {
 
     @Override
     public boolean enqueue(Integer value) {
-
+        //adds a value to the end of the queue. 
         if (isFull()) {
             System.out.println("queue is full");
             return false;
@@ -70,6 +72,7 @@ public class Queue implements QueueInterface {
 
     @Override
     public Integer dequeue() {
+        //returns and removes the first integer of the queue. 
         if (front == que.length) {
                 front = 0;
             }
@@ -107,6 +110,7 @@ public class Queue implements QueueInterface {
 
     @Override
     public int size() {
+        //returns the filled spots of the queue. 
         if (isEmpty()) {
             return 0;
         } else {
@@ -120,6 +124,7 @@ public class Queue implements QueueInterface {
 
     @Override
     public int capacity() {
+        //returns the total number of available positions in the queue. 
         return que.length;
     }
 

@@ -1,6 +1,6 @@
 /*
  * Mountain Paths - Greedy Algorithm
- * Mr. Muir
+ * Ellie
  * 2018.03.26 - v1.0
  */
 package unit3_recursion;

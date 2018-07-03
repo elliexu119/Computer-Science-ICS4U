@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Ellie X
+ * Feb. 21, 2018 
+ * simulates bacteria growth; 
  */
 package unit2_arrays;
 
@@ -19,6 +19,7 @@ public class GameOfLife {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //setup 
         Scanner input = new Scanner(System.in);
         int random1, random2, size = 20, randomCounter = 0;
         int[][] grid = new int[size][size];
@@ -35,6 +36,7 @@ public class GameOfLife {
             }
         }
 
+        //simulation 
         for (int i = 0; i < grid2.length; i++) {
             for (int a = 0; a < grid2[i].length; a++) {
                 int neighbours = 0;
@@ -61,6 +63,8 @@ public class GameOfLife {
                 }
             }
         }
+        
+        //output
         sopl("\norignal");
         sopl(grid2);
         sopl("\nafter 1 generation");

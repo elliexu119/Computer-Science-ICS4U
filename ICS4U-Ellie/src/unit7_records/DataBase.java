@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Ellie
+ * June 2018 
+ * Creates an object for writing records to a file. 
  */
 package unit7_records;
 
@@ -19,6 +19,7 @@ public class DataBase extends Parent {
 
     public DataBase(String file) throws Exception {
         if (status == false) {
+            //opens the database only if it's not opened anywhere else. 
             this.file = new RandomAccessFile(file, "rw");
 
         } else {
@@ -41,7 +42,8 @@ public class DataBase extends Parent {
     }
 
     public void save(Records records) throws Exception {
-        if (status == true) {
+        //saves a record to the file. 
+        if (status == true) { //making sure the record is not opened elsewhere. 
             if (records.getid() == -1) {
                 file.seek(file.length());
                 write(records);
@@ -64,6 +66,7 @@ public class DataBase extends Parent {
     }
 
     public Records get(long index) {
+        //gets records from the file. 
         try {
             if (status == true) {
                 if ((file.length() / RECORD) > index) {
@@ -94,6 +97,7 @@ public class DataBase extends Parent {
     }
 
     public long length() throws Exception {
+        //returns the length of the file. 
         return file.length();
     }
 }

@@ -19,14 +19,16 @@ public class Resistors {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //variables 
         Scanner input = new Scanner(System.in);
         String[] values = {"black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "grey", "white"};
-        String code = input.nextLine();
+        String code = input.nextLine(); //e.g. red-yellow-brown 
         String numbers = "";
         int answer = 0; 
 
+        //turning the colours to a value  
         StringTokenizer hyphens = new StringTokenizer(code, "-");
-        while (hyphens.hasMoreTokens()) {
+        for (int j = 0; j < 3 && hyphens.hasMoreTokens(); j++) {
             String token = hyphens.nextToken();
             for (int i = 0; i < values.length; i++) {
                 if (token.trim().equalsIgnoreCase(values[i])) {
@@ -41,9 +43,6 @@ public class Resistors {
                     } else {
                         sopl("too many colours, too little values");
                     }
-                }
-                else {
-                    sopl("this coloured doesn't exist");
                 }
             }
         }

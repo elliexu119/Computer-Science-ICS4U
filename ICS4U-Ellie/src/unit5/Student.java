@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Ellie 
+ * May 2018 
+ * Student object. Contains data of students such as name and phone number, then generates a hash value.
  */
 package unit5;
 

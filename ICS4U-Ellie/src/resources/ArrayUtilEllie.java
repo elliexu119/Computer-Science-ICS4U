@@ -8,7 +8,6 @@ package resources;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import static resources.SOPL.sopl;
 
 public class ArrayUtilEllie {
 

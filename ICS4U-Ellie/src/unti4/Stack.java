@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Ellie 
+ * may 2018 
+ * creates a stack object. 
  */
 package unti4;
 
@@ -16,6 +16,12 @@ public class Stack implements StackInterface{
 
     public Stack(int size) {
         stack = new Integer[size];
+        pointer = -1; 
+    }
+    
+    public Stack() {
+        //default constructor 
+        stack = new Integer[10];
         pointer = -1; 
     }
 
@@ -36,6 +42,7 @@ public class Stack implements StackInterface{
 
     @Override
     public int top() {
+        //returns the value at the top of the stack. 
         if (pointer > -1){
         return stack[pointer];
         }
@@ -48,6 +55,7 @@ public class Stack implements StackInterface{
 
     @Override
     public int pop() {
+        //returns and removes the value at the top of the stack.
         if (pointer >= 0){
         int ans = stack[pointer];
         stack[pointer] = null;
@@ -61,6 +69,7 @@ public class Stack implements StackInterface{
     }
 
     public boolean push(int value) {
+        //enters a new value to the stack. 
         if (this.pointer+1 < this.stack.length){
         this.stack[this.pointer+1] = value; 
         this.pointer ++; 
@@ -74,11 +83,13 @@ public class Stack implements StackInterface{
 
     @Override
     public int size() {
+        //returns the number of filled positions in the stack. 
         return this.pointer+1; 
     }
 
     @Override
     public int capacity() {
+        //returns the total number of available positions in the stack. 
         return stack.length;
 
     }

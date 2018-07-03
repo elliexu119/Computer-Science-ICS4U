@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Ellie 
+ * Tuesday, Feb 20, 2018
+ * does simple encryption on phrases 
  */
 package unit1_nums_strings;
 
@@ -24,6 +24,7 @@ public class SimpleEncryption {
         String phrase = "", word, newWord = "", newPhrase = "";
         int rotation = 0, cryption = 0;
 
+        //input
         sop("Enter in the phrase: ");
         phrase = input.nextLine();
         sop("Enter the rotation amount: ");
@@ -31,6 +32,7 @@ public class SimpleEncryption {
         sopl("1 - Encryption \n2 - Decryption");
         cryption = input.nextInt();
 
+        //encryption 
         StringTokenizer token = new StringTokenizer(phrase);
         while (token.hasMoreTokens()) {
             word = token.nextToken().toLowerCase();

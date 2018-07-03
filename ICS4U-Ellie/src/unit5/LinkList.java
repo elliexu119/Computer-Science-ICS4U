@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Ellie
+ * May 2018 
+ * Creates the Linkedlist object
  */
 package unit5;
 
@@ -11,11 +11,13 @@ package unit5;
  */
 public class LinkList implements LinkListInterface {
 
+    //variables 
     Node head;
     Node tail;
 
     @Override
     public int size() {
+        //returns the size of the list 
         int counter = 1;
         if (head == null && tail == null) {
             return 0;
@@ -29,6 +31,7 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public boolean makeEmpty() {
+        //makes it emoty 
         head = null;
         tail = null;
         return true;
@@ -36,6 +39,7 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public boolean isEmpty() {
+        //checks to see if it's empty 
         if (head == null && tail == null) {
             return true;
         } else {
@@ -45,6 +49,7 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public void addAtFront(String str) {
+        //adds a node at the front of the list 
         Node node = new Node(str);
         if (isEmpty()) {
             this.tail = node;
@@ -57,6 +62,7 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public void addAtEnd(String str) {
+        //adds a node at the end of the list 
         Node node = new Node(str);
         if (isEmpty()) {
             this.tail = node;
@@ -83,6 +89,7 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public boolean remove(String str) {
+        //removes a node 
         Node value = head;
         boolean foundIt = false;
         if (head != null && head.getValue() == str) {
@@ -114,6 +121,7 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public String removeHead() {
+        //remove the node at the head 
         if (head != null) {
             String str = head.getValue();
             if (head == tail) {
@@ -128,6 +136,7 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public String removeTail() {
+        //removes the node at the tail 
         if (tail != null) {
             String str = tail.getValue();
 
@@ -150,6 +159,7 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public String head() {
+        //return the head 
         if (head == null) {
             return null;
         } else {
@@ -159,6 +169,7 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public String tail() {
+        //returns the tail 
         if (tail == null) {
             return null;
         } else {
